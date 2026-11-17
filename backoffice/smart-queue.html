@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Queue &mdash; Take a Virtual Ticket</title>
+</head>
+<body>
+
+  <!-- ================= PAGE HEADER ================= -->
+  <header>
+    <h1>Don't wait in line. Wait wherever you want.</h1>
+    <p>Smart Queue gives you a virtual ticket, so you can grab a coffee, run an errand or stay home until it is almost your turn.</p>
+  </header>
+
+  <!-- ================= MAIN NAVIGATION ================= -->
+  <nav aria-label="Page sections">
+    <a href="#front-office">Front Office</a> |
+    <a href="#back-office">Back Office</a>
+  </nav>
+
+  <main>
+
+    <!-- ============================================================
+         FRONT OFFICE &mdash; what the visitor sees
+         ============================================================ -->
+    <section id="front-office" aria-labelledby="front-office-title">
+      <h2 id="front-office-title">Front Office</h2>
+      <p>Everything a visitor needs: check the wait, take a ticket and follow your place in the queue.</p>
+
+      <!-- ---------- 2. Services and current wait times ---------- -->
+      <section aria-labelledby="services-title">
+        <h3 id="services-title">Services and estimated wait</h3>
+
+        <table>
+          <caption>Live queue overview per service</caption>
+          <thead>
+            <tr>
+              <th scope="col">Service</th>
+              <th scope="col">People waiting</th>
+              <th scope="col">Estimated wait time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Customer Service</th>
+              <td>14</td>
+              <td>25 min</td>
+            </tr>
+            <tr>
+              <th scope="row">Payments</th>
+              <td>8</td>
+              <td>15 min</td>
+            </tr>
+            <tr>
+              <th scope="row">Appointments</th>
+              <td>5</td>
+              <td>10 min</td>
+            </tr>
+            <tr>
+              <th scope="row">Documents &amp; Permits</th>
+              <td>11</td>
+              <td>20 min</td>
+            </tr>
+            <tr>
+              <th scope="row">Technical Support</th>
+              <td>7</td>
+              <td>18 min</td>
+            </tr>
+            <tr>
+              <th scope="row">New Accounts</th>
+              <td>3</td>
+              <td>8 min</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ---------- 3. Get my ticket form ---------- -->
+      <section aria-labelledby="get-ticket-title">
+        <h3 id="get-ticket-title">Get my ticket</h3>
+
+        <form action="#ticket-tracking" method="post">
+          <fieldset>
+            <legend>Your details</legend>
+
+            <p>
+              <label for="visitor-name">Full name</label>
+              <input type="text" id="visitor-name" name="visitor_name" autocomplete="name" required>
+            </p>
+
+            <p>
+              <label for="visitor-phone">Phone number</label>
+              <input type="tel" id="visitor-phone" name="visitor_phone" autocomplete="tel" placeholder="+216 00 000 000" required>
+            </p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Service selection</legend>
+
+            <p>
+              <label for="ticket-service">Service you need</label>
+              <select id="ticket-service" name="service" required>
+                <option value="" selected disabled>Choose a service</option>
+                <option value="customer-service">Customer Service</option>
+                <option value="payments">Payments</option>
+                <option value="appointments">Appointments</option>
+                <option value="documents">Documents &amp; Permits</option>
+                <option value="tech-support">Technical Support</option>
+                <option value="new-accounts">New Accounts</option>
+              </select>
+            </p>
+
+            <p>
+              <label for="ticket-priority">Priority</label>
+              <select id="ticket-priority" name="priority" required>
+                <option value="normal" selected>Normal</option>
+                <option value="elderly">Elderly</option>
+                <option value="disabled">Disabled</option>
+              </select>
+            </p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Notifications</legend>
+
+            <p>
+              <input type="checkbox" id="notify-me" name="notify" value="yes" checked>
+              <label for="notify-me">Notify me when my turn is near</label>
+            </p>
+          </fieldset>
+
+          <p>
+            <button type="submit">Get my ticket</button>
+          </p>
+        </form>
+      </section>
+
+      <!-- ---------- 4. Ticket tracking ---------- -->
+      <article id="ticket-tracking" aria-labelledby="ticket-tracking-title">
+        <h3 id="ticket-tracking-title">Your ticket</h3>
+
+        <dl>
+          <dt>Ticket number</dt>
+          <dd><strong>A-023</strong></dd>
+
+          <dt>Service</dt>
+          <dd>Customer Service</dd>
+
+          <dt>Position in queue</dt>
+          <dd>4</dd>
+
+          <dt>People ahead of you</dt>
+          <dd>3</dd>
+
+          <dt>Estimated time remaining</dt>
+          <dd>12 min</dd>
+
+          <dt>Status</dt>
+          <dd><output name="ticket-status">Almost your turn</output></dd>
+        </dl>
+
+        <p>
+          <label for="ticket-progress">Queue progress</label>
+          <progress id="ticket-progress" value="9" max="12">9 of 12</progress>
+        </p>
+
+        <p>You will be called at <strong>Counter 1</strong>. Please stay within reach of your phone.</p>
+
+        <!-- ---------- 5. Ticket actions ---------- -->
+        <section aria-labelledby="ticket-actions-title">
+          <h4 id="ticket-actions-title">Ticket actions</h4>
+          <p>
+            <button type="button" aria-label="Cancel ticket A-023">Cancel ticket</button>
+            <button type="button" aria-label="Postpone ticket A-023 and let 3 people go ahead">Postpone (let 3 people go ahead)</button>
+            <button type="button" aria-label="Take a new ticket">Take a new ticket</button>
+          </p>
+        </section>
+      </article>
+
+      <!-- ---------- 6. Now serving board ---------- -->
+      <section aria-labelledby="now-serving-title">
+        <h3 id="now-serving-title">Now serving</h3>
+
+        <table>
+          <caption>Ticket currently being served at each counter</caption>
+          <thead>
+            <tr>
+              <th scope="col">Counter</th>
+              <th scope="col">Ticket being served</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Counter 1</th>
+              <td>A-023</td>
+            </tr>
+            <tr>
+              <th scope="row">Counter 2</th>
+              <td>B-011</td>
+            </tr>
+            <tr>
+              <th scope="row">Counter 3</th>
+              <td>C-007</td>
+            </tr>
+            <tr>
+              <th scope="row">Counter 4</th>
+              <td>A-021</td>
+            </tr>
+            <tr>
+              <th scope="row">Counter 5</th>
+              <td>D-004</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Last 5 called tickets</h4>
+        <ol reversed>
+          <li>A-023 &mdash; Customer Service &mdash; Counter 1</li>
+          <li>B-011 &mdash; Payments &mdash; Counter 2</li>
+          <li>C-007 &mdash; Appointments &mdash; Counter 3</li>
+          <li>A-022 &mdash; Customer Service &mdash; Counter 4</li>
+          <li>D-004 &mdash; Documents &amp; Permits &mdash; Counter 5</li>
+        </ol>
+      </section>
+
+      <!-- ---------- 7. Best time to come ---------- -->
+      <section aria-labelledby="best-time-title">
+        <h3 id="best-time-title">Best time to come</h3>
+
+        <table>
+          <caption>How busy each hour of the day usually is</caption>
+          <thead>
+            <tr>
+              <th scope="col">Hour</th>
+              <th scope="col">Busy level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">08:00 &ndash; 09:00</th>
+              <td>
+                <meter value="35" min="0" max="100" low="40" high="75" optimum="20" aria-label="Busy level 35 percent at 8 to 9">35% busy</meter>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">09:00 &ndash; 10:00</th>
+              <td>
+                <meter value="88" min="0" max="100" low="40" high="75" optimum="20" aria-label="Busy level 88 percent at 9 to 10">88% busy</meter>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">10:00 &ndash; 11:00</th>
+              <td>
+                <meter value="95" min="0" max="100" low="40" high="75" optimum="20" aria-label="Busy level 95 percent at 10 to 11">95% busy</meter>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">11:00 &ndash; 12:00</th>
+              <td>
+                <meter value="62" min="0" max="100" low="40" high="75" optimum="20" aria-label="Busy level 62 percent at 11 to 12">62% busy</meter>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">12:00 &ndash; 13:00</th>
+              <td>
+                <meter value="30" min="0" max="100" low="40" high="75" optimum="20" aria-label="Busy level 30 percent at 12 to 13">30% busy</meter>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">13:00 &ndash; 14:00</th>
+              <td>
+                <meter value="18" min="0" max="100" low="40" high="75" optimum="20" aria-label="Busy level 18 percent at 13 to 14">18% busy</meter>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ---------- 8. Announcements ---------- -->
+      <aside aria-labelledby="announcements-title">
+        <h3 id="announcements-title">Announcements</h3>
+        <p>
+          <strong>Reminder:</strong> Counter 3 is closing at 14:00 today. Appointments booked after
+          13:30 will be served at Counter 4. Thank you for your understanding.
+        </p>
+      </aside>
+    </section>
+
+    <!-- ============================================================
+         BACK OFFICE &mdash; what the staff sees
+         ============================================================ -->
+    <section id="back-office" aria-labelledby="back-office-title">
+      <h2 id="back-office-title">Back Office</h2>
+      <p>Staff area: manage the live queue, counters, services and daily statistics.</p>
+
+      <!-- ---------- 1. Login ---------- -->
+      <section aria-labelledby="login-title">
+        <h3 id="login-title">Staff login</h3>
+
+        <form action="#back-office" method="post">
+          <fieldset>
+            <legend>Authentication</legend>
+
+            <p>
+              <label for="staff-pin">PIN code</label>
+              <input type="password" id="staff-pin" name="pin" inputmode="numeric" autocomplete="current-password" required>
+            </p>
+
+            <p>
+              <button type="submit">Login</button>
+            </p>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- ---------- 2. Counter dashboard ---------- -->
+      <section aria-labelledby="dashboard-title">
+        <h3 id="dashboard-title">Counter dashboard</h3>
+
+        <p>Current ticket: <strong>A-023</strong> &mdash; Customer Service</p>
+
+        <form action="#dashboard-title" method="post">
+          <fieldset>
+            <legend>My workstation</legend>
+
+            <p>
+              <label for="dash-counter">Counter</label>
+              <select id="dash-counter" name="counter">
+                <option value="1" selected>Counter 1</option>
+                <option value="2">Counter 2</option>
+                <option value="3">Counter 3</option>
+                <option value="4">Counter 4</option>
+                <option value="5">Counter 5</option>
+              </select>
+            </p>
+
+            <p>
+              <label for="dash-service">Service handled here</label>
+              <select id="dash-service" name="service">
+                <option value="customer-service" selected>Customer Service</option>
+                <option value="payments">Payments</option>
+                <option value="appointments">Appointments</option>
+                <option value="documents">Documents &amp; Permits</option>
+                <option value="tech-support">Technical Support</option>
+                <option value="new-accounts">New Accounts</option>
+              </select>
+            </p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Queue controls</legend>
+
+            <p>
+              <button type="submit" name="action" value="call-next">CALL NEXT</button>
+              <button type="submit" name="action" value="recall">RECALL</button>
+              <button type="submit" name="action" value="skip">SKIP</button>
+              <button type="submit" name="action" value="served">MARK AS SERVED</button>
+              <button type="submit" name="action" value="transfer">TRANSFER</button>
+            </p>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- ---------- 3. Live queue ---------- -->
+      <section aria-labelledby="live-queue-title">
+        <h3 id="live-queue-title">Live queue</h3>
+
+        <form action="#live-queue-title" method="get" aria-label="Filter the live queue">
+          <fieldset>
+            <legend>Search and filter</legend>
+
+            <p>
+              <label for="queue-search">Search by ticket or name</label>
+              <input type="search" id="queue-search" name="q" placeholder="A-023 or Sarah">
+            </p>
+
+            <p>
+              <label for="queue-filter-service">Filter by service</label>
+              <select id="queue-filter-service" name="service">
+                <option value="" selected>All services</option>
+                <option value="customer-service">Customer Service</option>
+                <option value="payments">Payments</option>
+                <option value="appointments">Appointments</option>
+                <option value="documents">Documents &amp; Permits</option>
+                <option value="tech-support">Technical Support</option>
+                <option value="new-accounts">New Accounts</option>
+              </select>
+            </p>
+
+            <p>
+              <label for="queue-filter-priority">Filter by priority</label>
+              <select id="queue-filter-priority" name="priority">
+                <option value="" selected>All priorities</option>
+                <option value="normal">Normal</option>
+                <option value="elderly">Elderly</option>
+                <option value="disabled">Disabled</option>
+              </select>
+            </p>
+
+            <p>
+              <button type="submit">Apply filters</button>
+            </p>
+          </fieldset>
+        </form>
+
+        <table>
+          <caption>Every ticket currently waiting or in service</caption>
+          <thead>
+            <tr>
+              <th scope="col">Ticket</th>
+              <th scope="col">Name</th>
+              <th scope="col">Service</th>
+              <th scope="col">Arrival time</th>
+              <th scope="col">Wait time</th>
+              <th scope="col">Priority</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">A-023</th>
+              <td>Sarah Ben Ali</td>
+              <td>Customer Service</td>
+              <td>09:12</td>
+              <td>12 min</td>
+              <td>Normal</td>
+              <td>Almost your turn</td>
+              <td>
+                <button type="button" aria-label="Call ticket A-023">Call</button>
+                <button type="button" aria-label="Skip ticket A-023">Skip</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">A-024</th>
+              <td>Karim Trabelsi</td>
+              <td>Customer Service</td>
+              <td>09:15</td>
+              <td>9 min</td>
+              <td>Elderly</td>
+              <td>Waiting</td>
+              <td>
+                <button type="button" aria-label="Call ticket A-024">Call</button>
+                <button type="button" aria-label="Skip ticket A-024">Skip</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">B-011</th>
+              <td>Leila Haddad</td>
+              <td>Payments</td>
+              <td>09:05</td>
+              <td>19 min</td>
+              <td>Disabled</td>
+              <td>Called</td>
+              <td>
+                <button type="button" aria-label="Recall ticket B-011">Recall</button>
+                <button type="button" aria-label="Skip ticket B-011">Skip</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">C-007</th>
+              <td>Youssef Mansour</td>
+              <td>Appointments</td>
+              <td>09:20</td>
+              <td>4 min</td>
+              <td>Normal</td>
+              <td>Waiting</td>
+              <td>
+                <button type="button" aria-label="Call ticket C-007">Call</button>
+                <button type="button" aria-label="Skip ticket C-007">Skip</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">D-004</th>
+              <td>Amina Gharbi</td>
+              <td>Documents &amp; Permits</td>
+              <td>09:02</td>
+              <td>22 min</td>
+              <td>Elderly</td>
+              <td>Waiting</td>
+              <td>
+                <button type="button" aria-label="Call ticket D-004">Call</button>
+                <button type="button" aria-label="Skip ticket D-004">Skip</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">E-002</th>
+              <td>Nadia Bouzid</td>
+              <td>Technical Support</td>
+              <td>09:24</td>
+              <td>1 min</td>
+              <td>Normal</td>
+              <td>Waiting</td>
+              <td>
+                <button type="button" aria-label="Call ticket E-002">Call</button>
+                <button type="button" aria-label="Skip ticket E-002">Skip</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ---------- 4. Service management ---------- -->
+      <section aria-labelledby="service-mgmt-title">
+        <h3 id="service-mgmt-title">Service management</h3>
+
+        <table>
+          <caption>Services offered and their status</caption>
+          <thead>
+            <tr>
+              <th scope="col">Service</th>
+              <th scope="col">Average service time</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Customer Service</th>
+              <td>9 min</td>
+              <td>Open</td>
+              <td>
+                <button type="button" aria-label="Edit service Customer Service">Edit</button>
+                <button type="button" aria-label="Delete service Customer Service">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Payments</th>
+              <td>6 min</td>
+              <td>Open</td>
+              <td>
+                <button type="button" aria-label="Edit service Payments">Edit</button>
+                <button type="button" aria-label="Delete service Payments">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Appointments</th>
+              <td>12 min</td>
+              <td>Open</td>
+              <td>
+                <button type="button" aria-label="Edit service Appointments">Edit</button>
+                <button type="button" aria-label="Delete service Appointments">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Documents &amp; Permits</th>
+              <td>15 min</td>
+              <td>Closed</td>
+              <td>
+                <button type="button" aria-label="Edit service Documents and Permits">Edit</button>
+                <button type="button" aria-label="Delete service Documents and Permits">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Technical Support</th>
+              <td>18 min</td>
+              <td>Open</td>
+              <td>
+                <button type="button" aria-label="Edit service Technical Support">Edit</button>
+                <button type="button" aria-label="Delete service Technical Support">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">New Accounts</th>
+              <td>20 min</td>
+              <td>Closed</td>
+              <td>
+                <button type="button" aria-label="Edit service New Accounts">Edit</button>
+                <button type="button" aria-label="Delete service New Accounts">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <form action="#service-mgmt-title" method="post">
+          <fieldset>
+            <legend>Add service</legend>
+
+            <p>
+              <label for="new-service-name">Service name</label>
+              <input type="text" id="new-service-name" name="service_name" required>
+            </p>
+
+            <p>
+              <label for="new-service-time">Average service time (minutes)</label>
+              <input type="number" id="new-service-time" name="average_time" min="1" max="120" value="10" required>
+            </p>
+
+            <p>
+              <button type="submit">Add service</button>
+            </p>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- ---------- 5. Counter management ---------- -->
+      <section aria-labelledby="counter-mgmt-title">
+        <h3 id="counter-mgmt-title">Counter management</h3>
+
+        <table>
+          <caption>Counters, their status and assigned service</caption>
+          <thead>
+            <tr>
+              <th scope="col">Counter</th>
+              <th scope="col">Status</th>
+              <th scope="col">Assigned service</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Counter 1</th>
+              <td>Open</td>
+              <td>Customer Service</td>
+            </tr>
+            <tr>
+              <th scope="row">Counter 2</th>
+              <td>Open</td>
+              <td>Payments</td>
+            </tr>
+            <tr>
+              <th scope="row">Counter 3</th>
+              <td>Closing at 14:00</td>
+              <td>Appointments</td>
+            </tr>
+            <tr>
+              <th scope="row">Counter 4</th>
+              <td>Open</td>
+              <td>Customer Service</td>
+            </tr>
+            <tr>
+              <th scope="row">Counter 5</th>
+              <td>Closed</td>
+              <td>Documents &amp; Permits</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <form action="#counter-mgmt-title" method="post">
+          <fieldset>
+            <legend>Add counter</legend>
+
+            <p>
+              <label for="new-counter-number">Counter number</label>
+              <input type="text" id="new-counter-number" name="counter_number" placeholder="Counter 6" required>
+            </p>
+
+            <p>
+              <label for="new-counter-service">Assigned service</label>
+              <select id="new-counter-service" name="counter_service">
+                <option value="customer-service" selected>Customer Service</option>
+                <option value="payments">Payments</option>
+                <option value="appointments">Appointments</option>
+                <option value="documents">Documents &amp; Permits</option>
+                <option value="tech-support">Technical Support</option>
+                <option value="new-accounts">New Accounts</option>
+              </select>
+            </p>
+
+            <p>
+              <button type="submit">Add counter</button>
+            </p>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- ---------- 6. Statistics ---------- -->
+      <section aria-labelledby="statistics-title">
+        <h3 id="statistics-title">Statistics</h3>
+
+        <h4>Key performance indicators</h4>
+        <dl>
+          <dt>Tickets today</dt>
+          <dd>184</dd>
+
+          <dt>Average wait time</dt>
+          <dd>14 min</dd>
+
+          <dt>Average service time</dt>
+          <dd>9 min</dd>
+
+          <dt>Abandon rate</dt>
+          <dd>4.5%</dd>
+
+          <dt>Satisfaction</dt>
+          <dd>4.6 / 5</dd>
+        </dl>
+
+        <h4>Tickets per hour</h4>
+        <table>
+          <caption>Ticket volume compared with the hourly capacity</caption>
+          <thead>
+            <tr>
+              <th scope="col">Hour</th>
+              <th scope="col">Tickets issued</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">08:00 &ndash; 09:00</th>
+              <td>
+                <meter value="18" min="0" max="40" low="12" high="30" optimum="15" aria-label="18 tickets issued between 8 and 9">18 tickets</meter>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">09:00 &ndash; 10:00</th>
+              <td>
+                <meter value="36" min="0" max="40" low="12" high="30" optimum="15" aria-label="36 tickets issued between 9 and 10">36 tickets</meter>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">10:00 &ndash; 11:00</th>
+              <td>
+                <meter value="39" min="0" max="40" low="12" high="30" optimum="15" aria-label="39 tickets issued between 10 and 11">39 tickets</meter>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">11:00 &ndash; 12:00</th>
+              <td>
+                <meter value="28" min="0" max="40" low="12" high="30" optimum="15" aria-label="28 tickets issued between 11 and 12">28 tickets</meter>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">12:00 &ndash; 13:00</th>
+              <td>
+                <meter value="21" min="0" max="40" low="12" high="30" optimum="15" aria-label="21 tickets issued between 12 and 13">21 tickets</meter>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">13:00 &ndash; 14:00</th>
+              <td>
+                <meter value="14" min="0" max="40" low="12" high="30" optimum="15" aria-label="14 tickets issued between 13 and 14">14 tickets</meter>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ---------- 7. Announcement form ---------- -->
+      <section aria-labelledby="announcement-form-title">
+        <h3 id="announcement-form-title">Broadcast an announcement</h3>
+
+        <form action="#announcement-form-title" method="post">
+          <fieldset>
+            <legend>Message to all visitors</legend>
+
+            <p>
+              <label for="announcement-text">Announcement text</label>
+              <textarea id="announcement-text" name="announcement" rows="4" cols="50" placeholder="Counter 3 is closing at 14:00 today."></textarea>
+            </p>
+
+            <p>
+              <button type="submit">Broadcast</button>
+            </p>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- ---------- 8. Danger zone ---------- -->
+      <section aria-labelledby="data-tools-title">
+        <h3 id="data-tools-title">Data tools</h3>
+        <p>
+          <button type="button" aria-label="Export today's data as a CSV file">Export CSV</button>
+          <button type="button" aria-label="Reset all demo data">Reset demo</button>
+        </p>
+      </section>
+    </section>
+
+  </main>
+
+  <!-- ================= PAGE FOOTER ================= -->
+  <footer>
+    <p>Smart Queue &mdash; virtual ticketing demo.</p>
+    <nav aria-label="Footer links">
+      <a href="#front-office">Back to Front Office</a> |
+      <a href="#back-office">Back to Back Office</a>
+    </nav>
+  </footer>
+
+</body>
+</html>
