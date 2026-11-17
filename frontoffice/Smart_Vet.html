@@ -1,1 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Vet — Front Office</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 
+:root{--bg:#05070f;--panel:rgba(255,255,255,.055);--line:rgba(255,255,255,.11);--txt:#e8ecff;--mut:#8f99c0;--c1:#00e5ff;--c2:#8a5cff;--c3:#ff3d9a;--ok:#2cffb0;--warn:#ffc857;--bad:#ff5c7a;--r:18px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;line-height:1.5}
+body:before{content:'';position:fixed;inset:0;z-index:-2;background:radial-gradient(600px 400px at 15% 10%,rgba(0,229,255,.16),transparent 60%),radial-gradient(700px 500px at 85% 30%,rgba(138,92,255,.18),transparent 60%),radial-gradient(500px 400px at 50% 100%,rgba(255,61,154,.12),transparent 60%)}
+body:after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 75%);mask-image:radial-gradient(circle at 50% 30%,#000,transparent 75%)}
+h1,h2,h3,.logo{font-family:'Orbitron','Inter',sans-serif;letter-spacing:.5px}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+.grad{background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* nav */
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:18px;padding:14px 5vw;backdrop-filter:blur(16px);background:rgba(5,7,15,.65);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:20px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo i{font-style:normal;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 0 18px rgba(0,229,255,.5)}
+.links{margin-left:auto;display:flex;gap:22px;align-items:center;color:var(--mut);font-size:14px}
+.links a:hover{color:var(--c1)}
+.btn{border:0;border-radius:12px;padding:11px 20px;font-weight:600;font-size:14px;color:#04121a;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 24px rgba(0,229,255,.25);transition:.25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(138,92,255,.45)}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:var(--c1);color:var(--c1)}
+.btn.sm{padding:7px 13px;font-size:12.5px;border-radius:10px}
+.btn.danger{background:transparent;color:var(--bad);border:1px solid rgba(255,92,122,.4);box-shadow:none}
+/* hero */
+.hero{min-height:88vh;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:60px 5vw}
+.tag{display:inline-block;padding:6px 14px;border:1px solid var(--line);border-radius:99px;font-size:12.5px;color:var(--c1);background:var(--panel);margin-bottom:22px}
+.hero h1{font-size:clamp(34px,5.2vw,66px);line-height:1.05;margin-bottom:20px}
+.hero p{color:var(--mut);font-size:17px;max-width:540px;margin-bottom:30px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.stats{display:flex;gap:30px;margin-top:42px}
+.stats b{font-family:'Orbitron';font-size:26px;display:block}
+.stats span{color:var(--mut);font-size:12.5px}
+.orb{position:relative;height:440px;display:grid;place-items:center}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(0,229,255,.35);animation:spin 18s linear infinite}
+.ring:nth-child(1){width:380px;height:380px;border-style:dashed}
+.ring:nth-child(2){width:290px;height:290px;border-color:rgba(138,92,255,.5);animation-duration:12s;animation-direction:reverse}
+.ring:nth-child(3){width:200px;height:200px;border-color:rgba(255,61,154,.5);animation-duration:9s}
+.core{font-size:84px;filter:drop-shadow(0 0 28px rgba(0,229,255,.8));animation:float 4s ease-in-out infinite}
+.chip{position:absolute;padding:10px 16px;border-radius:14px;background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(10px);font-size:13px;animation:float 5s ease-in-out infinite}
+.chip.a{top:40px;left:0}.chip.b{bottom:70px;right:0;animation-delay:-2s}.chip.c{top:150px;right:-10px;animation-delay:-3.5s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translateY(-12px)}}
+/* sections */
+section.s{padding:80px 5vw}
+.s h2{font-size:clamp(26px,3.4vw,40px);margin-bottom:12px}
+.s .sub{color:var(--mut);max-width:620px;margin-bottom:40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px;backdrop-filter:blur(10px);transition:.3s}
+.card:hover{transform:translateY(-6px);border-color:rgba(0,229,255,.5);box-shadow:0 18px 40px rgba(0,229,255,.1)}
+.card .ic{font-size:34px;margin-bottom:12px}
+.card h3{font-size:16px;margin-bottom:8px}
+.card p{color:var(--mut);font-size:14px}
+.reveal{opacity:0;transform:translateY(24px);transition:.8s}
+.reveal.in{opacity:1;transform:none}
+.step{counter-increment:st}
+.step:before{content:counter(st,decimal-leading-zero);font-family:'Orbitron';font-size:34px;font-weight:800;display:block;margin-bottom:8px;background:linear-gradient(90deg,var(--c1),var(--c3));-webkit-background-clip:text;background-clip:text;color:transparent}
+footer{padding:40px 5vw;border-top:1px solid var(--line);color:var(--mut);font-size:13px;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between}
+/* app */
+#app{padding:30px 5vw 80px;min-height:80vh}
+.apphead{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:22px}
+.apphead h2{font-size:24px}
+.rolepill{padding:4px 12px;border-radius:99px;font-size:12px;border:1px solid var(--c2);color:var(--c2)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px;padding:6px;border:1px solid var(--line);border-radius:14px;background:var(--panel);width:fit-content;max-width:100%}
+.tabs button{border:0;background:transparent;color:var(--mut);padding:9px 16px;border-radius:10px;font-size:13.5px;font-weight:500;transition:.2s}
+.tabs button:hover{color:var(--txt)}
+.tabs button.on{background:linear-gradient(135deg,rgba(0,229,255,.2),rgba(138,92,255,.25));color:#fff;box-shadow:inset 0 0 0 1px rgba(0,229,255,.4)}
+#content{animation:fade .4s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+.bar{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-bottom:20px;padding:16px;border-radius:var(--r);background:var(--panel);border:1px solid var(--line)}
+.bar label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--mut)}
+.bar .grow{flex:1;min-width:180px}
+input,select,textarea{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--txt);padding:10px 12px;border-radius:10px;font:inherit;font-size:14px;outline:none;transition:.2s;width:100%}
+select option{background:#10142a;color:var(--txt)}
+input:focus,select:focus,textarea:focus{border-color:var(--c1);box-shadow:0 0 0 3px rgba(0,229,255,.15)}
+.bar input,.bar select{min-width:140px}
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;padding:14px 16px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tbody tr{transition:.2s}tbody tr:hover{background:rgba(0,229,255,.05)}
+.pill{padding:3px 11px;border-radius:99px;font-size:12px;border:1px solid}
+.pill.pending{color:var(--warn);border-color:rgba(255,200,87,.4)}.pill.confirmed{color:var(--c1);border-color:rgba(0,229,255,.4)}.pill.done{color:var(--ok);border-color:rgba(44,255,176,.4)}.pill.cancelled{color:var(--bad);border-color:rgba(255,92,122,.4)}.pill.available{color:var(--ok);border-color:rgba(44,255,176,.4)}.pill.requested{color:var(--warn);border-color:rgba(255,200,87,.4)}
+.empty{padding:50px;text-align:center;color:var(--mut)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:26px}
+.kpi .card b{font-family:'Orbitron';font-size:30px;display:block}.kpi .card span{color:var(--mut);font-size:13px}
+.meta{color:var(--mut);font-size:13px;margin:2px 0}
+.day{margin:22px 0 10px;font-family:'Orbitron';font-size:14px;color:var(--c1)}
+.appt{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:14px 18px;margin-bottom:10px;border-radius:14px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--c2)}
+.appt .time{font-family:'Orbitron';font-size:15px;min-width:62px}
+.appt .who{flex:1;min-width:180px}
+/* modal / toast */
+.ov{position:fixed;inset:0;z-index:100;background:rgba(2,4,10,.7);backdrop-filter:blur(6px);display:grid;place-items:center;padding:20px;animation:fade .25s}
+.modal{width:100%;max-width:460px;max-height:90vh;overflow:auto;background:#0b1024;border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(138,92,255,.15)}
+.modal h3{margin-bottom:18px}
+.f{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;font-size:12.5px;color:var(--mut)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.switch{display:flex;gap:6px;margin-bottom:20px;padding:5px;border-radius:12px;background:rgba(255,255,255,.05)}
+.switch button{flex:1;border:0;padding:9px;border-radius:9px;background:transparent;color:var(--mut);font-weight:600}
+.switch button.on{background:linear-gradient(135deg,var(--c1),var(--c2));color:#04121a}
+#toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,120px);z-index:200;padding:13px 22px;border-radius:14px;background:#10162e;border:1px solid var(--c1);box-shadow:0 10px 40px rgba(0,229,255,.25);transition:.4s;font-size:14px}
+#toast.show{transform:translate(-50%,0)}
+/* support */
+#sfab{position:fixed;right:24px;bottom:24px;z-index:90;width:60px;height:60px;border-radius:50%;border:0;font-size:26px;background:linear-gradient(135deg,var(--c1),var(--c3));box-shadow:0 8px 30px rgba(255,61,154,.4);animation:pulse 2.5s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,229,255,.5)}70%{box-shadow:0 0 0 18px rgba(0,229,255,0)}100%{box-shadow:0 0 0 0 rgba(0,229,255,0)}}
+#spanel{position:fixed;right:24px;bottom:96px;z-index:90;width:360px;max-width:calc(100vw - 32px);max-height:70vh;overflow:auto;background:#0b1024;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 30px 80px rgba(0,0,0,.6);transform:translateY(20px) scale(.96);opacity:0;pointer-events:none;transition:.3s}
+#spanel.open{transform:none;opacity:1;pointer-events:auto}
+#spanel details{border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-size:13.5px}
+#spanel summary{cursor:pointer;font-weight:600}
+#spanel details p{color:var(--mut);margin-top:8px}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.orb{height:340px}.links a.hide{display:none}.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="goHome()"><i>🐾</i><span>SMART<span class="grad">VET</span></span></div>
+  <div class="links" id="navlinks"></div>
+</nav>
+
+<!-- PUBLIC HOME -->
+<div id="home">
+  <header class="hero">
+    <div>
+      <span class="tag">● The future of pet care is online</span>
+      <h1>Your pet's health,<br><span class="grad">smarter &amp; closer.</span></h1>
+      <p>Manage your animals, book a veterinarian in seconds, adopt a new friend and find the best pet stores near you — all in one futuristic platform.</p>
+      <div class="cta">
+        <button class="btn" onclick="openAuth('register')">Get started free</button>
+        <button class="btn ghost" onclick="openAuth('register','vet')">I'm a veterinarian</button>
+      </div>
+    </div>
+    <div class="orb">
+      <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+      <div class="core">🐕</div>
+    </div>
+  </header>
+
+  <section class="s" id="features">
+    <h2 class="reveal">Everything in <span class="grad">one place</span></h2>
+    <p class="sub reveal">One account gives you access to the three Smart Vet branches, whether you own a pet or not.</p>
+    <div class="grid">
+      <div class="card reveal" style="cursor:pointer" onclick="enterApp('adopt')"><div class="ic">🐶</div><h3>Adopt a pet</h3><p>Browse animals waiting for a home. Filter by type and city, then send an adoption request.</p></div>
+      <div class="card reveal" style="cursor:pointer" onclick="enterApp('vets')"><div class="ic">🩺</div><h3>Find a veterinarian</h3><p>Filter by city and specialty, compare vets and book an appointment on a free time slot.</p></div>
+      <div class="card reveal" style="cursor:pointer" onclick="enterApp('stores')"><div class="ic">🏪</div><h3>Find stores</h3><p>Food, accessories, grooming, pharmacies — find the right pet store in your area.</p></div>
+      <div class="card reveal" style="cursor:pointer" onclick="me&&me.role==='vet'?enterApp():openAuth('register','vet')"><div class="ic">📊</div><h3>Vet dashboard</h3><p>Veterinarians get a patient table (own pets + clients' pets) with sorting, filters and an appointment organizer.</p></div>
+    </div>
+  </section>
+
+  <section class="s" id="how" style="counter-reset:st">
+    <h2 class="reveal">How it <span class="grad">works</span></h2>
+    <p class="sub reveal">Three simple steps.</p>
+    <div class="grid">
+      <div class="card step reveal"><h3>Create your account</h3><p>Sign up as a pet owner or as a veterinarian. Same login on the whole platform.</p></div>
+      <div class="card step reveal"><h3>Enter Smart Vet</h3><p>Add your animals, or open your patient table if you are a vet.</p></div>
+      <div class="card step reveal"><h3>Book &amp; manage</h3><p>Choose a vet, pick a time slot and follow your appointments in real time.</p></div>
+    </div>
+  </section>
+
+  <section class="s" id="contact">
+    <h2 class="reveal">Need <span class="grad">help?</span></h2>
+    <p class="sub reveal">Use the support button at the bottom right for the FAQ and a contact form, or write to us by email.</p>
+    <div class="grid">
+      <div class="card reveal"><div class="ic">📧</div><h3>Email support</h3><p>support@smartvet.tn</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- LOGGED-IN APP -->
+<main id="app" hidden>
+  <div class="apphead"><h2 id="hello"></h2><span class="rolepill" id="rolepill"></span></div>
+  <div class="tabs" id="tabs"></div>
+  <div id="content"></div>
+</main>
+
+<footer><span>© 2026 Smart Vet</span><span>Privacy · Terms · Support</span></footer>
+
+<!-- Support widget -->
+<button id="sfab" onclick="toggleSupport()" aria-label="Support">💬</button>
+<div id="spanel">
+  <h3 style="margin-bottom:12px">Support <span class="grad">center</span></h3>
+  <div class="switch"><button class="on" onclick="supTab('faq',this)">FAQ</button><button onclick="supTab('contact',this)">Contact</button><button onclick="supTab('info',this)">Info</button></div>
+  <div id="sbody"></div>
+</div>
+
+<div id="toast"></div>
+<div id="modalroot"></div>
+
+<script>
+/* ============ SHARED DATABASE (same code in backoffice.html) ============ */
+const DB_KEY='smartvet_db_v2'; /* v2 = empty base */
+const uid=()=>Math.random().toString(36).slice(2,9);
+const today=(d=0)=>{const t=new Date();t.setDate(t.getDate()+d);return t.toISOString().slice(0,10)};
+function seed(){return {users:[],pets:[],appointments:[],adoptions:[],stores:[],tickets:[]}}
+function load(){let d=null;try{d=JSON.parse(localStorage.getItem(DB_KEY))}catch(e){}if(!d){d=seed();save(d)}
+  ['users','pets','appointments','adoptions','stores','tickets'].forEach(k=>{if(!Array.isArray(d[k]))d[k]=[]});
+  return d}
+function save(d){localStorage.setItem(DB_KEY,JSON.stringify(d))}
+
+/* ============ HELPERS ============ */
+let db=load(),me=null,tab='';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const val=id=>($(id)||{}).value||'';
+const sync=()=>{db=load()};
+const CITIES=['Tunis','Ariana','Sfax','Sousse','Nabeul','Bizerte','Monastir','Gabes'];
+const TYPES=['Dog','Cat','Bird','Rabbit','Reptile','Other'];
+const EMO={Dog:'🐶',Cat:'🐱',Bird:'🐦',Rabbit:'🐰',Reptile:'🦎',Other:'🐾'};
+const SPEC=['Small animals','Surgery','Exotic pets','Dermatology','Cardiology','Dentistry','Large animals'];
+const opts=(arr,sel)=>arr.map(o=>{const [v,l]=Array.isArray(o)?o:[o,o];return `<option value="${esc(v)}" ${v===sel?'selected':''}>${esc(l)}</option>`}).join('');
+const userName=id=>(db.users.find(u=>u.id===id)||{}).name||'—';
+const petById=id=>db.pets.find(p=>p.id===id)||{};
+let tt;
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2800)}
+function modal(html){$('modalroot').innerHTML=`<div class="ov" onclick="if(event.target===this)closeModal()"><div class="modal">${html}</div></div>`}
+function closeModal(){$('modalroot').innerHTML=''}
+
+/* ============ SESSION / NAV ============ */
+function boot(){
+  sync();
+  const id=localStorage.getItem('smartvet_session');
+  me=db.users.find(u=>u.id===id&&u.role!=='admin')||null;
+  renderNav();
+  if(me){enterApp()}else{goHome()}
+  heroStats();
+}
+function renderNav(){
+  const hide='class="hide"';
+  let h=`<a ${hide} href="#features" onclick="goHome()">Features</a><a ${hide} href="#how" onclick="goHome()">How it works</a><a ${hide} href="#contact" onclick="goHome()">Contact</a>`;
+  h+=me?`<button class="btn ghost sm" onclick="enterApp()">Dashboard</button><button class="btn sm" onclick="logout()">Logout</button>`
+       :`<button class="btn ghost sm" onclick="openAuth('login')">Login</button><button class="btn sm" onclick="openAuth('register')">Sign up</button>`;
+  $('navlinks').innerHTML=h;
+}
+function goHome(){$('home').hidden=false;$('app').hidden=true;window.scrollTo({top:0,behavior:'smooth'})}
+function heroStats(){}
+function logout(){localStorage.removeItem('smartvet_session');me=null;renderNav();goHome();toast('Logged out. See you soon! 🐾')}
+
+/* ============ AUTH ============ */
+function openAuth(mode='login',role='owner'){
+  modal(`<div class="switch"><button id="tl" class="${mode==='login'?'on':''}" onclick="openAuth('login')">Login</button><button id="tr" class="${mode==='register'?'on':''}" onclick="openAuth('register')">Sign up</button></div>
+  <form onsubmit="event.preventDefault();${mode==='login'?'doLogin()':'doRegister()'}">
+  ${mode==='register'?`<div class="f">Full name<input id="a_name" required></div>`:''}
+  <div class="f">Email<input id="a_email" type="email" required></div>
+  <div class="f">Password<input id="a_pass" type="password" minlength="4" required></div>
+  ${mode==='register'?`
+   <div class="two"><div class="f">I am<select id="a_role" onchange="$('vetOnly').hidden=this.value!=='vet'"><option value="owner" ${role==='owner'?'selected':''}>Pet owner / adopter</option><option value="vet" ${role==='vet'?'selected':''}>Veterinarian</option></select></div>
+   <div class="f">City<select id="a_city">${opts(CITIES)}</select></div></div>
+   <div class="two" id="vetOnly" ${role==='vet'?'':'hidden'}><div class="f">Specialty<select id="a_spec">${opts(SPEC)}</select></div><div class="f">Phone<input id="a_phone"></div></div>`:''}
+  <button class="btn" style="width:100%;margin-top:6px">${mode==='login'?'Enter Smart Vet':'Create my account'}</button>
+  </form>`);
+}
+function doLogin(){
+  sync();
+  const u=db.users.find(x=>x.email.toLowerCase()===val('a_email').trim().toLowerCase()&&x.password===val('a_pass'));
+  if(!u)return toast('❌ Wrong email or password');
+  me=u;localStorage.setItem('smartvet_session',u.id);closeModal();renderNav();enterApp();toast(`Welcome back, ${u.name.split(' ')[0]}!`);
+}
+function doRegister(){
+  sync();
+  const email=val('a_email').trim().toLowerCase();
+  if(db.users.some(u=>u.email.toLowerCase()===email))return toast('This email is already used');
+  const role=val('a_role');
+  const u={id:uid(),name:val('a_name').trim(),email,password:val('a_pass'),role,city:val('a_city'),specialty:role==='vet'?val('a_spec'):'',phone:val('a_phone')};
+  db.users.push(u);save(db);me=u;localStorage.setItem('smartvet_session',u.id);closeModal();renderNav();enterApp();toast('Account created 🎉');
+}
+
+/* ============ APP SHELL ============ */
+const TABS={
+  owner:[['overview','Overview'],['pets','My pets'],['adopt','🐶 Adopt'],['vets','🩺 Find a vet'],['stores','🏪 Stores'],['appts','Appointments'],['account','👤 My account']],
+  vet:[['patients','Patients'],['agenda','Appointments'],['account','👤 My account']]
+};
+const roleKey=()=>me.role;
+function needLogin(){toast('Please log in or sign up first 🐾');openAuth('login')}
+function enterApp(t){
+  if(!me)return openAuth('login');
+  sync();const fresh=db.users.find(u=>u.id===me.id);
+  if(!fresh){localStorage.removeItem('smartvet_session');me=null;renderNav();goHome();return openAuth('login')}
+  me=fresh;
+  $('home').hidden=true;$('app').hidden=false;window.scrollTo(0,0);
+  $('hello').innerHTML=`Hello, <span class="grad">${esc(me.name)}</span>`;
+  $('rolepill').textContent=me.role==='vet'?'Veterinarian':'Pet owner';
+  const list=TABS[roleKey()];
+  setTab(list.some(x=>x[0]===t)?t:list[0][0]);
+}
+function setTab(t){
+  tab=t;
+  $('tabs').innerHTML=TABS[roleKey()].map(([k,l])=>`<button class="${k===t?'on':''}" onclick="setTab('${k}')">${l}</button>`).join('');
+  const c=$('content');c.style.animation='none';void c.offsetWidth;c.style.animation='';
+  c.innerHTML=V[t].shell();
+  V[t].list&&V[t].list();
+}
+const refresh=()=>{sync();V[tab].list&&V[tab].list()};
+
+/* ============ VIEWS ============ */
+const V={};
+const petCard=p=>`<div class="card"><div class="ic">${EMO[p.type]||'🐾'}</div><h3>${esc(p.name)}</h3><p class="meta">${esc(p.type)} · ${esc(p.breed||'—')} · ${p.age} yr</p><p class="meta">${esc(p.notes||'')}</p><div class="row" style="margin-top:12px"><button class="btn sm" onclick="apptModal({petId:'${p.id}'})">Book vet</button><button class="btn danger sm" onclick="delPet('${p.id}')">Remove</button></div></div>`;
+
+/* ---- owner ---- */
+V.overview={shell(){
+  sync();const mine=db.pets.filter(p=>p.ownerId===me.id),ap=db.appointments.filter(a=>a.ownerId===me.id&&['pending','confirmed'].includes(a.status));
+  return `<div class="kpi"><div class="card"><b>${mine.length}</b><span>My pets</span></div><div class="card"><b>${ap.length}</b><span>Upcoming appointments</span></div><div class="card"><b>${db.adoptions.filter(a=>a.status==='available').length}</b><span>Pets to adopt</span></div><div class="card"><b>${db.users.filter(u=>u.role==='vet').length}</b><span>Veterinarians</span></div></div>
+  <h3 style="margin-bottom:16px">Choose a branch</h3>
+  <div class="grid">
+   <div class="card" onclick="setTab('adopt')" style="cursor:pointer"><div class="ic">🐶</div><h3>Adopt a pet</h3><p>Give an animal a new home.</p></div>
+   <div class="card" onclick="setTab('vets')" style="cursor:pointer"><div class="ic">🩺</div><h3>Find a veterinarian</h3><p>Filter by city &amp; specialty and book.</p></div>
+   <div class="card" onclick="setTab('stores')" style="cursor:pointer"><div class="ic">🏪</div><h3>Find stores</h3><p>Food, grooming, pharmacy and more.</p></div>
+  </div>`}};
+V.pets={shell(){return `<div class="row" style="margin-bottom:20px"><button class="btn" onclick="petModal()">＋ Add an animal</button></div><div class="grid" id="res"></div>`},
+ list(){const m=db.pets.filter(p=>p.ownerId===me.id);$('res').innerHTML=m.length?m.map(petCard).join(''):`<div class="empty" style="grid-column:1/-1">No animals yet. Add your first one!</div>`}};
+V.adopt={shell(){return `<div class="bar"><label class="grow">Search<input id="f_q" placeholder="Name or breed…" oninput="refresh()"></label><label>Type<select id="f_t" onchange="refresh()"><option value="">All</option>${opts(TYPES)}</select></label><label>City<select id="f_c" onchange="refresh()"><option value="">All</option>${opts(CITIES)}</select></label></div><div class="grid" id="res"></div>`},
+ list(){const q=val('f_q').toLowerCase(),t=val('f_t'),c=val('f_c');
+  const r=db.adoptions.filter(a=>(!t||a.type===t)&&(!c||a.city===c)&&(a.name+a.breed).toLowerCase().includes(q));
+  $('res').innerHTML=r.length?r.map(a=>`<div class="card"><div class="ic">${EMO[a.type]||'🐾'}</div><h3>${esc(a.name)} <span class="pill ${a.status}">${a.status}</span></h3><p class="meta">${esc(a.type)} · ${esc(a.breed)} · ${a.age} yr · 📍${esc(a.city)}</p><p style="margin:8px 0 12px;font-size:14px;color:var(--mut)">${esc(a.desc)}</p>${a.status==='available'?`<button class="btn sm" onclick="adopt('${a.id}')">${me?'Request adoption':'Log in to adopt'}</button>`:me&&a.requestedBy===me.id?`<span class="meta">✔ You requested this pet</span>`:`<span class="meta">Already requested</span>`}</div>`).join(''):`<div class="empty" style="grid-column:1/-1">${db.adoptions.length?'No pet matches your filters.':'No pets are available for adoption yet.'}</div>`}};
+V.vets={shell(){return `<div class="bar"><label class="grow">Search<input id="f_q" placeholder="Veterinarian name…" oninput="refresh()"></label><label>City<select id="f_c" onchange="refresh()"><option value="">All</option>${opts(CITIES)}</select></label><label>Specialty<select id="f_s" onchange="refresh()"><option value="">All</option>${opts(SPEC)}</select></label><label>Sort<select id="f_o" onchange="refresh()"><option value="name">Name A→Z</option><option value="city">City</option></select></label></div><div class="grid" id="res"></div>`},
+ list(){const q=val('f_q').toLowerCase(),c=val('f_c'),s=val('f_s'),o=val('f_o')||'name';
+  const r=db.users.filter(u=>u.role==='vet'&&(!c||u.city===c)&&(!s||u.specialty===s)&&u.name.toLowerCase().includes(q)).sort((a,b)=>a[o].localeCompare(b[o]));
+  $('res').innerHTML=r.length?r.map(v=>`<div class="card"><div class="ic">🩺</div><h3>${esc(v.name)}</h3><p class="meta">📍 ${esc(v.city)} · ${esc(v.specialty||'General')}</p><p class="meta">📞 ${esc(v.phone||'—')}</p><button class="btn sm" style="margin-top:12px" onclick="apptModal({vetId:'${v.id}'})">Book appointment</button></div>`).join(''):`<div class="empty" style="grid-column:1/-1">${db.users.some(u=>u.role==='vet')?'No veterinarian matches your filters.':'No veterinarians registered yet.'}</div>`}};
+V.stores={shell(){return `<div class="bar"><label class="grow">Search<input id="f_q" placeholder="Store name…" oninput="refresh()"></label><label>City<select id="f_c" onchange="refresh()"><option value="">All</option>${opts(CITIES)}</select></label><label>Category<select id="f_k" onchange="refresh()"><option value="">All</option>${opts([...new Set(db.stores.map(s=>s.category))])}</select></label></div><div class="grid" id="res"></div>`},
+ list(){const q=val('f_q').toLowerCase(),c=val('f_c'),k=val('f_k');
+  const r=db.stores.filter(s=>(!c||s.city===c)&&(!k||s.category===k)&&s.name.toLowerCase().includes(q));
+  $('res').innerHTML=r.length?r.map(s=>`<div class="card"><div class="ic">🏪</div><h3>${esc(s.name)}</h3><p class="meta">${esc(s.category)}</p><p class="meta">📍 ${esc(s.address)}, ${esc(s.city)}</p><p class="meta">📞 ${esc(s.phone)}</p></div>`).join(''):`<div class="empty" style="grid-column:1/-1">${db.stores.length?'No store matches your filters.':'No stores added yet.'}</div>`}};
+V.appts={shell(){return `<div class="tblwrap"><table><thead><tr><th>Date</th><th>Time</th><th>Pet</th><th>Veterinarian</th><th>Reason</th><th>Status</th><th></th></tr></thead><tbody id="res"></tbody></table></div>`},
+ list(){const r=db.appointments.filter(a=>a.ownerId===me.id).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  $('res').innerHTML=r.length?r.map(a=>`<tr><td>${a.date}</td><td>${a.time}</td><td>${esc(petById(a.petId).name)}</td><td>${esc(userName(a.vetId))}</td><td>${esc(a.reason)}</td><td><span class="pill ${a.status}">${a.status}</span></td><td>${['pending','confirmed'].includes(a.status)?`<button class="btn danger sm" onclick="setAppt('${a.id}','cancelled')">Cancel</button>`:''}</td></tr>`).join(''):`<tr><td colspan="7" class="empty">No appointments yet. Find a vet to book one.</td></tr>`}};
+
+/* ---- vet ---- */
+V.patients={shell(){return `<div class="bar"><label class="grow">Search pet or owner<input id="f_q" placeholder="Type to search…" oninput="refresh()"></label><label>Type<select id="f_t" onchange="refresh()"><option value="">All</option>${opts(TYPES)}</select></label><label>Show<select id="f_s" onchange="refresh()"><option value="mine">My pets + my clients' pets</option><option value="clients">My clients' pets</option><option value="own">My own pets</option></select></label><label>Sort by<select id="f_o" onchange="refresh()"><option value="name-asc">Name A→Z</option><option value="name-desc">Name Z→A</option><option value="type">Type</option><option value="age-asc">Age ↑</option><option value="age-desc">Age ↓</option></select></label><button class="btn" onclick="petModal()">＋ Add animal</button></div>
+  <div class="kpi" id="vk"></div><div class="tblwrap"><table><thead><tr><th>Pet</th><th>Type</th><th>Breed</th><th>Age</th><th>Owner</th><th>Phone</th><th></th></tr></thead><tbody id="res"></tbody></table></div>`},
+ list(){
+  const q=val('f_q').toLowerCase(),t=val('f_t'),s=val('f_s')||'mine',o=val('f_o')||'name-asc';
+  const cl=new Set(db.appointments.filter(a=>a.vetId===me.id).map(a=>a.ownerId));
+  let r=db.pets.filter(p=>(s==='all')||(s==='own'&&p.ownerId===me.id)||(s==='clients'&&cl.has(p.ownerId))||(s==='mine'&&(cl.has(p.ownerId)||p.ownerId===me.id)));
+  r=r.filter(p=>(!t||p.type===t)&&(p.name+userName(p.ownerId)).toLowerCase().includes(q));
+  const [k,d]=o.split('-');r.sort((a,b)=>{const x=k==='age'?a.age-b.age:String(a[k]).localeCompare(b[k]);return d==='desc'?-x:x});
+  const mineAp=db.appointments.filter(a=>a.vetId===me.id);
+  $('vk').innerHTML=`<div class="card"><b>${r.length}</b><span>Patients shown</span></div><div class="card"><b>${cl.size}</b><span>My clients</span></div><div class="card"><b>${mineAp.filter(a=>a.date===today(0)&&a.status!=='cancelled').length}</b><span>Appointments today</span></div><div class="card"><b>${mineAp.filter(a=>a.status==='pending').length}</b><span>Waiting for confirmation</span></div>`;
+  $('res').innerHTML=r.length?r.map(p=>{const o=db.users.find(u=>u.id===p.ownerId)||{};
+   return `<tr><td>${EMO[p.type]||'🐾'} <b>${esc(p.name)}</b></td><td>${esc(p.type)}</td><td>${esc(p.breed||'—')}</td><td>${p.age}</td><td>${esc(o.name)}${o.id===me.id?' <span class="pill confirmed">me</span>':''}</td><td>${esc(o.phone||'—')}</td><td><button class="btn sm" onclick="apptModal({petId:'${p.id}'})">Schedule</button></td></tr>`}).join(''):`<tr><td colspan="7" class="empty">No patient matches your filters.</td></tr>`}};
+V.agenda={shell(){return `<div class="bar"><label>Period<select id="f_p" onchange="refresh()"><option value="up">Upcoming</option><option value="today">Today</option><option value="all">All</option></select></label><label>Status<select id="f_s" onchange="refresh()"><option value="">All</option>${opts(['pending','confirmed','done','cancelled'])}</select></label><button class="btn" onclick="apptModal({})">＋ New appointment</button></div><div id="res"></div>`},
+ list(){const p=val('f_p')||'up',s=val('f_s');
+  let r=db.appointments.filter(a=>a.vetId===me.id&&(!s||a.status===s)&&(p==='all'||(p==='today'?a.date===today(0):a.date>=today(0))));
+  r.sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  if(!r.length)return $('res').innerHTML=`<div class="empty">Nothing scheduled for this filter.</div>`;
+  let last='',h='';r.forEach(a=>{if(a.date!==last){last=a.date;h+=`<div class="day">${a.date===today(0)?'TODAY · ':a.date===today(1)?'TOMORROW · ':''}${a.date}</div>`}
+   h+=`<div class="appt"><span class="time">${a.time}</span><div class="who"><b>${esc(petById(a.petId).name)}</b> <span class="meta">(${esc(petById(a.petId).type||'')})</span><div class="meta">${esc(userName(a.ownerId))} · ${esc(a.reason)}</div></div><span class="pill ${a.status}">${a.status}</span><div class="row">${a.status==='pending'?`<button class="btn sm" onclick="setAppt('${a.id}','confirmed')">Confirm</button>`:''}${a.status==='confirmed'?`<button class="btn sm" onclick="setAppt('${a.id}','done')">Mark done</button>`:''}${['pending','confirmed'].includes(a.status)?`<button class="btn danger sm" onclick="setAppt('${a.id}','cancelled')">Cancel</button>`:''}</div></div>`});
+  $('res').innerHTML=h}};
+V.account={shell(){return `<div class="card" style="max-width:580px"><h3 style="margin-bottom:6px">My account</h3><p class="meta" style="margin-bottom:18px">Only you can see this page.</p>
+ <div class="f">Full name<input id="p_name" value="${esc(me.name)}"></div>
+ <div class="f">Email<input id="p_email" type="email" value="${esc(me.email)}"></div>
+ <div class="two"><div class="f">City<select id="p_city">${opts(CITIES,me.city)}</select></div><div class="f">Phone<input id="p_phone" value="${esc(me.phone)}"></div></div>
+ ${me.role==='vet'?`<div class="f">Specialty<select id="p_spec">${opts(SPEC,me.specialty)}</select></div>`:''}
+ <div class="f">New password (leave empty to keep the current one)<input id="p_pass" type="password" autocomplete="new-password"></div>
+ <div class="row"><button class="btn" onclick="saveProfile()">Save changes</button><button class="btn danger" onclick="deleteAccount()">Delete my account</button></div></div>`}};
+function saveProfile(){
+  sync();const u=db.users.find(x=>x.id===me.id),email=val('p_email').trim().toLowerCase();
+  if(!val('p_name').trim()||!email)return toast('Name and email are required');
+  if(db.users.some(x=>x.id!==u.id&&x.email.toLowerCase()===email))return toast('This email is already used');
+  if(val('p_pass')&&val('p_pass').length<4)return toast('Password: 4 characters minimum');
+  Object.assign(u,{name:val('p_name').trim(),email,city:val('p_city'),phone:val('p_phone')});
+  if(u.role==='vet')u.specialty=val('p_spec');
+  if(val('p_pass'))u.password=val('p_pass');
+  save(db);me=u;$('p_pass').value='';$('hello').innerHTML=`Hello, <span class="grad">${esc(u.name)}</span>`;toast('Saved ✔');
+}
+function deleteAccount(){
+  if(!confirm('Delete your account and all your data? This cannot be undone.'))return;
+  sync();const id=me.id,mine=db.pets.filter(p=>p.ownerId===id).map(p=>p.id);
+  db.pets=db.pets.filter(p=>p.ownerId!==id);
+  db.appointments=db.appointments.filter(a=>a.ownerId!==id&&a.vetId!==id&&!mine.includes(a.petId));
+  db.adoptions.forEach(a=>{if(a.requestedBy===id){a.requestedBy='';a.status='available'}});
+  db.users=db.users.filter(u=>u.id!==id);save(db);
+  logout();toast('Your account was deleted');
+}
+
+/* ============ ACTIONS ============ */
+function petModal(){
+  sync();
+  const ownerSel='';
+  modal(`<h3>Add an animal</h3><form onsubmit="event.preventDefault();addPet()">${ownerSel}
+  <div class="two"><div class="f">Name<input id="n_name" required></div><div class="f">Type<select id="n_type">${opts(TYPES)}</select></div></div>
+  <div class="two"><div class="f">Breed<input id="n_breed"></div><div class="f">Age (years)<input id="n_age" type="number" min="0" max="60" value="1"></div></div>
+  <div class="f">Notes<textarea id="n_notes" rows="2" placeholder="Allergies, vaccines…"></textarea></div>
+  <div class="row"><button class="btn">Save animal</button><button type="button" class="btn ghost" onclick="closeModal()">Cancel</button></div></form>`);
+}
+function addPet(){sync();db.pets.push({id:uid(),ownerId:val('n_owner')||me.id,name:val('n_name').trim(),type:val('n_type'),breed:val('n_breed'),age:+val('n_age')||0,notes:val('n_notes')});save(db);closeModal();toast('Animal added 🐾');refresh()}
+function delPet(id){if(!confirm('Remove this animal and its appointments?'))return;sync();db.pets=db.pets.filter(p=>p.id!==id);db.appointments=db.appointments.filter(a=>a.petId!==id);save(db);toast('Animal removed');refresh()}
+function adopt(id){if(!me)return needLogin();sync();const a=db.adoptions.find(x=>x.id===id);a.status='requested';a.requestedBy=me.id;save(db);toast('Adoption request sent 💌');refresh()}
+function setAppt(id,s){sync();db.appointments.find(a=>a.id===id).status=s;save(db);toast('Appointment '+s);refresh()}
+const SLOTS=(()=>{const r=[];for(let h=9;h<18;h++){['00','30'].forEach(m=>r.push(`${String(h).padStart(2,'0')}:${m}`))}return r})();
+function apptModal(pre={}){
+  if(!me)return needLogin();
+  sync();
+  const vets=db.users.filter(u=>u.role==='vet');
+  if(me.role==='owner'&&!vets.length)return toast('No veterinarians registered yet');
+  const cl=new Set(db.appointments.filter(a=>a.vetId===me.id).map(a=>a.ownerId));
+  const pets=me.role==='vet'?db.pets.filter(p=>p.ownerId===me.id||cl.has(p.ownerId)):db.pets.filter(p=>p.ownerId===me.id);
+  if(!pets.length){if(me.role==='owner'){toast('Add an animal first 🐾');closeModal();petModal()}else toast('No patients yet. Clients appear here once they book with you.');return}
+  const vetSel=me.role==='vet'?'':`<div class="f">Veterinarian<select id="b_vet" onchange="fillSlots()">${opts(vets.map(v=>[v.id,`${v.name} — ${v.city}`]),pre.vetId)}</select></div>`;
+  modal(`<h3>Book an appointment</h3><form onsubmit="event.preventDefault();bookAppt()">${vetSel}
+  <div class="f">Animal<select id="b_pet">${opts(pets.map(p=>[p.id,p.name+(me.role==='vet'?` (${userName(p.ownerId)})`:'')]),pre.petId)}</select></div>
+  <div class="two"><div class="f">Date<input id="b_date" type="date" min="${today(0)}" value="${today(1)}" onchange="fillSlots()" required></div><div class="f">Time slot<select id="b_time"></select></div></div>
+  <div class="f">Reason<input id="b_reason" placeholder="Checkup, vaccination…" required></div>
+  <div class="row"><button class="btn">Confirm booking</button><button type="button" class="btn ghost" onclick="closeModal()">Cancel</button></div></form>`);
+  fillSlots();
+}
+function fillSlots(){
+  sync();const vid=me.role==='vet'?me.id:val('b_vet'),d=val('b_date');
+  const taken=db.appointments.filter(a=>a.vetId===vid&&a.date===d&&a.status!=='cancelled').map(a=>a.time);
+  $('b_time').innerHTML=SLOTS.map(s=>`<option value="${s}" ${taken.includes(s)?'disabled':''}>${s}${taken.includes(s)?' (booked)':''}</option>`).join('');
+  const f=SLOTS.find(s=>!taken.includes(s));if(f)$('b_time').value=f;
+}
+function bookAppt(){
+  sync();const vid=me.role==='vet'?me.id:val('b_vet'),pet=petById(val('b_pet'));
+  if(db.appointments.some(a=>a.vetId===vid&&a.date===val('b_date')&&a.time===val('b_time')&&a.status!=='cancelled'))return toast('This slot was just taken');
+  db.appointments.push({id:uid(),petId:pet.id,ownerId:pet.ownerId,vetId:vid,date:val('b_date'),time:val('b_time'),reason:val('b_reason'),status:me.role==='vet'?'confirmed':'pending'});
+  save(db);closeModal();toast('Appointment booked ✔');
+  if(me.role==='owner')setTab('appts');else refresh();
+}
+
+/* ============ SUPPORT WIDGET ============ */
+function toggleSupport(){const p=$('spanel');p.classList.toggle('open');if(p.classList.contains('open')&&!$('sbody').innerHTML)supTab('faq')}
+function supTab(t,btn){
+  if(btn){[...btn.parentNode.children].forEach(b=>b.classList.remove('on'));btn.classList.add('on')}
+  const b=$('sbody');
+  if(t==='faq')b.innerHTML=`<details><summary>How do I create an account?</summary><p>Click "Sign up", choose pet owner or veterinarian, and fill in the form.</p></details><details><summary>How do I book a veterinarian?</summary><p>Open "Find a vet", filter by city/specialty and click "Book appointment".</p></details><details><summary>How do I add my pet?</summary><p>Go to "My pets" and click "Add an animal".</p></details><details><summary>How does adoption work?</summary><p>Open "Adopt", pick an animal and send a request. Our team will contact you.</p></details><details><summary>I forgot my password</summary><p>Send us a message in the Contact tab and we will help you.</p></details>`;
+  if(t==='contact')b.innerHTML=`<form onsubmit="event.preventDefault();sendTicket()"><div class="f">Name<input id="t_name" value="${esc(me?me.name:'')}" required></div><div class="f">Email<input id="t_email" type="email" value="${esc(me?me.email:'')}" required></div><div class="f">Message<textarea id="t_msg" rows="4" required></textarea></div><button class="btn" style="width:100%">Send message</button></form>`;
+  if(t==='info')b.innerHTML=`<p style="margin-bottom:10px">📧 support@smartvet.tn</p><p class="meta">🚨 For a pet emergency, contact your nearest veterinarian immediately.</p>`;
+}
+function sendTicket(){sync();db.tickets.push({id:uid(),name:val('t_name'),email:val('t_email'),message:val('t_msg'),status:'open',date:today(0)});save(db);$('t_msg').value='';toast('Message sent. We will reply soon 💚')}
+
+/* ============ INIT ============ */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+window.addEventListener('storage',()=>{if(!$('app').hidden)refresh();heroStats()});
+boot();
+</script>
+</body>
+</html>
