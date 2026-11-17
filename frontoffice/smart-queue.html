@@ -2,138 +2,123 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Smart Queue &mdash; Front Office</title>
+  <title>Smart Queue - Front Office</title>
 </head>
 <body>
 
-  <div>
+  <h1>Smart Queue</h1>
+  <p>Don't wait in line. Wait wherever you want.</p>
 
-    <aside aria-label="Sidebar">
-      <p><strong>SmartQueue</strong></p>
+  <h2>Menu</h2>
+  <ul>
+    <li><a href="#">Dashboard</a></li>
+    <li><a href="#">My Ticket</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">History</a></li>
+    <li><a href="#">Settings</a></li>
+  </ul>
 
-      <nav aria-label="Main menu">
-        <ul>
-          <li><a href="#" aria-current="page">Dashboard</a></li>
-          <li><a href="#">My Ticket</a></li>
-          <li>
-            <a href="#">Services</a>
-            <ul>
-              <li><a href="#">Customer Service</a></li>
-              <li><a href="#">Payments</a></li>
-              <li><a href="#">Appointments</a></li>
-            </ul>
-          </li>
-          <li><a href="#">History</a></li>
-          <li><a href="#">Settings</a></li>
-        </ul>
-      </nav>
+  <h2>Today's Queue</h2>
+  <p>Date: 17 November 2026</p>
+  <p>People waiting now: 5</p>
 
-      <p><button type="button">Log out</button></p>
-    </aside>
+  <h3>Services and wait time</h3>
+  <table>
+    <tr>
+      <th>Service</th>
+      <th>People waiting</th>
+      <th>Wait time</th>
+    </tr>
+    <tr>
+      <td>Customer Service</td>
+      <td>14</td>
+      <td>25 min</td>
+    </tr>
+    <tr>
+      <td>Payments</td>
+      <td>8</td>
+      <td>15 min</td>
+    </tr>
+    <tr>
+      <td>Appointments</td>
+      <td>5</td>
+      <td>10 min</td>
+    </tr>
+    <tr>
+      <td>Documents</td>
+      <td>11</td>
+      <td>20 min</td>
+    </tr>
+    <tr>
+      <td>Technical Support</td>
+      <td>7</td>
+      <td>18 min</td>
+    </tr>
+  </table>
 
-    <main>
+  <h3>Get my ticket</h3>
+  <form>
+    <p>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name">
+    </p>
+    <p>
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone">
+    </p>
+    <p>
+      <label for="service">Service</label>
+      <select id="service" name="service">
+        <option>Customer Service</option>
+        <option>Payments</option>
+        <option>Appointments</option>
+        <option>Documents</option>
+        <option>Technical Support</option>
+      </select>
+    </p>
+    <p>
+      <label for="priority">Priority</label>
+      <select id="priority" name="priority">
+        <option>Normal</option>
+        <option>Elderly</option>
+        <option>Disabled</option>
+      </select>
+    </p>
+    <p>
+      <button type="submit">Get my ticket</button>
+    </p>
+  </form>
 
-      <header>
-        <h2>Today's Queue</h2>
-        <p><time datetime="2026-11-17">Tuesday, 17 November 2026</time></p>
-        <p><button type="button" aria-label="Take a new ticket">+</button></p>
-      </header>
+  <h3>My Ticket</h3>
+  <p>Ticket number: A-023</p>
+  <p>Service: Customer Service</p>
+  <p>Position in queue: 4</p>
+  <p>Wait time left: about 12 min</p>
+  <p>Status: Almost your turn</p>
+  <p>
+    <button type="button">VIEW TICKET</button>
+    <button type="button">Cancel ticket</button>
+  </p>
 
-      <h1>Don't wait in line. Wait wherever you want.</h1>
+  <h3>Now serving</h3>
+  <ul>
+    <li>Counter 1: A-023</li>
+    <li>Counter 2: A-019</li>
+    <li>Counter 3: C-007</li>
+    <li>Counter 4: A-021</li>
+    <li>Counter 5: D-004</li>
+  </ul>
 
-      <section aria-label="People waiting now">
-        <ul>
-          <li>SB</li>
-          <li>KT</li>
-          <li>LH</li>
-          <li>AM</li>
-          <li>+5</li>
-        </ul>
-      </section>
+  <h3>Best time to come</h3>
+  <ul>
+    <li>Morning: 35% busy</li>
+    <li>Noon: 95% busy</li>
+    <li>Afternoon: 62% busy</li>
+    <li>Evening: 18% busy</li>
+  </ul>
 
-      <article aria-labelledby="my-ticket-title">
-        <h2 id="my-ticket-title">My Ticket</h2>
+  <h3>Announcements</h3>
+  <p>Counter 3 is closed today. Appointments move to Counter 4.</p>
 
-        <dl>
-          <dt>Ticket number</dt>
-          <dd><strong>A-023</strong></dd>
-
-          <dt>Position in queue</dt>
-          <dd>4</dd>
-
-          <dt>Estimated time left</dt>
-          <dd>about 12 min</dd>
-        </dl>
-
-        <p>
-          <label for="ticket-progress">Your progress</label>
-          <progress id="ticket-progress" value="68" max="100">68%</progress>
-        </p>
-
-        <p><button type="button">VIEW TICKET</button></p>
-      </article>
-
-      <section aria-label="Queue highlights">
-        <article>
-          <h3>Now Serving</h3>
-          <p>Counter 2 &rarr; <strong>A-019</strong></p>
-        </article>
-
-        <article>
-          <h3>Estimated Wait</h3>
-          <p><strong>12 min</strong> for Customer Service</p>
-        </article>
-      </section>
-    </main>
-
-    <aside aria-label="Announcements and best time to come">
-
-      <section aria-labelledby="announcements-title">
-        <h3 id="announcements-title">Announcements</h3>
-
-        <article>
-          <h4>Counter 3 closed</h4>
-          <p>Appointments move to Counter 4 today.</p>
-          <p>Status: <strong>New</strong></p>
-        </article>
-
-        <article>
-          <h4>System update</h4>
-          <p>Short maintenance tonight at 22:00.</p>
-          <p>Status: <strong>Info</strong></p>
-        </article>
-
-        <article>
-          <h4>Almost your turn</h4>
-          <p>Please stay close to Counter 2.</p>
-          <p>Status: <strong>A-023</strong></p>
-        </article>
-      </section>
-
-      <section aria-labelledby="best-time-title">
-        <h3 id="best-time-title">Best time to come</h3>
-
-        <ul>
-          <li>Morning &mdash; 35% busy</li>
-          <li>Noon &mdash; 95% busy</li>
-          <li>Afternoon &mdash; 62% busy</li>
-          <li>Evening &mdash; 18% busy</li>
-        </ul>
-      </section>
-    </aside>
-
-    <aside aria-label="Customer profile">
-      <p>SB</p>
-      <p><strong>Sarah Ben Ali</strong></p>
-      <p>Customer</p>
-
-      <p>
-        <button type="button" aria-label="Notifications">Alerts</button>
-        <button type="button" aria-label="Settings">Settings</button>
-      </p>
-    </aside>
-
-  </div>
 </body>
 </html>

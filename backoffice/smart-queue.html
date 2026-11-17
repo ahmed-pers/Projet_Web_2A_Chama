@@ -2,258 +2,178 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Smart Queue &mdash; Back Office</title>
+  <title>Smart Queue - Back Office</title>
 </head>
 <body>
 
-  <div>
+  <h1>Smart Queue - Back Office</h1>
+  <p>Staff page to manage the queue.</p>
 
-    <aside aria-label="Sidebar">
+  <h2>Login</h2>
+  <form>
+    <p>
+      <label for="pin">PIN</label>
+      <input type="password" id="pin" name="pin">
+    </p>
+    <p>
+      <button type="submit">Login</button>
+    </p>
+  </form>
 
-      <p>
-        <strong>Queue list</strong>
-        <a href="#">Back</a>
-      </p>
+  <h2>Counter dashboard</h2>
+  <p>Current ticket: A-023</p>
+  <form>
+    <p>
+      <label for="counter">Counter</label>
+      <select id="counter" name="counter">
+        <option>Counter 1</option>
+        <option>Counter 2</option>
+        <option>Counter 3</option>
+        <option>Counter 4</option>
+        <option>Counter 5</option>
+      </select>
+    </p>
+    <p>
+      <label for="service">Service</label>
+      <select id="service" name="service">
+        <option>Customer Service</option>
+        <option>Payments</option>
+        <option>Appointments</option>
+        <option>Documents</option>
+        <option>Technical Support</option>
+      </select>
+    </p>
+    <p>
+      <button type="submit">CALL NEXT</button>
+      <button type="button">RECALL</button>
+      <button type="button">SKIP</button>
+      <button type="button">MARK AS SERVED</button>
+      <button type="button">TRANSFER</button>
+    </p>
+  </form>
 
-      <h2>Settings</h2>
-      <nav aria-label="Settings menu">
-        <ul>
-          <li><a href="#">My details</a></li>
-          <li><a href="#">Counters</a></li>
-          <li><a href="#" aria-current="page">Services</a></li>
-          <li><a href="#">Queue</a></li>
-          <li><a href="#">Statistics <span>20</span></a></li>
-          <li><a href="#">Announcements</a></li>
-          <li><a href="#">Team</a></li>
-        </ul>
-      </nav>
+  <h2>Live queue</h2>
+  <table>
+    <tr>
+      <th>Ticket</th>
+      <th>Name</th>
+      <th>Service</th>
+      <th>Wait time</th>
+      <th>Priority</th>
+      <th>Status</th>
+    </tr>
+    <tr>
+      <td>A-023</td>
+      <td>Sarah Ben Ali</td>
+      <td>Customer Service</td>
+      <td>12 min</td>
+      <td>Normal</td>
+      <td>Almost your turn</td>
+    </tr>
+    <tr>
+      <td>A-024</td>
+      <td>Karim Trabelsi</td>
+      <td>Customer Service</td>
+      <td>9 min</td>
+      <td>Elderly</td>
+      <td>Waiting</td>
+    </tr>
+    <tr>
+      <td>B-011</td>
+      <td>Leila Haddad</td>
+      <td>Payments</td>
+      <td>19 min</td>
+      <td>Disabled</td>
+      <td>Called</td>
+    </tr>
+    <tr>
+      <td>C-007</td>
+      <td>Youssef Mansour</td>
+      <td>Appointments</td>
+      <td>4 min</td>
+      <td>Normal</td>
+      <td>Waiting</td>
+    </tr>
+    <tr>
+      <td>D-004</td>
+      <td>Amina Gharbi</td>
+      <td>Documents</td>
+      <td>22 min</td>
+      <td>Elderly</td>
+      <td>Waiting</td>
+    </tr>
+  </table>
 
-      <section aria-label="Staff profile">
-        <p>ER</p>
-        <p><strong>Emma Rose</strong></p>
-        <p>@counter2</p>
-      </section>
-    </aside>
+  <h2>Services</h2>
+  <table>
+    <tr>
+      <th>Service</th>
+      <th>Average time</th>
+      <th>Status</th>
+    </tr>
+    <tr>
+      <td>Customer Service</td>
+      <td>9 min</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Payments</td>
+      <td>6 min</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Appointments</td>
+      <td>12 min</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Documents</td>
+      <td>15 min</td>
+      <td>Closed</td>
+    </tr>
+    <tr>
+      <td>Technical Support</td>
+      <td>18 min</td>
+      <td>Open</td>
+    </tr>
+  </table>
 
-    <div>
+  <h2>Add service</h2>
+  <form>
+    <p>
+      <label for="new-service">Service name</label>
+      <input type="text" id="new-service" name="new-service">
+    </p>
+    <p>
+      <label for="new-time">Average time (minutes)</label>
+      <input type="number" id="new-time" name="new-time">
+    </p>
+    <p>
+      <button type="submit">Add service</button>
+    </p>
+  </form>
 
-      <header>
-        <p><strong>Main Branch ▾</strong></p>
+  <h2>Statistics</h2>
+  <ul>
+    <li>Tickets today: 184</li>
+    <li>Average wait time: 14 min</li>
+    <li>Average service time: 9 min</li>
+    <li>Abandon rate: 4.5%</li>
+    <li>Satisfaction: 4.6 / 5</li>
+  </ul>
 
-        <div>
-          <ul>
-            <li>SB</li>
-            <li>KT</li>
-            <li>+2</li>
-          </ul>
+  <h2>Announcement</h2>
+  <form>
+    <p>
+      <label for="message">Message</label>
+    </p>
+    <p>
+      <textarea id="message" name="message" rows="4" cols="40"></textarea>
+    </p>
+    <p>
+      <button type="submit">Broadcast</button>
+    </p>
+  </form>
 
-          <button type="button">Apps ▾</button>
-          <button type="button">+ Add service</button>
-        </div>
-      </header>
-
-      <nav aria-label="Quick actions">
-        <ul>
-          <li><a href="#">Call next</a></li>
-          <li><a href="#">Create announcement</a></li>
-          <li><a href="#">Export CSV</a></li>
-        </ul>
-      </nav>
-
-      <section aria-label="Search and filter">
-        <form action="#" method="get">
-          <p>
-            <label for="search">Search for a ticket or service</label>
-            <input type="search" id="search" name="q" placeholder="Search for a ticket or service">
-          </p>
-
-          <p>
-            <button type="submit">Filter</button>
-            <button type="button">View all ▾</button>
-          </p>
-        </form>
-      </section>
-
-      <section aria-labelledby="services-title">
-        <h2 id="services-title">Services</h2>
-        <p>Manage every service offered at this branch.</p>
-
-        <div>
-
-          <article aria-labelledby="service-1">
-            <p>Status: <strong>Open</strong></p>
-            <h3 id="service-1">Customer Service</h3>
-
-            <dl>
-              <dt>People waiting</dt>
-              <dd>14</dd>
-
-              <dt>Average service time</dt>
-              <dd>9 min</dd>
-
-              <dt>Assigned counter</dt>
-              <dd>Counter 1</dd>
-            </dl>
-
-            <details open>
-              <summary>More options</summary>
-              <ul>
-                <li><a href="#">Call next</a></li>
-                <li><a href="#">Pause</a></li>
-                <li><a href="#">Edit</a></li>
-                <li><a href="#">Delete</a></li>
-              </ul>
-            </details>
-          </article>
-
-          <article aria-labelledby="service-2">
-            <p>Status: <strong>Open</strong></p>
-            <h3 id="service-2">Payments</h3>
-
-            <dl>
-              <dt>People waiting</dt>
-              <dd>8</dd>
-
-              <dt>Average service time</dt>
-              <dd>6 min</dd>
-
-              <dt>Assigned counter</dt>
-              <dd>Counter 2</dd>
-            </dl>
-
-            <p><button type="button" aria-label="More options for Payments">...</button></p>
-          </article>
-
-          <article aria-labelledby="service-3">
-            <p>Status: <strong>Open</strong></p>
-            <h3 id="service-3">Appointments</h3>
-
-            <dl>
-              <dt>People waiting</dt>
-              <dd>5</dd>
-
-              <dt>Average service time</dt>
-              <dd>12 min</dd>
-
-              <dt>Assigned counter</dt>
-              <dd>Counter 3</dd>
-            </dl>
-
-            <p><button type="button" aria-label="More options for Appointments">...</button></p>
-          </article>
-
-          <article aria-labelledby="service-4">
-            <p>Status: <strong>Closed</strong></p>
-            <h3 id="service-4">Documents &amp; Permits</h3>
-
-            <dl>
-              <dt>People waiting</dt>
-              <dd>0</dd>
-
-              <dt>Average service time</dt>
-              <dd>15 min</dd>
-
-              <dt>Assigned counter</dt>
-              <dd>Counter 4</dd>
-            </dl>
-
-            <p><button type="button" aria-label="More options for Documents and Permits">...</button></p>
-          </article>
-
-          <article aria-labelledby="service-5">
-            <p>Status: <strong>Open</strong></p>
-            <h3 id="service-5">Technical Support</h3>
-
-            <dl>
-              <dt>People waiting</dt>
-              <dd>7</dd>
-
-              <dt>Average service time</dt>
-              <dd>18 min</dd>
-
-              <dt>Assigned counter</dt>
-              <dd>Counter 5</dd>
-            </dl>
-
-            <p><button type="button" aria-label="More options for Technical Support">...</button></p>
-          </article>
-
-          <article aria-labelledby="service-6">
-            <p>Status: <strong>Closed</strong></p>
-            <h3 id="service-6">New Accounts</h3>
-
-            <dl>
-              <dt>People waiting</dt>
-              <dd>0</dd>
-
-              <dt>Average service time</dt>
-              <dd>20 min</dd>
-
-              <dt>Assigned counter</dt>
-              <dd>Counter 6</dd>
-            </dl>
-
-            <p><button type="button" aria-label="More options for New Accounts">...</button></p>
-          </article>
-
-          <article aria-labelledby="service-7">
-            <p>Status: <strong>Open</strong></p>
-            <h3 id="service-7">Lost &amp; Found</h3>
-
-            <dl>
-              <dt>People waiting</dt>
-              <dd>2</dd>
-
-              <dt>Average service time</dt>
-              <dd>7 min</dd>
-
-              <dt>Assigned counter</dt>
-              <dd>Counter 2</dd>
-            </dl>
-
-            <p><button type="button" aria-label="More options for Lost and Found">...</button></p>
-          </article>
-
-          <article aria-labelledby="service-8">
-            <p>Status: <strong>Open</strong></p>
-            <h3 id="service-8">Complaints</h3>
-
-            <dl>
-              <dt>People waiting</dt>
-              <dd>6</dd>
-
-              <dt>Average service time</dt>
-              <dd>11 min</dd>
-
-              <dt>Assigned counter</dt>
-              <dd>Counter 1</dd>
-            </dl>
-
-            <p><button type="button" aria-label="More options for Complaints">...</button></p>
-          </article>
-
-          <article aria-labelledby="service-9">
-            <p>Status: <strong>Open</strong></p>
-            <h3 id="service-9">Reception</h3>
-
-            <dl>
-              <dt>People waiting</dt>
-              <dd>3</dd>
-
-              <dt>Average service time</dt>
-              <dd>5 min</dd>
-
-              <dt>Assigned counter</dt>
-              <dd>Counter 3</dd>
-            </dl>
-
-            <p><button type="button" aria-label="More options for Reception">...</button></p>
-          </article>
-
-        </div>
-      </section>
-    </div>
-  </div>
 </body>
 </html>
