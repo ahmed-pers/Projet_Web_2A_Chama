@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Queue &mdash; Front Office</title>
+</head>
+<body>
+
+  <div>
+
+    <aside aria-label="Sidebar">
+      <p><strong>SmartQueue</strong></p>
+
+      <nav aria-label="Main menu">
+        <ul>
+          <li><a href="#" aria-current="page">Dashboard</a></li>
+          <li><a href="#">My Ticket</a></li>
+          <li>
+            <a href="#">Services</a>
+            <ul>
+              <li><a href="#">Customer Service</a></li>
+              <li><a href="#">Payments</a></li>
+              <li><a href="#">Appointments</a></li>
+            </ul>
+          </li>
+          <li><a href="#">History</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+      </nav>
+
+      <p><button type="button">Log out</button></p>
+    </aside>
+
+    <main>
+
+      <header>
+        <h2>Today's Queue</h2>
+        <p><time datetime="2026-11-17">Tuesday, 17 November 2026</time></p>
+        <p><button type="button" aria-label="Take a new ticket">+</button></p>
+      </header>
+
+      <h1>Don't wait in line. Wait wherever you want.</h1>
+
+      <section aria-label="People waiting now">
+        <ul>
+          <li>SB</li>
+          <li>KT</li>
+          <li>LH</li>
+          <li>AM</li>
+          <li>+5</li>
+        </ul>
+      </section>
+
+      <article aria-labelledby="my-ticket-title">
+        <h2 id="my-ticket-title">My Ticket</h2>
+
+        <dl>
+          <dt>Ticket number</dt>
+          <dd><strong>A-023</strong></dd>
+
+          <dt>Position in queue</dt>
+          <dd>4</dd>
+
+          <dt>Estimated time left</dt>
+          <dd>about 12 min</dd>
+        </dl>
+
+        <p>
+          <label for="ticket-progress">Your progress</label>
+          <progress id="ticket-progress" value="68" max="100">68%</progress>
+        </p>
+
+        <p><button type="button">VIEW TICKET</button></p>
+      </article>
+
+      <section aria-label="Queue highlights">
+        <article>
+          <h3>Now Serving</h3>
+          <p>Counter 2 &rarr; <strong>A-019</strong></p>
+        </article>
+
+        <article>
+          <h3>Estimated Wait</h3>
+          <p><strong>12 min</strong> for Customer Service</p>
+        </article>
+      </section>
+    </main>
+
+    <aside aria-label="Announcements and best time to come">
+
+      <section aria-labelledby="announcements-title">
+        <h3 id="announcements-title">Announcements</h3>
+
+        <article>
+          <h4>Counter 3 closed</h4>
+          <p>Appointments move to Counter 4 today.</p>
+          <p>Status: <strong>New</strong></p>
+        </article>
+
+        <article>
+          <h4>System update</h4>
+          <p>Short maintenance tonight at 22:00.</p>
+          <p>Status: <strong>Info</strong></p>
+        </article>
+
+        <article>
+          <h4>Almost your turn</h4>
+          <p>Please stay close to Counter 2.</p>
+          <p>Status: <strong>A-023</strong></p>
+        </article>
+      </section>
+
+      <section aria-labelledby="best-time-title">
+        <h3 id="best-time-title">Best time to come</h3>
+
+        <ul>
+          <li>Morning &mdash; 35% busy</li>
+          <li>Noon &mdash; 95% busy</li>
+          <li>Afternoon &mdash; 62% busy</li>
+          <li>Evening &mdash; 18% busy</li>
+        </ul>
+      </section>
+    </aside>
+
+    <aside aria-label="Customer profile">
+      <p>SB</p>
+      <p><strong>Sarah Ben Ali</strong></p>
+      <p>Customer</p>
+
+      <p>
+        <button type="button" aria-label="Notifications">Alerts</button>
+        <button type="button" aria-label="Settings">Settings</button>
+      </p>
+    </aside>
+
+  </div>
+</body>
+</html>
