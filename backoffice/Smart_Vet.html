@@ -2,255 +2,211 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Smart Vet — Back Office</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-[hidden]{display:none!important}
-
-:root{--bg:#070a14;--panel:rgba(255,255,255,.05);--line:rgba(255,255,255,.1);--txt:#e8ecff;--mut:#8f99c0;--c1:#00e5ff;--c2:#8a5cff;--c3:#ff3d9a;--ok:#2cffb0;--warn:#ffc857;--bad:#ff5c7a}
-body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;line-height:1.5;background-image:radial-gradient(600px 400px at 90% 0%,rgba(138,92,255,.15),transparent 60%),radial-gradient(500px 400px at 0% 100%,rgba(0,229,255,.1),transparent 60%);background-attachment:fixed}
-h1,h2,h3,.logo{font-family:'Orbitron','Inter',sans-serif}
-button{font-family:inherit;cursor:pointer}
-.grad{background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));-webkit-background-clip:text;background-clip:text;color:transparent}
-.btn{border:0;border-radius:10px;padding:10px 18px;font-weight:600;font-size:13.5px;color:#04121a;background:linear-gradient(135deg,var(--c1),var(--c2));transition:.25s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(138,92,255,.4)}
-.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
-.btn.ghost:hover{border-color:var(--c1);color:var(--c1);box-shadow:none}
-.btn.sm{padding:6px 12px;font-size:12px;border-radius:8px}
-.btn.danger{background:transparent;color:var(--bad);border:1px solid rgba(255,92,122,.4)}
-input,select,textarea{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--txt);padding:10px 12px;border-radius:10px;font:inherit;font-size:14px;outline:none;width:100%;transition:.2s}
-select option{background:#10142a}
-select.qs{width:auto;padding:5px 8px;font-size:12.5px;border-radius:8px}
-th.sortable{cursor:pointer;user-select:none}th.sortable:hover{color:var(--c1)}
-input:focus,select:focus,textarea:focus{border-color:var(--c1);box-shadow:0 0 0 3px rgba(0,229,255,.15)}
-/* login */
-#login{min-height:100vh;display:grid;place-items:center;padding:20px}
-.lbox{width:100%;max-width:400px;padding:36px;border-radius:24px;background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(14px);box-shadow:0 30px 80px rgba(0,0,0,.5)}
-.lbox h1{font-size:24px;margin-bottom:6px}.lbox p{color:var(--mut);font-size:13.5px;margin-bottom:22px}
-.f{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;font-size:12.5px;color:var(--mut)}
-/* layout */
-#shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
-aside{position:sticky;top:0;height:100vh;padding:24px 16px;border-right:1px solid var(--line);background:rgba(5,7,15,.7);backdrop-filter:blur(14px);display:flex;flex-direction:column;gap:6px}
-.logo{font-weight:800;font-size:18px;padding:0 10px 20px}
-aside button.nav{display:flex;align-items:center;gap:12px;border:0;background:transparent;color:var(--mut);padding:11px 14px;border-radius:12px;text-align:left;font-size:14px;transition:.2s}
-aside button.nav:hover{color:var(--txt);background:rgba(255,255,255,.05)}
-aside button.nav.on{color:#fff;background:linear-gradient(135deg,rgba(0,229,255,.18),rgba(138,92,255,.25));box-shadow:inset 0 0 0 1px rgba(0,229,255,.35)}
-aside .sp{flex:1}
-main{padding:30px 4vw 60px;min-width:0}
-.top{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:24px}
-.top h2{font-size:24px;flex:1}
-.top input{max-width:260px}
-.page{animation:fade .35s}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}}
-.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:26px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;transition:.25s}
-.card:hover{border-color:rgba(0,229,255,.4);transform:translateY(-3px)}
-.kpi b{font-family:'Orbitron';font-size:30px;display:block}.kpi span{color:var(--mut);font-size:13px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.bars .b{display:flex;align-items:center;gap:12px;margin:10px 0;font-size:13px}
-.bars .b label{width:90px;color:var(--mut)}
-.bars .t{flex:1;height:10px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
-.bars .t i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width 1s}
-.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th{text-align:left;padding:14px 16px;font-size:11.5px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);border-bottom:1px solid var(--line);white-space:nowrap}
-td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.05);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-tr:last-child td{border-bottom:0}tbody tr:hover{background:rgba(0,229,255,.05)}
-.pill{padding:3px 11px;border-radius:99px;font-size:12px;border:1px solid}
-.pill.pending,.pill.requested,.pill.open{color:var(--warn);border-color:rgba(255,200,87,.4)}.pill.confirmed,.pill.vet{color:var(--c1);border-color:rgba(0,229,255,.4)}.pill.done,.pill.available,.pill.closed,.pill.owner{color:var(--ok);border-color:rgba(44,255,176,.4)}.pill.cancelled,.pill.admin{color:var(--bad);border-color:rgba(255,92,122,.4)}.pill.adopted{color:var(--c2);border-color:var(--c2)}
-.empty{padding:40px;text-align:center;color:var(--mut)}
-.row{display:flex;gap:8px}
-.ov{position:fixed;inset:0;z-index:100;background:rgba(2,4,10,.7);backdrop-filter:blur(6px);display:grid;place-items:center;padding:20px}
-.modal{width:100%;max-width:480px;max-height:90vh;overflow:auto;background:#0b1024;border:1px solid var(--line);border-radius:22px;padding:28px}
-.modal h3{margin-bottom:18px}
-#toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,120px);z-index:200;padding:12px 22px;border-radius:12px;background:#10162e;border:1px solid var(--c1);transition:.4s;font-size:14px}
-#toast.show{transform:translate(-50%,0)}
-@media(max-width:860px){#shell{grid-template-columns:1fr}aside{position:static;height:auto;flex-direction:row;flex-wrap:wrap;padding:12px}.logo{width:100%;padding-bottom:6px}.two{grid-template-columns:1fr}}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Vet - Back Office</title>
 </head>
 <body>
 
-<!-- ADMIN SHELL -->
-<div id="shell">
-  <aside>
-    <div class="logo">SMART<span class="grad">VET</span> <span style="font-size:11px;color:var(--mut)">ADMIN</span></div>
-    <div id="menu"></div>
-    <div class="sp"></div>
-    <a class="nav" href="frontoffice.html" style="text-decoration:none;display:block;padding:11px 14px;color:var(--mut);font-size:14px">↗ Open front office</a>
-  </aside>
-  <main>
-    <div class="top"><h2 id="title"></h2><div id="filters" style="display:flex;gap:10px;flex-wrap:wrap"></div><input id="q" placeholder="Search…" oninput="renderPage()" hidden><button class="btn" id="addBtn" onclick="editRow(cur)" hidden>＋ Add new</button></div>
-    <div id="page" class="page"></div>
-  </main>
-</div>
+<header>
+<h1>Smart Vet - Back office</h1>
+<p>View, add, edit, delete and filter everything on the site.</p>
+<nav>
+<ul>
+<li><a href="#users">Users</a></li>
+<li><a href="#pets">Pets</a></li>
+<li><a href="#appointments">Appointments</a></li>
+<li><a href="#adoptions">Adoptions</a></li>
+<li><a href="#stores">Stores</a></li>
+<li><a href="#tickets">Support tickets</a></li>
+<li><a href="frontoffice.html">Open front office</a></li>
+</ul>
+</nav>
+</header>
 
-<div id="modalroot"></div>
-<div id="toast"></div>
+<hr>
+<section id="users">
+<h2>Users</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>Role <select name="role"><option value="">All</option><option>owner</option><option>vet</option></select></label>
+<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
+<button>Filter</button>
+</fieldset>
+</form>
 
-<script>
-/* ============ SHARED DATABASE (same code as frontoffice.html) ============ */
-const DB_KEY='smartvet_db_v2'; /* v2 = empty base */
-const uid=()=>Math.random().toString(36).slice(2,9);
-const today=(d=0)=>{const t=new Date();t.setDate(t.getDate()+d);return t.toISOString().slice(0,10)};
-function seed(){return {users:[],pets:[],appointments:[],adoptions:[],stores:[],tickets:[]}}
-function load(){let d=null;try{d=JSON.parse(localStorage.getItem(DB_KEY))}catch(e){}if(!d){d=seed();save(d)}
-  ['users','pets','appointments','adoptions','stores','tickets'].forEach(k=>{if(!Array.isArray(d[k]))d[k]=[]});
-  return d}
-function save(d){localStorage.setItem(DB_KEY,JSON.stringify(d))}
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Name <input type="text" name="name" required></label></p>
+<p><label>Email <input type="email" name="email" required></label></p>
+<p><label>Password <input type="password" name="password" required></label></p>
+<p><label>Role <select name="role"><option>owner</option><option>vet</option></select></label></p>
+<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
+<p><label>Specialty <select name="specialty"><option value="">-</option><option>Small animals</option><option>Surgery</option><option>Exotic pets</option><option>Dermatology</option><option>Cardiology</option><option>Dentistry</option><option>Large animals</option></select></label></p>
+<p><label>Phone <input type="text" name="phone"></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
 
-/* ============ HELPERS ============ */
-let db=load(),cur='dashboard';
-const $=id=>document.getElementById(id);
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2600)}
-const CITIES=['Tunis','Ariana','Sfax','Sousse','Nabeul','Bizerte','Monastir','Gabes'];
-const TYPES=['Dog','Cat','Bird','Rabbit','Reptile','Other'];
-const users=r=>db.users.filter(u=>!r||u.role===r).map(u=>[u.id,`${u.name} (${u.role})`]);
+<table border="1" cellpadding="6">
+<tr><th>Name</th><th>Email</th><th>Role</th><th>City</th><th>Specialty</th><th>Phone</th><th>Actions</th></tr>
+<tr><td colspan="7" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+<hr>
+<section id="pets">
+<h2>Pets</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>Type <select name="type"><option value="">All</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label>
+<label>Owner <input type="text" name="owner"></label>
+<button>Filter</button>
+</fieldset>
+</form>
 
-/* ============ ENTITY CONFIG (drives every table + form) ============ */
-const ENT={
- users:{icon:'👥',label:'Users',fk:'role',filters:['role','city'],cols:['name','email','role','city','specialty','phone'],fields:[
-   {k:'name',req:1},{k:'email',type:'email',req:1},{k:'password',type:'password',req:1},{k:'role',sel:()=>['owner','vet']},{k:'city',sel:()=>CITIES},{k:'specialty'},{k:'phone'}]},
- pets:{icon:'🐾',label:'Pets',fk:'type',filters:['type','ownerId'],cols:['name','type','breed','age','ownerId'],fields:[
-   {k:'name',req:1},{k:'type',sel:()=>TYPES},{k:'breed'},{k:'age',type:'number'},{k:'ownerId',label:'Owner',sel:()=>users()},{k:'notes',type:'textarea'}]},
- appointments:{icon:'📅',label:'Appointments',fk:'status',filters:['status','vetId','date'],cols:['date','time','petId','vetId','reason','status'],fields:[
-   {k:'petId',label:'Pet',sel:()=>db.pets.map(p=>[p.id,`${p.name} (${p.type})`])},{k:'vetId',label:'Veterinarian',sel:()=>users('vet')},{k:'date',type:'date',req:1},{k:'time',type:'time',req:1},{k:'reason'},{k:'status',sel:()=>['pending','confirmed','done','cancelled']}]},
- adoptions:{icon:'💚',label:'Adoptions',fk:'status',filters:['status','type','city'],cols:['name','type','breed','age','city','requestedBy','status'],fields:[
-   {k:'name',req:1},{k:'type',sel:()=>TYPES},{k:'breed'},{k:'age',type:'number'},{k:'city',sel:()=>CITIES},{k:'desc',label:'Description',type:'textarea'},{k:'status',sel:()=>['available','requested','adopted']},{k:'requestedBy',label:'Requested by',sel:()=>[['','— nobody —'],...users('owner')]}]},
- stores:{icon:'🏪',label:'Stores',filters:['city','category'],cols:['name','category','city','address','phone'],fields:[
-   {k:'name',req:1},{k:'category'},{k:'city',sel:()=>CITIES},{k:'address'},{k:'phone'}]},
- tickets:{icon:'🎧',label:'Support tickets',fk:'status',filters:['status'],cols:['date','name','email','message','status'],fields:[
-   {k:'name'},{k:'email',type:'email'},{k:'message',type:'textarea'},{k:'status',sel:()=>['open','closed']}]}
-};
-const label=(f)=>f.label||f.k.charAt(0).toUpperCase()+f.k.slice(1);
-const LBL={ownerId:'Owner',vetId:'Vet',petId:'Pet',requestedBy:'Requested by'};
-function txt(k,v){
-  if(k==='ownerId'||k==='vetId'||k==='requestedBy')return v?((db.users.find(u=>u.id===v)||{}).name||'—'):'—';
-  if(k==='petId')return (db.pets.find(p=>p.id===v)||{}).name||'—';
-  return v===undefined||v===null||v===''?'—':String(v);
-}
-function cell(ent,k,r){
-  const E=ENT[ent];
-  if(k===E.fk){const f=E.fields.find(x=>x.k===k);
-    return `<select class="qs" onchange="quick('${ent}','${r.id}','${k}',this.value)">${f.sel().map(o=>`<option ${o===r[k]?'selected':''}>${esc(o)}</option>`).join('')}</select>`}
-  return esc(txt(k,r[k]));
-}
-/* change a status / role / type straight from the table */
-function quick(ent,id,k,v){
-  db=load();const r=db[ent].find(x=>x.id===id);r[k]=v;
-  if(ent==='appointments'&&v!=='cancelled'&&db.appointments.some(a=>a.id!==id&&a.vetId===r.vetId&&a.date===r.date&&a.time===r.time&&a.status!=='cancelled')){toast('Time slot conflict');return renderPage()}
-  if(ent==='adoptions'&&v==='available')r.requestedBy='';
-  save(db);toast('Updated ✔');renderPage();
-}
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Name <input type="text" name="name" required></label></p>
+<p><label>Type <select name="type"><option value="">Choose a type</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label></p>
+<p><label>Breed <input type="text" name="breed"></label></p>
+<p><label>Age <input type="number" name="age"></label></p>
+<p><label>Owner <select name="owner"><option value="">Choose an owner</option></select></label></p>
+<p><label>Notes<br><textarea name="notes" rows="2" cols="40"></textarea></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
 
-function start(){db=load();go('dashboard')}
+<table border="1" cellpadding="6">
+<tr><th>Name</th><th>Type</th><th>Breed</th><th>Age</th><th>Owner</th><th>Actions</th></tr>
+<tr><td colspan="6" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+<hr>
+<section id="appointments">
+<h2>Appointments</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>Status <select name="status"><option value="">All</option><option>pending</option><option>confirmed</option><option>done</option><option>cancelled</option></select></label>
+<label>Veterinarian <input type="text" name="vet"></label>
+<label>Date <input type="date" name="date"></label>
+<button>Filter</button>
+</fieldset>
+</form>
 
-/* ============ NAVIGATION ============ */
-let sk='',sd=1;
-function go(p){
-  cur=p;db=load();$('q').value='';sk='';sd=1;
-  const items=[['dashboard','📊','Dashboard'],...Object.entries(ENT).map(([k,e])=>[k,e.icon,e.label])];
-  $('menu').innerHTML=items.map(([k,i,l])=>`<button class="nav ${k===p?'on':''}" style="width:100%" onclick="go('${k}')">${i} ${l}</button>`).join('');
-  $('title').textContent=p==='dashboard'?'Dashboard':ENT[p].label;
-  $('q').hidden=$('addBtn').hidden=p==='dashboard';
-  buildFilters();
-  renderPage();
-}
-function fOpts(k){
-  const E=ENT[cur],f=E.fields.find(x=>x.k===k);
-  if(f&&f.sel)return f.sel().map(o=>Array.isArray(o)?o:[o,o]);
-  return [...new Set(db[cur].map(r=>r[k]).filter(Boolean))].sort().map(v=>[v,v]);
-}
-function buildFilters(){
-  const box=$('filters');if(cur==='dashboard'){box.innerHTML='';return}
-  const E=ENT[cur];
-  box.innerHTML=(E.filters||[]).map(k=>{const f=E.fields.find(x=>x.k===k)||{};
-    return `<select id="flt_${k}" onchange="renderPage()" style="width:auto;max-width:190px"><option value="">${esc(LBL[k]||k.charAt(0).toUpperCase()+k.slice(1))}: all</option>${fOpts(k).filter(o=>o[0]!=='').map(([v,l])=>`<option value="${esc(v)}">${esc(l)}</option>`).join('')}</select>`}).join('');
-}
-function sortBy(k){if(sk===k)sd=-sd;else{sk=k;sd=1}renderPage()}
-function renderPage(){
-  db=load();
-  const pg=$('page');
-  if(cur==='dashboard')return pg.innerHTML=dashboard();
-  const E=ENT[cur],q=$('q').value.toLowerCase();
-  const act=(E.filters||[]).map(k=>[k,($('flt_'+k)||{}).value]).filter(x=>x[1]);
-  let rows=db[cur].filter(r=>act.every(([k,v])=>r[k]===v)&&E.cols.map(c=>txt(c,r[c])).join(' ').toLowerCase().includes(q));
-  if(sk)rows.sort((a,b)=>txt(sk,a[sk]).localeCompare(txt(sk,b[sk]),undefined,{numeric:true})*sd);
-  pg.innerHTML=`<div class="tblwrap"><table><thead><tr>${E.cols.map(c=>`<th class="sortable" onclick="sortBy('${c}')">${esc(LBL[c]||c.charAt(0).toUpperCase()+c.slice(1))} ${sk===c?(sd>0?'▲':'▼'):''}</th>`).join('')}<th></th></tr></thead><tbody>
-  ${rows.length?rows.map(r=>`<tr>${E.cols.map(c=>`<td title="${esc(txt(c,r[c]))}">${cell(cur,c,r)}</td>`).join('')}<td><div class="row"><button class="btn ghost sm" onclick="editRow('${cur}','${r.id}')">Edit</button><button class="btn danger sm" onclick="delRow('${cur}','${r.id}')">Delete</button></div></td></tr>`).join(''):`<tr><td colspan="${E.cols.length+1}" class="empty">Nothing here yet.</td></tr>`}
-  </tbody></table></div><p style="color:var(--mut);font-size:12.5px;margin-top:12px">${rows.length} record(s) · click a column title to sort · change a status directly from the table</p>`;
-}
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Animal <select name="pet"><option value="">Choose an animal</option></select></label></p>
+<p><label>Veterinarian <select name="vet"><option value="">Choose a veterinarian</option></select></label></p>
+<p><label>Date <input type="date" name="date" required></label></p>
+<p><label>Time <input type="time" name="time" required></label></p>
+<p><label>Reason <input type="text" name="reason"></label></p>
+<p><label>Status <select name="status"><option value="">Choose a status</option><option>pending</option><option>confirmed</option><option>done</option><option>cancelled</option></select></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
 
-/* ============ DASHBOARD ============ */
-function bars(map,max){return Object.entries(map).map(([k,v])=>`<div class="b"><label>${esc(k)}</label><div class="t"><i style="width:${max?Math.round(v/max*100):0}%"></i></div><b>${v}</b></div>`).join('')||'<p class="empty">No data</p>'}
-function count(arr,k){const m={};arr.forEach(x=>m[x[k]]=(m[x[k]]||0)+1);return m}
-function dashboard(){
-  const empty=!Object.values(db).some(a=>a.length);
-  const pt=count(db.pets,'type'),ap=count(db.appointments,'status');
-  const open=db.tickets.filter(t=>t.status==='open');
-  return (empty?`<div class="card" style="margin-bottom:18px">The database is empty. Everything users register in the front office appears here, and you can also add records yourself from the menu on the left.</div>`:'')+`<div class="kpi">
-   <div class="card"><b>${db.users.filter(u=>u.role==='owner').length}</b><span>Pet owners</span></div>
-   <div class="card"><b>${db.users.filter(u=>u.role==='vet').length}</b><span>Veterinarians</span></div>
-   <div class="card"><b>${db.pets.length}</b><span>Pets</span></div>
-   <div class="card"><b>${db.appointments.filter(a=>a.date===today(0)).length}</b><span>Appointments today</span></div>
-   <div class="card"><b>${db.adoptions.filter(a=>a.status==='requested').length}</b><span>Adoption requests</span></div>
-   <div class="card"><b>${open.length}</b><span>Open support tickets</span></div></div>
-  <div class="two">
-   <div class="card bars"><h3 style="font-size:15px;margin-bottom:10px">Pets by type</h3>${bars(pt,Math.max(0,...Object.values(pt)))}</div>
-   <div class="card bars"><h3 style="font-size:15px;margin-bottom:10px">Appointments by status</h3>${bars(ap,Math.max(0,...Object.values(ap)))}</div>
-  </div>
-  <div class="card" style="margin-top:16px"><h3 style="font-size:15px;margin-bottom:12px">Latest support messages</h3>
-   ${open.length?open.slice(-4).reverse().map(t=>`<div style="padding:10px 0;border-bottom:1px solid var(--line)"><b>${esc(t.name)}</b> <span style="color:var(--mut);font-size:12.5px">${esc(t.email)} · ${esc(t.date)}</span><div style="font-size:14px;color:var(--mut)">${esc(t.message)}</div></div>`).join(''):'<p class="empty">No open tickets 🎉</p>'}
-  </div>
-  <div class="row" style="margin-top:20px"><button class="btn ghost" onclick="exportDB()">⬇ Export database (JSON)</button><button class="btn ghost" onclick="$('imp').click()">⬆ Import database (JSON)</button><input id="imp" type="file" accept=".json,application/json" hidden onchange="importDB(event)"><button class="btn danger" onclick="resetDB()">Erase all data</button></div>`;
-}
-function exportDB(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));a.download='smartvet-db.json';a.click()}
-function resetDB(){if(!confirm('Erase ALL data (users, pets, appointments, adoptions, stores, tickets)?'))return;save(seed());toast('Database is now empty');go('dashboard')}
-function importDB(ev){
-  const f=ev.target.files[0];if(!f)return;const r=new FileReader();
-  r.onload=()=>{try{const d=JSON.parse(r.result);['users','pets','appointments','adoptions','stores','tickets'].forEach(k=>{if(!Array.isArray(d[k]))throw 0});save(d);toast('Database imported ✔');go('dashboard')}catch(e){toast('Invalid database file')}};
-  r.readAsText(f);ev.target.value='';
-}
+<table border="1" cellpadding="6">
+<tr><th>Date</th><th>Time</th><th>Animal</th><th>Veterinarian</th><th>Reason</th><th>Status</th><th>Actions</th></tr>
+<tr><td colspan="7" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+<hr>
+<section id="adoptions">
+<h2>Adoptions</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>Status <select name="status"><option value="">All</option><option>available</option><option>requested</option><option>adopted</option></select></label>
+<label>Type <select name="type"><option value="">All</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label>
+<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
+<button>Filter</button>
+</fieldset>
+</form>
 
-/* ============ CRUD ============ */
-function editRow(ent,id){
-  db=load();
-  if(!id&&ent==='pets'&&!db.users.length)return toast('Add a user first');
-  if(!id&&ent==='appointments'&&(!db.pets.length||!db.users.some(u=>u.role==='vet')))return toast('You need at least one pet and one veterinarian first');const E=ENT[ent],row=id?db[ent].find(r=>r.id===id):{};
-  modal(`<h3>${id?'Edit':'Add'} · ${esc(E.label)}</h3><form onsubmit="event.preventDefault();saveRow('${ent}','${id||''}')">
-  ${E.fields.map(f=>{const v=row[f.k]??'';let inp;
-    if(f.sel)inp=`<select id="f_${f.k}">${f.sel().map(o=>{const [a,b]=Array.isArray(o)?o:[o,o];return `<option value="${esc(a)}" ${a===v?'selected':''}>${esc(b)}</option>`}).join('')}</select>`;
-    else if(f.type==='textarea')inp=`<textarea id="f_${f.k}" rows="3">${esc(v)}</textarea>`;
-    else if(f.type==='password')inp=`<input id="f_${f.k}" type="password" autocomplete="new-password" placeholder="${id?'Leave empty to keep the current one':''}" ${f.req&&!id?'required':''}>`;
-    else inp=`<input id="f_${f.k}" type="${f.type||'text'}" value="${esc(v)}" ${f.req?'required':''}>`;
-    return `<div class="f">${esc(label(f))}${inp}</div>`}).join('')}
-  <div class="row"><button class="btn">Save</button><button type="button" class="btn ghost" onclick="closeModal()">Cancel</button></div></form>`);
-}
-function saveRow(ent,id){
-  db=load();const E=ENT[ent];const data={};
-  E.fields.forEach(f=>{const v=$('f_'+f.k).value;if(f.type==='password'&&id&&!v)return;data[f.k]=f.type==='number'?(+v||0):v});
-  if(ent==='users'&&db.users.some(u=>u.id!==id&&u.email.toLowerCase()===data.email.toLowerCase()))return toast('Email already used');
-  if(ent==='appointments'){const p=db.pets.find(x=>x.id===data.petId);data.ownerId=p?p.ownerId:'';
-    if(db.appointments.some(a=>a.id!==id&&a.vetId===data.vetId&&a.date===data.date&&a.time===data.time&&a.status!=='cancelled'&&data.status!=='cancelled'))return toast('This vet already has an appointment at that time')}
-  if(ent==='tickets'&&!id)data.date=today(0);
-  if(id)Object.assign(db[ent].find(r=>r.id===id),data);else db[ent].push({id:uid(),...data});
-  save(db);closeModal();toast('Saved ✔');renderPage();
-}
-function delRow(ent,id){
-  if(!confirm('Delete this record?'))return;
-  db=load();
-  if(ent==='users'){db.adoptions.forEach(a=>{if(a.requestedBy===id){a.requestedBy='';a.status='available'}});
-    const myPets=db.pets.filter(p=>p.ownerId===id).map(p=>p.id);db.pets=db.pets.filter(p=>p.ownerId!==id);db.appointments=db.appointments.filter(a=>a.ownerId!==id&&a.vetId!==id&&!myPets.includes(a.petId))}
-  if(ent==='pets')db.appointments=db.appointments.filter(a=>a.petId!==id);
-  db[ent]=db[ent].filter(r=>r.id!==id);save(db);toast('Deleted');renderPage();
-}
-function modal(h){$('modalroot').innerHTML=`<div class="ov" onclick="if(event.target===this)closeModal()"><div class="modal">${h}</div></div>`}
-function closeModal(){$('modalroot').innerHTML=''}
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Name <input type="text" name="name" required></label></p>
+<p><label>Type <select name="type"><option value="">Choose a type</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label></p>
+<p><label>Breed <input type="text" name="breed"></label></p>
+<p><label>Age <input type="number" name="age"></label></p>
+<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
+<p><label>Description<br><textarea name="description" rows="2" cols="40"></textarea></label></p>
+<p><label>Status <select name="status"><option value="">Choose a status</option><option>available</option><option>requested</option><option>adopted</option></select></label></p>
+<p><label>Requested by <input type="text" name="requested_by"></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
 
-window.addEventListener('storage',()=>{if(!$('shell').hidden)renderPage()});
-start();
-</script>
+<table border="1" cellpadding="6">
+<tr><th>Name</th><th>Type</th><th>Breed</th><th>Age</th><th>City</th><th>Requested by</th><th>Status</th><th>Actions</th></tr>
+<tr><td colspan="8" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+<hr>
+<section id="stores">
+<h2>Stores</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
+<label>Category <input type="text" name="category"></label>
+<button>Filter</button>
+</fieldset>
+</form>
+
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Name <input type="text" name="name" required></label></p>
+<p><label>Category <input type="text" name="category"></label></p>
+<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
+<p><label>Address <input type="text" name="address"></label></p>
+<p><label>Phone <input type="text" name="phone"></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
+
+<table border="1" cellpadding="6">
+<tr><th>Name</th><th>Category</th><th>City</th><th>Address</th><th>Phone</th><th>Actions</th></tr>
+<tr><td colspan="6" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+<hr>
+<section id="tickets">
+<h2>Support tickets</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>Status <select name="status"><option value="">All</option><option>open</option><option>closed</option></select></label>
+<button>Filter</button>
+</fieldset>
+</form>
+
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Name <input type="text" name="name"></label></p>
+<p><label>Email <input type="email" name="email"></label></p>
+<p><label>Message<br><textarea name="message" rows="3" cols="40"></textarea></label></p>
+<p><label>Status <select name="status"><option value="">Choose a status</option><option>open</option><option>closed</option></select></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
+
+<table border="1" cellpadding="6">
+<tr><th>Date</th><th>Name</th><th>Email</th><th>Message</th><th>Status</th><th>Actions</th></tr>
+<tr><td colspan="6" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+
+<hr>
+<footer><p>Smart Vet - Back office</p></footer>
+
 </body>
 </html>
