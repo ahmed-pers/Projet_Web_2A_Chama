@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoTravel | Transport Back Office</title>
+</head>
+<body>
+  <header>
+    <h1>GoTravel</h1>
+    <p>Transport back office</p>
+  </header>
+
+  <table>
+    <tr>
+      <td>
+        <nav aria-label="Staff navigation">
+          <h2>Navigation</h2>
+          <ul>
+            <li><a href="#trips">Available trips</a></li>
+            <li><a href="#add-trip">Add a trip</a></li>
+          </ul>
+        </nav>
+      </td>
+      <td>
+        <main>
+          <section id="dashboard" aria-labelledby="dashboard-title">
+            <h2 id="dashboard-title">Dashboard</h2>
+            <p>Booked trips today: <strong>126</strong></p>
+          </section>
+
+          <section id="trips" aria-labelledby="trips-title">
+            <h2 id="trips-title">Available trips</h2>
+            <table>
+              <caption>Current bus and train departures</caption>
+              <thead>
+                <tr><th scope="col">Trip</th><th scope="col">Type</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Departure</th><th scope="col">Price</th><th scope="col">Seats available</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">T101</th><td>Train</td><td>Tunis</td><td>Sousse</td><td>07:00</td><td>15 TND</td><td>24</td></tr>
+                <tr><th scope="row">B204</th><td>Bus</td><td>Tunis</td><td>Sousse</td><td>08:30</td><td>12 TND</td><td>9</td></tr>
+                <tr><th scope="row">T220</th><td>Train</td><td>Tunis</td><td>Sfax</td><td>06:45</td><td>24 TND</td><td>18</td></tr>
+                <tr><th scope="row">T405</th><td>Train</td><td>Sousse</td><td>Monastir</td><td>09:00</td><td>5 TND</td><td>40</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="add-trip" aria-labelledby="add-trip-title">
+            <h2 id="add-trip-title">Add a trip</h2>
+            <form action="#trips" method="post">
+              <fieldset>
+                <legend>Trip information</legend>
+                <p><label for="trip-type">Transport type</label>
+                  <select id="trip-type" name="type" required><option value="bus">Bus</option><option value="train">Train</option></select>
+                </p>
+                <p><label for="trip-from">From</label> <input type="text" id="trip-from" name="from" required></p>
+                <p><label for="trip-to">To</label> <input type="text" id="trip-to" name="to" required></p>
+                <p><label for="trip-date">Date</label> <input type="date" id="trip-date" name="date" required></p>
+                <p><label for="trip-time">Departure time</label> <input type="time" id="trip-time" name="time" required></p>
+                <p><label for="trip-price">Price (TND)</label> <input type="number" id="trip-price" name="price" min="0" step="0.5" required></p>
+                <p><label for="trip-seats">Available seats</label> <input type="number" id="trip-seats" name="seats" min="1" required></p>
+                <p><button type="submit">Add trip</button></p>
+              </fieldset>
+            </form>
+          </section>
+        </main>
+      </td>
+    </tr>
+  </table>
+
+  <footer><p>GoTravel staff portal</p></footer>
+</body>
+</html>
