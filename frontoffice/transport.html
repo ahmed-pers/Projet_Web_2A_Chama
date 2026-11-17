@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoTravel | Available trips</title>
+</head>
+<body>
+  <header>
+    <h1>GoTravel</h1>
+    <p>Available bus and train trips across Tunisia</p>
+  </header>
+  <table>
+    <tr>
+      <td>
+        <nav aria-label="Main navigation">
+          <h2>Destinations</h2>
+          <ul><li><a href="#tunis">From Tunis</a></li><li><a href="#sousse">From Sousse</a></li><li><a href="#sfax">From Sfax</a></li><li><a href="#monastir">From Monastir</a></li></ul>
+        </nav>
+      </td>
+      <td>
+        <main>
+          <h2>Choose an available trip</h2>
+          <p>Select one trip card, then choose it to continue.</p>
+          <form action="#selected-trip" method="get">
+            <section id="tunis" aria-labelledby="tunis-title">
+              <h2 id="tunis-title">Departing from Tunis</h2>
+              <article>
+                <h3>Tunis to Sousse</h3>
+                <p><input type="radio" id="trip-t101" name="trip" value="T101" required> <label for="trip-t101"><strong>Train T101</strong></label></p>
+                <p>Tunis Ville at 07:00 → Sousse at 09:20</p><p>Duration: 2 h 20 min | Fare: 15 TND | 24 seats available</p>
+              </article>
+              <article>
+                <h3>Tunis to Sousse</h3>
+                <p><input type="radio" id="trip-b204" name="trip" value="B204"> <label for="trip-b204"><strong>Bus B204</strong></label></p>
+                <p>Tunis Station at 08:30 → Sousse Station at 11:00</p><p>Duration: 2 h 30 min | Fare: 12 TND | 9 seats available</p>
+              </article>
+              <article>
+                <h3>Tunis to Sousse</h3>
+                <p><input type="radio" id="trip-t105" name="trip" value="T105"> <label for="trip-t105"><strong>Train T105</strong></label></p>
+                <p>Tunis Ville at 10:15 → Sousse at 12:35</p><p>Duration: 2 h 20 min | Fare: 18 TND | 31 seats available</p>
+              </article>
+              <article>
+                <h3>Tunis to Sfax</h3>
+                <p><input type="radio" id="trip-t220" name="trip" value="T220"> <label for="trip-t220"><strong>Train T220</strong></label></p>
+                <p>Tunis Ville at 06:45 → Sfax at 10:30</p><p>Duration: 3 h 45 min | Fare: 24 TND | 18 seats available</p>
+              </article>
+              <article>
+                <h3>Tunis to Sfax</h3>
+                <p><input type="radio" id="trip-b310" name="trip" value="B310"> <label for="trip-b310"><strong>Bus B310</strong></label></p>
+                <p>Tunis Station at 09:00 → Sfax Station at 13:00</p><p>Duration: 4 h | Fare: 20 TND | 12 seats available</p>
+              </article>
+              <article>
+                <h3>Tunis to Bizerte</h3>
+                <p><input type="radio" id="trip-b115" name="trip" value="B115"> <label for="trip-b115"><strong>Bus B115</strong></label></p>
+                <p>Tunis Station at 08:00 → Bizerte at 10:00</p><p>Duration: 2 h | Fare: 9 TND | 16 seats available</p>
+              </article>
+            </section>
+
+            <section id="sousse" aria-labelledby="sousse-title">
+              <h2 id="sousse-title">Departing from Sousse</h2>
+              <article>
+                <h3>Sousse to Monastir</h3>
+                <p><input type="radio" id="trip-t405" name="trip" value="T405"> <label for="trip-t405"><strong>Train T405</strong></label></p>
+                <p>Sousse at 09:00 → Monastir at 09:35</p><p>Duration: 35 min | Fare: 5 TND | 40 seats available</p>
+              </article>
+              <article>
+                <h3>Sousse to Monastir</h3>
+                <p><input type="radio" id="trip-b412" name="trip" value="B412"> <label for="trip-b412"><strong>Bus B412</strong></label></p>
+                <p>Sousse Station at 10:15 → Monastir at 11:00</p><p>Duration: 45 min | Fare: 4 TND | 14 seats available</p>
+              </article>
+              <article>
+                <h3>Sousse to Tunis</h3>
+                <p><input type="radio" id="trip-t408" name="trip" value="T408"> <label for="trip-t408"><strong>Train T408</strong></label></p>
+                <p>Sousse at 08:10 → Tunis Ville at 10:30</p><p>Duration: 2 h 20 min | Fare: 15 TND | 19 seats available</p>
+              </article>
+            </section>
+
+            <section id="sfax" aria-labelledby="sfax-title">
+              <h2 id="sfax-title">Departing from Sfax</h2>
+              <article>
+                <h3>Sfax to Gabes</h3>
+                <p><input type="radio" id="trip-t602" name="trip" value="T602"> <label for="trip-t602"><strong>Train T602</strong></label></p>
+                <p>Sfax at 07:20 → Gabes at 09:10</p><p>Duration: 1 h 50 min | Fare: 10 TND | 22 seats available</p>
+              </article>
+              <article>
+                <h3>Sfax to Tunis</h3>
+                <p><input type="radio" id="trip-t620" name="trip" value="T620"> <label for="trip-t620"><strong>Train T620</strong></label></p>
+                <p>Sfax at 08:00 → Tunis Ville at 11:45</p><p>Duration: 3 h 45 min | Fare: 24 TND | 13 seats available</p>
+              </article>
+            </section>
+
+            <section id="monastir" aria-labelledby="monastir-title">
+              <h2 id="monastir-title">Departing from Monastir</h2>
+              <article>
+                <h3>Monastir to Mahdia</h3>
+                <p><input type="radio" id="trip-t710" name="trip" value="T710"> <label for="trip-t710"><strong>Train T710</strong></label></p>
+                <p>Monastir at 09:15 → Mahdia at 10:20</p><p>Duration: 1 h 5 min | Fare: 6 TND | 27 seats available</p>
+              </article>
+              <article>
+                <h3>Monastir to Sousse</h3>
+                <p><input type="radio" id="trip-t720" name="trip" value="T720"> <label for="trip-t720"><strong>Train T720</strong></label></p>
+                <p>Monastir at 10:00 → Sousse at 10:35</p><p>Duration: 35 min | Fare: 5 TND | 33 seats available</p>
+              </article>
+            </section>
+
+            <p id="selected-trip"><button type="submit">Choose selected trip</button></p>
+          </form>
+        </main>
+      </td>
+    </tr>
+  </table>
+  <footer><p>GoTravel — bus and train trips</p></footer>
+</body>
+</html>
