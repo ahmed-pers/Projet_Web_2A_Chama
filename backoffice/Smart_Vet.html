@@ -6,6 +6,7 @@
   <title>Smart Vet &mdash; Back Office</title>
 </head>
 <body>
+<!-- this menu is the same in all the pages of my friends -->
 <table width="100%" cellpadding="16" cellspacing="0">
   <tr>
     <td width="230" valign="top" bgcolor="#f4f6f8">
@@ -23,19 +24,13 @@
         </nav>
       </aside>
     </td>
+    <!-- here starts my own page -->
     <td valign="top">
 
-        <!--
-          HOW THIS FILE WORKS
-          - Plain HTML: no CSS and no JavaScript.
-          - One <section> per table of the database. The links below jump to them.
-          - For each table the admin can: search and filter, add (open "Add new"),
-            edit and delete (buttons in the Actions column).
-          - Your team connects the forms (action="") and fills the table rows.
-        -->
+        <!-- title of the page -->
         <h1>Smart Vet - Back office</h1>
         <p>Manage everything on the site.</p>
-        <!-- All the links are on the same line -->
+        <!-- links to go to each table -->
         <p>
           <a href="#users">Users</a> |
           <a href="#pets">Pets</a> |
@@ -46,10 +41,10 @@
           <a href="../frontoffice/Smart_Vet.html">Open the front office</a>
         </p>
 
-        <!-- ========== USERS ========== -->
+        <!-- table of the users -->
         <section id="users">
           <h3>Users</h3>
-          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <!-- filters: i choose something and click on Filter -->
           <form method="get" action="">
             Search: <input type="search" name="q">
             Role:
@@ -73,7 +68,7 @@
             <button type="submit">Filter</button>
           </form>
 
-          <!-- Click the title to open the form -->
+          <!-- click here to open the form and add something -->
           <details>
             <summary>Add new</summary>
             <form method="post" action="">
@@ -114,6 +109,7 @@
             </form>
           </details>
 
+          <!-- the table is empty, the backend will put the data here -->
           <table border="1" cellpadding="6">
             <tr>
               <th>Name</th>
@@ -124,7 +120,6 @@
               <th>Phone</th>
               <th>Actions</th>
             </tr>
-            <!-- One row per record. Actions: Edit and Delete buttons -->
             <tr>
               <td colspan="7">Nothing here yet.</td>
             </tr>
@@ -133,10 +128,10 @@
 
         <hr>
 
-        <!-- ========== PETS ========== -->
+        <!-- table of the pets -->
         <section id="pets">
           <h3>Pets</h3>
-          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <!-- filters: i choose something and click on Filter -->
           <form method="get" action="">
             Search: <input type="search" name="q">
             Type:
@@ -153,7 +148,7 @@
             <button type="submit">Filter</button>
           </form>
 
-          <!-- Click the title to open the form -->
+          <!-- click here to open the form and add something -->
           <details>
             <summary>Add new</summary>
             <form method="post" action="">
@@ -181,6 +176,7 @@
             </form>
           </details>
 
+          <!-- the table is empty, the backend will put the data here -->
           <table border="1" cellpadding="6">
             <tr>
               <th>Name</th>
@@ -190,7 +186,6 @@
               <th>Owner</th>
               <th>Actions</th>
             </tr>
-            <!-- One row per record. Actions: Edit and Delete buttons -->
             <tr>
               <td colspan="6">Nothing here yet.</td>
             </tr>
@@ -199,10 +194,10 @@
 
         <hr>
 
-        <!-- ========== APPOINTMENTS ========== -->
+        <!-- table of the appointments -->
         <section id="appointments">
           <h3>Appointments</h3>
-          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <!-- filters: i choose something and click on Filter -->
           <form method="get" action="">
             Search: <input type="search" name="q">
             Status:
@@ -218,7 +213,7 @@
             <button type="submit">Filter</button>
           </form>
 
-          <!-- Click the title to open the form -->
+          <!-- click here to open the form and add something -->
           <details>
             <summary>Add new</summary>
             <form method="post" action="">
@@ -247,6 +242,7 @@
             </form>
           </details>
 
+          <!-- the table is empty, the backend will put the data here -->
           <table border="1" cellpadding="6">
             <tr>
               <th>Date</th>
@@ -257,7 +253,6 @@
               <th>Status</th>
               <th>Actions</th>
             </tr>
-            <!-- One row per record. Actions: Edit and Delete buttons -->
             <tr>
               <td colspan="7">Nothing here yet.</td>
             </tr>
@@ -266,10 +261,10 @@
 
         <hr>
 
-        <!-- ========== ADOPTIONS ========== -->
+        <!-- table of the animals for adoption -->
         <section id="adoptions">
           <h3>Adoptions</h3>
-          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <!-- filters: i choose something and click on Filter -->
           <form method="get" action="">
             Search: <input type="search" name="q">
             Status:
@@ -304,7 +299,7 @@
             <button type="submit">Filter</button>
           </form>
 
-          <!-- Click the title to open the form -->
+          <!-- click here to open the form and add something -->
           <details>
             <summary>Add new</summary>
             <form method="post" action="">
@@ -347,6 +342,7 @@
             </form>
           </details>
 
+          <!-- the table is empty, the backend will put the data here -->
           <table border="1" cellpadding="6">
             <tr>
               <th>Name</th>
@@ -358,7 +354,6 @@
               <th>Status</th>
               <th>Actions</th>
             </tr>
-            <!-- One row per record. Actions: Edit and Delete buttons -->
             <tr>
               <td colspan="8">Nothing here yet.</td>
             </tr>
@@ -367,10 +362,10 @@
 
         <hr>
 
-        <!-- ========== STORES ========== -->
+        <!-- table of the stores -->
         <section id="stores">
           <h3>Stores</h3>
-          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <!-- filters: i choose something and click on Filter -->
           <form method="get" action="">
             Search: <input type="search" name="q">
             City:
@@ -389,7 +384,7 @@
             <button type="submit">Filter</button>
           </form>
 
-          <!-- Click the title to open the form -->
+          <!-- click here to open the form and add something -->
           <details>
             <summary>Add new</summary>
             <form method="post" action="">
@@ -413,6 +408,7 @@
             </form>
           </details>
 
+          <!-- the table is empty, the backend will put the data here -->
           <table border="1" cellpadding="6">
             <tr>
               <th>Name</th>
@@ -422,7 +418,6 @@
               <th>Phone</th>
               <th>Actions</th>
             </tr>
-            <!-- One row per record. Actions: Edit and Delete buttons -->
             <tr>
               <td colspan="6">Nothing here yet.</td>
             </tr>
@@ -431,10 +426,10 @@
 
         <hr>
 
-        <!-- ========== SUPPORT MESSAGES ========== -->
+        <!-- table of the messages sent to the support -->
         <section id="tickets">
           <h3>Support messages</h3>
-          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <!-- filters: i choose something and click on Filter -->
           <form method="get" action="">
             Search: <input type="search" name="q">
             Status:
@@ -446,7 +441,7 @@
             <button type="submit">Filter</button>
           </form>
 
-          <!-- Click the title to open the form -->
+          <!-- click here to open the form and add something -->
           <details>
             <summary>Add new</summary>
             <form method="post" action="">
@@ -464,6 +459,7 @@
             </form>
           </details>
 
+          <!-- the table is empty, the backend will put the data here -->
           <table border="1" cellpadding="6">
             <tr>
               <th>Date</th>
@@ -473,7 +469,6 @@
               <th>Status</th>
               <th>Actions</th>
             </tr>
-            <!-- One row per record. Actions: Edit and Delete buttons -->
             <tr>
               <td colspan="6">Nothing here yet.</td>
             </tr>
