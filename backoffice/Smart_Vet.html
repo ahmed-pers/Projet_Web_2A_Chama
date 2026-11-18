@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Smart Vet - Back Office</title>
-<style>
-  header nav ul { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-left: 0; list-style: none; }
-  header nav li { min-width: max-content; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Vet &mdash; Back Office</title>
 </head>
 <body>
 <table width="100%" cellpadding="16" cellspacing="0">
@@ -29,208 +25,460 @@
     </td>
     <td valign="top">
 
-<header>
-<h1>Smart Vet - Back office</h1>
-<p>View, add, edit, delete and filter everything on the site.</p>
-<nav>
-<ul>
-<li><a href="#users">Users</a></li>
-<li><a href="#pets">Pets</a></li>
-<li><a href="#appointments">Appointments</a></li>
-<li><a href="#adoptions">Adoptions</a></li>
-<li><a href="#stores">Stores</a></li>
-<li><a href="#tickets">Support tickets</a></li>
-<li><a href="frontoffice.html">Open front office</a></li>
+        <!--
+          HOW THIS FILE WORKS
+          - Plain HTML: no CSS and no JavaScript.
+          - One <section> per table of the database. The links below jump to them.
+          - For each table the admin can: search and filter, add (open "Add new"),
+            edit and delete (buttons in the Actions column).
+          - Your team connects the forms (action="") and fills the table rows.
+        -->
+        <h1>Smart Vet - Back office</h1>
+        <p>Manage everything on the site.</p>
+        <!-- All the links are on the same line -->
+        <p>
+          <a href="#users">Users</a> |
+          <a href="#pets">Pets</a> |
+          <a href="#appointments">Appointments</a> |
+          <a href="#adoptions">Adoptions</a> |
+          <a href="#stores">Stores</a> |
+          <a href="#tickets">Support messages</a> |
+          <a href="../frontoffice/Smart_Vet.html">Open the front office</a>
+        </p>
 
-</ul>
-</nav>
-</header>
+        <!-- ========== USERS ========== -->
+        <section id="users">
+          <h3>Users</h3>
+          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <form method="get" action="">
+            Search: <input type="search" name="q">
+            Role:
+            <select name="role">
+              <option value="">All roles</option>
+              <option>owner</option>
+              <option>vet</option>
+            </select>
+            City:
+            <select name="city">
+              <option value="">All cities</option>
+              <option>Tunis</option>
+              <option>Ariana</option>
+              <option>Sfax</option>
+              <option>Sousse</option>
+              <option>Nabeul</option>
+              <option>Bizerte</option>
+              <option>Monastir</option>
+              <option>Gabes</option>
+            </select>
+            <button type="submit">Filter</button>
+          </form>
 
-<hr>
-<section id="users">
-<h2>Users</h2>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Search <input type="search" name="q"></label>
-<label>Role <select name="role"><option value="">All</option><option>owner</option><option>vet</option></select></label>
-<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
-<button>Filter</button>
-</fieldset>
-</form>
+          <!-- Click the title to open the form -->
+          <details>
+            <summary>Add new</summary>
+            <form method="post" action="">
+              Name: <input type="text" name="name" required><br>
+              Email: <input type="email" name="email" required><br>
+              Password: <input type="password" name="password" required><br>
+              Role:
+              <select name="role">
+                <option value="">Choose a role</option>
+                <option>owner</option>
+                <option>vet</option>
+              </select><br>
+              City:
+              <select name="city">
+                <option value="">Choose a city</option>
+                <option>Tunis</option>
+                <option>Ariana</option>
+                <option>Sfax</option>
+                <option>Sousse</option>
+                <option>Nabeul</option>
+                <option>Bizerte</option>
+                <option>Monastir</option>
+                <option>Gabes</option>
+              </select><br>
+              Specialty (vet only):
+              <select name="specialty">
+                <option value="">None</option>
+                <option>Small animals</option>
+                <option>Surgery</option>
+                <option>Exotic pets</option>
+                <option>Dermatology</option>
+                <option>Cardiology</option>
+                <option>Dentistry</option>
+                <option>Large animals</option>
+              </select><br>
+              Phone: <input type="text" name="phone"><br>
+              <button type="submit">Save</button>
+            </form>
+          </details>
 
-<details>
-<summary>Add new</summary>
-<form method="post" action="">
-<p><label>Name <input type="text" name="name" required></label></p>
-<p><label>Email <input type="email" name="email" required></label></p>
-<p><label>Password <input type="password" name="password" required></label></p>
-<p><label>Role <select name="role"><option>owner</option><option>vet</option></select></label></p>
-<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
-<p><label>Specialty <select name="specialty"><option value="">-</option><option>Small animals</option><option>Surgery</option><option>Exotic pets</option><option>Dermatology</option><option>Cardiology</option><option>Dentistry</option><option>Large animals</option></select></label></p>
-<p><label>Phone <input type="text" name="phone"></label></p>
-<p><button>Save</button></p>
-</form>
-</details>
+          <table border="1" cellpadding="6">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>City</th>
+              <th>Specialty</th>
+              <th>Phone</th>
+              <th>Actions</th>
+            </tr>
+            <!-- One row per record. Actions: Edit and Delete buttons -->
+            <tr>
+              <td colspan="7">Nothing here yet.</td>
+            </tr>
+          </table>
+        </section>
 
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>Email</th><th>Role</th><th>City</th><th>Specialty</th><th>Phone</th><th>Actions</th></tr>
-<tr><td colspan="7" align="center"><i>Nothing here yet.</i></td></tr>
-</table>
-</section>
-<hr>
-<section id="pets">
-<h2>Pets</h2>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Search <input type="search" name="q"></label>
-<label>Type <select name="type"><option value="">All</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label>
-<label>Owner <input type="text" name="owner"></label>
-<button>Filter</button>
-</fieldset>
-</form>
+        <hr>
 
-<details>
-<summary>Add new</summary>
-<form method="post" action="">
-<p><label>Name <input type="text" name="name" required></label></p>
-<p><label>Type <select name="type"><option value="">Choose a type</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label></p>
-<p><label>Breed <input type="text" name="breed"></label></p>
-<p><label>Age <input type="number" name="age"></label></p>
-<p><label>Owner <select name="owner"><option value="">Choose an owner</option></select></label></p>
-<p><label>Notes<br><textarea name="notes" rows="2" cols="40"></textarea></label></p>
-<p><button>Save</button></p>
-</form>
-</details>
+        <!-- ========== PETS ========== -->
+        <section id="pets">
+          <h3>Pets</h3>
+          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <form method="get" action="">
+            Search: <input type="search" name="q">
+            Type:
+            <select name="type">
+              <option value="">All types</option>
+              <option>Dog</option>
+              <option>Cat</option>
+              <option>Bird</option>
+              <option>Rabbit</option>
+              <option>Reptile</option>
+              <option>Other</option>
+            </select>
+            Owner: <input type="text" name="owner">
+            <button type="submit">Filter</button>
+          </form>
 
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>Type</th><th>Breed</th><th>Age</th><th>Owner</th><th>Actions</th></tr>
-<tr><td colspan="6" align="center"><i>Nothing here yet.</i></td></tr>
-</table>
-</section>
-<hr>
-<section id="appointments">
-<h2>Appointments</h2>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Search <input type="search" name="q"></label>
-<label>Status <select name="status"><option value="">All</option><option>pending</option><option>confirmed</option><option>done</option><option>cancelled</option></select></label>
-<label>Veterinarian <input type="text" name="vet"></label>
-<label>Date <input type="date" name="date"></label>
-<button>Filter</button>
-</fieldset>
-</form>
+          <!-- Click the title to open the form -->
+          <details>
+            <summary>Add new</summary>
+            <form method="post" action="">
+              Name: <input type="text" name="name" required><br>
+              Type:
+              <select name="type">
+                <option value="">Choose a type</option>
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Bird</option>
+                <option>Rabbit</option>
+                <option>Reptile</option>
+                <option>Other</option>
+              </select><br>
+              Breed: <input type="text" name="breed"><br>
+              Age: <input type="number" name="age"><br>
+              Owner:
+              <select name="owner">
+                <option value="">Choose an owner</option>
 
-<details>
-<summary>Add new</summary>
-<form method="post" action="">
-<p><label>Animal <select name="pet"><option value="">Choose an animal</option></select></label></p>
-<p><label>Veterinarian <select name="vet"><option value="">Choose a veterinarian</option></select></label></p>
-<p><label>Date <input type="date" name="date" required></label></p>
-<p><label>Time <input type="time" name="time" required></label></p>
-<p><label>Reason <input type="text" name="reason"></label></p>
-<p><label>Status <select name="status"><option value="">Choose a status</option><option>pending</option><option>confirmed</option><option>done</option><option>cancelled</option></select></label></p>
-<p><button>Save</button></p>
-</form>
-</details>
+              </select><br>
+              Notes:<br>
+              <textarea name="notes" rows="3" cols="40"></textarea><br>
+              <button type="submit">Save</button>
+            </form>
+          </details>
 
-<table border="1" cellpadding="6">
-<tr><th>Date</th><th>Time</th><th>Animal</th><th>Veterinarian</th><th>Reason</th><th>Status</th><th>Actions</th></tr>
-<tr><td colspan="7" align="center"><i>Nothing here yet.</i></td></tr>
-</table>
-</section>
-<hr>
-<section id="adoptions">
-<h2>Adoptions</h2>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Search <input type="search" name="q"></label>
-<label>Status <select name="status"><option value="">All</option><option>available</option><option>requested</option><option>adopted</option></select></label>
-<label>Type <select name="type"><option value="">All</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label>
-<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
-<button>Filter</button>
-</fieldset>
-</form>
+          <table border="1" cellpadding="6">
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Breed</th>
+              <th>Age</th>
+              <th>Owner</th>
+              <th>Actions</th>
+            </tr>
+            <!-- One row per record. Actions: Edit and Delete buttons -->
+            <tr>
+              <td colspan="6">Nothing here yet.</td>
+            </tr>
+          </table>
+        </section>
 
-<details>
-<summary>Add new</summary>
-<form method="post" action="">
-<p><label>Name <input type="text" name="name" required></label></p>
-<p><label>Type <select name="type"><option value="">Choose a type</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label></p>
-<p><label>Breed <input type="text" name="breed"></label></p>
-<p><label>Age <input type="number" name="age"></label></p>
-<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
-<p><label>Description<br><textarea name="description" rows="2" cols="40"></textarea></label></p>
-<p><label>Status <select name="status"><option value="">Choose a status</option><option>available</option><option>requested</option><option>adopted</option></select></label></p>
-<p><label>Requested by <input type="text" name="requested_by"></label></p>
-<p><button>Save</button></p>
-</form>
-</details>
+        <hr>
 
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>Type</th><th>Breed</th><th>Age</th><th>City</th><th>Requested by</th><th>Status</th><th>Actions</th></tr>
-<tr><td colspan="8" align="center"><i>Nothing here yet.</i></td></tr>
-</table>
-</section>
-<hr>
-<section id="stores">
-<h2>Stores</h2>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Search <input type="search" name="q"></label>
-<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
-<label>Category <input type="text" name="category"></label>
-<button>Filter</button>
-</fieldset>
-</form>
+        <!-- ========== APPOINTMENTS ========== -->
+        <section id="appointments">
+          <h3>Appointments</h3>
+          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <form method="get" action="">
+            Search: <input type="search" name="q">
+            Status:
+            <select name="status">
+              <option value="">All status</option>
+              <option>pending</option>
+              <option>confirmed</option>
+              <option>done</option>
+              <option>cancelled</option>
+            </select>
+            Veterinarian: <input type="text" name="vet">
+            Date: <input type="date" name="date">
+            <button type="submit">Filter</button>
+          </form>
 
-<details>
-<summary>Add new</summary>
-<form method="post" action="">
-<p><label>Name <input type="text" name="name" required></label></p>
-<p><label>Category <input type="text" name="category"></label></p>
-<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
-<p><label>Address <input type="text" name="address"></label></p>
-<p><label>Phone <input type="text" name="phone"></label></p>
-<p><button>Save</button></p>
-</form>
-</details>
+          <!-- Click the title to open the form -->
+          <details>
+            <summary>Add new</summary>
+            <form method="post" action="">
+              Animal:
+              <select name="pet">
+                <option value="">Choose an animal</option>
 
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>Category</th><th>City</th><th>Address</th><th>Phone</th><th>Actions</th></tr>
-<tr><td colspan="6" align="center"><i>Nothing here yet.</i></td></tr>
-</table>
-</section>
-<hr>
-<section id="tickets">
-<h2>Support tickets</h2>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Search <input type="search" name="q"></label>
-<label>Status <select name="status"><option value="">All</option><option>open</option><option>closed</option></select></label>
-<button>Filter</button>
-</fieldset>
-</form>
+              </select><br>
+              Veterinarian:
+              <select name="vet">
+                <option value="">Choose a veterinarian</option>
 
-<details>
-<summary>Add new</summary>
-<form method="post" action="">
-<p><label>Name <input type="text" name="name"></label></p>
-<p><label>Email <input type="email" name="email"></label></p>
-<p><label>Message<br><textarea name="message" rows="3" cols="40"></textarea></label></p>
-<p><label>Status <select name="status"><option value="">Choose a status</option><option>open</option><option>closed</option></select></label></p>
-<p><button>Save</button></p>
-</form>
-</details>
+              </select><br>
+              Date: <input type="date" name="date" required><br>
+              Time: <input type="time" name="time" required><br>
+              Reason: <input type="text" name="reason"><br>
+              Status:
+              <select name="status">
+                <option value="">Choose a status</option>
+                <option>pending</option>
+                <option>confirmed</option>
+                <option>done</option>
+                <option>cancelled</option>
+              </select><br>
+              <button type="submit">Save</button>
+            </form>
+          </details>
 
-<table border="1" cellpadding="6">
-<tr><th>Date</th><th>Name</th><th>Email</th><th>Message</th><th>Status</th><th>Actions</th></tr>
-<tr><td colspan="6" align="center"><i>Nothing here yet.</i></td></tr>
-</table>
-</section>
+          <table border="1" cellpadding="6">
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Animal</th>
+              <th>Veterinarian</th>
+              <th>Reason</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+            <!-- One row per record. Actions: Edit and Delete buttons -->
+            <tr>
+              <td colspan="7">Nothing here yet.</td>
+            </tr>
+          </table>
+        </section>
 
-<hr>
-<footer><p>Smart Vet - Back office</p></footer>
+        <hr>
 
+        <!-- ========== ADOPTIONS ========== -->
+        <section id="adoptions">
+          <h3>Adoptions</h3>
+          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <form method="get" action="">
+            Search: <input type="search" name="q">
+            Status:
+            <select name="status">
+              <option value="">All status</option>
+              <option>available</option>
+              <option>requested</option>
+              <option>adopted</option>
+            </select>
+            Type:
+            <select name="type">
+              <option value="">All types</option>
+              <option>Dog</option>
+              <option>Cat</option>
+              <option>Bird</option>
+              <option>Rabbit</option>
+              <option>Reptile</option>
+              <option>Other</option>
+            </select>
+            City:
+            <select name="city">
+              <option value="">All cities</option>
+              <option>Tunis</option>
+              <option>Ariana</option>
+              <option>Sfax</option>
+              <option>Sousse</option>
+              <option>Nabeul</option>
+              <option>Bizerte</option>
+              <option>Monastir</option>
+              <option>Gabes</option>
+            </select>
+            <button type="submit">Filter</button>
+          </form>
+
+          <!-- Click the title to open the form -->
+          <details>
+            <summary>Add new</summary>
+            <form method="post" action="">
+              Name: <input type="text" name="name" required><br>
+              Type:
+              <select name="type">
+                <option value="">Choose a type</option>
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Bird</option>
+                <option>Rabbit</option>
+                <option>Reptile</option>
+                <option>Other</option>
+              </select><br>
+              Breed: <input type="text" name="breed"><br>
+              Age: <input type="number" name="age"><br>
+              City:
+              <select name="city">
+                <option value="">Choose a city</option>
+                <option>Tunis</option>
+                <option>Ariana</option>
+                <option>Sfax</option>
+                <option>Sousse</option>
+                <option>Nabeul</option>
+                <option>Bizerte</option>
+                <option>Monastir</option>
+                <option>Gabes</option>
+              </select><br>
+              Description:<br>
+              <textarea name="description" rows="3" cols="40"></textarea><br>
+              Status:
+              <select name="status">
+                <option value="">Choose a status</option>
+                <option>available</option>
+                <option>requested</option>
+                <option>adopted</option>
+              </select><br>
+              Requested by: <input type="text" name="requested_by"><br>
+              <button type="submit">Save</button>
+            </form>
+          </details>
+
+          <table border="1" cellpadding="6">
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Breed</th>
+              <th>Age</th>
+              <th>City</th>
+              <th>Requested by</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+            <!-- One row per record. Actions: Edit and Delete buttons -->
+            <tr>
+              <td colspan="8">Nothing here yet.</td>
+            </tr>
+          </table>
+        </section>
+
+        <hr>
+
+        <!-- ========== STORES ========== -->
+        <section id="stores">
+          <h3>Stores</h3>
+          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <form method="get" action="">
+            Search: <input type="search" name="q">
+            City:
+            <select name="city">
+              <option value="">All cities</option>
+              <option>Tunis</option>
+              <option>Ariana</option>
+              <option>Sfax</option>
+              <option>Sousse</option>
+              <option>Nabeul</option>
+              <option>Bizerte</option>
+              <option>Monastir</option>
+              <option>Gabes</option>
+            </select>
+            Category: <input type="text" name="category">
+            <button type="submit">Filter</button>
+          </form>
+
+          <!-- Click the title to open the form -->
+          <details>
+            <summary>Add new</summary>
+            <form method="post" action="">
+              Name: <input type="text" name="name" required><br>
+              Category: <input type="text" name="category"><br>
+              City:
+              <select name="city">
+                <option value="">Choose a city</option>
+                <option>Tunis</option>
+                <option>Ariana</option>
+                <option>Sfax</option>
+                <option>Sousse</option>
+                <option>Nabeul</option>
+                <option>Bizerte</option>
+                <option>Monastir</option>
+                <option>Gabes</option>
+              </select><br>
+              Address: <input type="text" name="address"><br>
+              Phone: <input type="text" name="phone"><br>
+              <button type="submit">Save</button>
+            </form>
+          </details>
+
+          <table border="1" cellpadding="6">
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>City</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Actions</th>
+            </tr>
+            <!-- One row per record. Actions: Edit and Delete buttons -->
+            <tr>
+              <td colspan="6">Nothing here yet.</td>
+            </tr>
+          </table>
+        </section>
+
+        <hr>
+
+        <!-- ========== SUPPORT MESSAGES ========== -->
+        <section id="tickets">
+          <h3>Support messages</h3>
+          <!-- Filters: all on one line. The page reloads with the chosen values -->
+          <form method="get" action="">
+            Search: <input type="search" name="q">
+            Status:
+            <select name="status">
+              <option value="">All status</option>
+              <option>open</option>
+              <option>closed</option>
+            </select>
+            <button type="submit">Filter</button>
+          </form>
+
+          <!-- Click the title to open the form -->
+          <details>
+            <summary>Add new</summary>
+            <form method="post" action="">
+              Name: <input type="text" name="name"><br>
+              Email: <input type="email" name="email"><br>
+              Message:<br>
+              <textarea name="message" rows="3" cols="40"></textarea><br>
+              Status:
+              <select name="status">
+                <option value="">Choose a status</option>
+                <option>open</option>
+                <option>closed</option>
+              </select><br>
+              <button type="submit">Save</button>
+            </form>
+          </details>
+
+          <table border="1" cellpadding="6">
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+            <!-- One row per record. Actions: Edit and Delete buttons -->
+            <tr>
+              <td colspan="6">Nothing here yet.</td>
+            </tr>
+          </table>
+        </section>
     </td>
   </tr>
 </table>
