@@ -4,6 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GoTravel | Transport Back Office</title>
+  <style>
+    .transport-layout, .transport-layout tbody, .transport-layout tr { display: block; width: 100%; }
+    .transport-layout tr { display: flex; flex-direction: column; }
+    .transport-layout td { display: block; width: 100%; }
+    .transport-layout nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 0; list-style: none; }
+  </style>
 </head>
 <body>
 <table width="100%" cellpadding="16" cellspacing="0">
@@ -30,7 +36,7 @@
     <p>Transport back office</p>
   </header>
 
-  <table>
+  <table class="transport-layout">
     <tr>
       <td>
         <nav aria-label="Staff navigation">

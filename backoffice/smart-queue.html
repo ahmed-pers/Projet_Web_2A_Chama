@@ -4,6 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Smart Queue &mdash; Back Office</title>
+  <style>
+    .queue-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .queue-layout > aside[aria-label="Sidebar"] nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 0; list-style: none; }
+
+    .service-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+  </style>
 </head>
 <body>
 <table width="100%" cellpadding="16" cellspacing="0">
@@ -25,7 +41,7 @@
     </td>
     <td valign="top">
 
-<div>
+<div class="queue-layout">
 
     <aside aria-label="Sidebar">
 
@@ -97,7 +113,7 @@
         <h2 id="services-title">Services</h2>
         <p>Manage every service offered at this branch.</p>
 
-        <div>
+        <div class="service-cards">
 
           <article aria-labelledby="service-1">
             <p>Status: <strong>Open</strong></p>
