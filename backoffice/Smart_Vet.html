@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Vet - Back Office</title>
+</head>
+<body>
+
+<header>
+<h1>Smart Vet - Back office</h1>
+<p>View, add, edit, delete and filter everything on the site.</p>
+<nav>
+<ul>
+<li><a href="#users">Users</a></li>
+<li><a href="#pets">Pets</a></li>
+<li><a href="#appointments">Appointments</a></li>
+<li><a href="#adoptions">Adoptions</a></li>
+<li><a href="#stores">Stores</a></li>
+<li><a href="#tickets">Support tickets</a></li>
+<li><a href="frontoffice.html">Open front office</a></li>
+</ul>
+</nav>
+</header>
+
+<hr>
+<section id="users">
+<h2>Users</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>Role <select name="role"><option value="">All</option><option>owner</option><option>vet</option></select></label>
+<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
+<button>Filter</button>
+</fieldset>
+</form>
+
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Name <input type="text" name="name" required></label></p>
+<p><label>Email <input type="email" name="email" required></label></p>
+<p><label>Password <input type="password" name="password" required></label></p>
+<p><label>Role <select name="role"><option>owner</option><option>vet</option></select></label></p>
+<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
+<p><label>Specialty <select name="specialty"><option value="">-</option><option>Small animals</option><option>Surgery</option><option>Exotic pets</option><option>Dermatology</option><option>Cardiology</option><option>Dentistry</option><option>Large animals</option></select></label></p>
+<p><label>Phone <input type="text" name="phone"></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
+
+<table border="1" cellpadding="6">
+<tr><th>Name</th><th>Email</th><th>Role</th><th>City</th><th>Specialty</th><th>Phone</th><th>Actions</th></tr>
+<tr><td colspan="7" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+<hr>
+<section id="pets">
+<h2>Pets</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>Type <select name="type"><option value="">All</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label>
+<label>Owner <input type="text" name="owner"></label>
+<button>Filter</button>
+</fieldset>
+</form>
+
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Name <input type="text" name="name" required></label></p>
+<p><label>Type <select name="type"><option value="">Choose a type</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label></p>
+<p><label>Breed <input type="text" name="breed"></label></p>
+<p><label>Age <input type="number" name="age"></label></p>
+<p><label>Owner <select name="owner"><option value="">Choose an owner</option></select></label></p>
+<p><label>Notes<br><textarea name="notes" rows="2" cols="40"></textarea></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
+
+<table border="1" cellpadding="6">
+<tr><th>Name</th><th>Type</th><th>Breed</th><th>Age</th><th>Owner</th><th>Actions</th></tr>
+<tr><td colspan="6" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+<hr>
+<section id="appointments">
+<h2>Appointments</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>Status <select name="status"><option value="">All</option><option>pending</option><option>confirmed</option><option>done</option><option>cancelled</option></select></label>
+<label>Veterinarian <input type="text" name="vet"></label>
+<label>Date <input type="date" name="date"></label>
+<button>Filter</button>
+</fieldset>
+</form>
+
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Animal <select name="pet"><option value="">Choose an animal</option></select></label></p>
+<p><label>Veterinarian <select name="vet"><option value="">Choose a veterinarian</option></select></label></p>
+<p><label>Date <input type="date" name="date" required></label></p>
+<p><label>Time <input type="time" name="time" required></label></p>
+<p><label>Reason <input type="text" name="reason"></label></p>
+<p><label>Status <select name="status"><option value="">Choose a status</option><option>pending</option><option>confirmed</option><option>done</option><option>cancelled</option></select></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
+
+<table border="1" cellpadding="6">
+<tr><th>Date</th><th>Time</th><th>Animal</th><th>Veterinarian</th><th>Reason</th><th>Status</th><th>Actions</th></tr>
+<tr><td colspan="7" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+<hr>
+<section id="adoptions">
+<h2>Adoptions</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>Status <select name="status"><option value="">All</option><option>available</option><option>requested</option><option>adopted</option></select></label>
+<label>Type <select name="type"><option value="">All</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label>
+<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
+<button>Filter</button>
+</fieldset>
+</form>
+
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Name <input type="text" name="name" required></label></p>
+<p><label>Type <select name="type"><option value="">Choose a type</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label></p>
+<p><label>Breed <input type="text" name="breed"></label></p>
+<p><label>Age <input type="number" name="age"></label></p>
+<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
+<p><label>Description<br><textarea name="description" rows="2" cols="40"></textarea></label></p>
+<p><label>Status <select name="status"><option value="">Choose a status</option><option>available</option><option>requested</option><option>adopted</option></select></label></p>
+<p><label>Requested by <input type="text" name="requested_by"></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
+
+<table border="1" cellpadding="6">
+<tr><th>Name</th><th>Type</th><th>Breed</th><th>Age</th><th>City</th><th>Requested by</th><th>Status</th><th>Actions</th></tr>
+<tr><td colspan="8" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+<hr>
+<section id="stores">
+<h2>Stores</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
+<label>Category <input type="text" name="category"></label>
+<button>Filter</button>
+</fieldset>
+</form>
+
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Name <input type="text" name="name" required></label></p>
+<p><label>Category <input type="text" name="category"></label></p>
+<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
+<p><label>Address <input type="text" name="address"></label></p>
+<p><label>Phone <input type="text" name="phone"></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
+
+<table border="1" cellpadding="6">
+<tr><th>Name</th><th>Category</th><th>City</th><th>Address</th><th>Phone</th><th>Actions</th></tr>
+<tr><td colspan="6" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+<hr>
+<section id="tickets">
+<h2>Support tickets</h2>
+<form method="get" action="">
+<fieldset><legend>Filters</legend>
+<label>Search <input type="search" name="q"></label>
+<label>Status <select name="status"><option value="">All</option><option>open</option><option>closed</option></select></label>
+<button>Filter</button>
+</fieldset>
+</form>
+
+<details>
+<summary>Add new</summary>
+<form method="post" action="">
+<p><label>Name <input type="text" name="name"></label></p>
+<p><label>Email <input type="email" name="email"></label></p>
+<p><label>Message<br><textarea name="message" rows="3" cols="40"></textarea></label></p>
+<p><label>Status <select name="status"><option value="">Choose a status</option><option>open</option><option>closed</option></select></label></p>
+<p><button>Save</button></p>
+</form>
+</details>
+
+<table border="1" cellpadding="6">
+<tr><th>Date</th><th>Name</th><th>Email</th><th>Message</th><th>Status</th><th>Actions</th></tr>
+<tr><td colspan="6" align="center"><i>Nothing here yet.</i></td></tr>
+</table>
+</section>
+
+<hr>
+<footer><p>Smart Vet - Back office</p></footer>
+
+</body>
+</html>
