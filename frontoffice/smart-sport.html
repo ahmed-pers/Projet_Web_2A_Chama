@@ -4,11 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Smart Sport - Front-office</title>
+<style>
+  .sport-layout, .sport-layout tbody, .sport-layout tr { display: block; width: 100%; }
+  .sport-layout tr { display: flex; flex-direction: column; }
+  .sport-layout td { display: block; width: 100%; }
+  .sport-layout td:first-child nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 0; list-style: none; }
+</style>
 </head>
 <body>
+<table width="100%" cellpadding="16" cellspacing="0">
+  <tr>
+    <td width="230" valign="top" bgcolor="#f4f6f8">
+      <aside aria-label="Project navigation">
+        <h2>Other services</h2>
+        <nav aria-label="Project pages">
+          <ul>
+        <li><a href="indexFIXMYCITY.html">Fix My City</a></li>
+        <li><a href="lost-and-found.html">Lost and Found</a></li>
+        <li><a href="smart-queue.html">Smart Queue</a></li>
+        <li><a href="smart-sport.html" aria-current="page">Smart Sport</a></li>
+        <li><a href="Smart_Vet.html">Smart Vet</a></li>
+        <li><a href="transport.html">Transport</a></li>
+          </ul>
+        </nav>
+      </aside>
+    </td>
+    <td valign="top">
 
-
-<table width="100%" cellpadding="12">
+<table class="sport-layout" width="100%" cellpadding="12">
 <tr>
 
 
@@ -26,8 +49,12 @@
       <li><a href="#my-participations">My participations</a></li>
       <li><a href="#profile">Player profile</a></li>
     </ul>
+      <li><a href="#login">Log in</a></li>
+      <li><a href="#logout">Log out</a></li>
+
+</ul>
     </nav>
-  </header>
+</header>
 </td>
 
 
@@ -206,5 +233,8 @@
 </tr>
 </table>
 
+    </td>
+  </tr>
+</table>
 </body>
 </html>

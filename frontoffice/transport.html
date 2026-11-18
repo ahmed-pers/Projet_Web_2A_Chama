@@ -4,20 +4,47 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GoTravel | Available trips</title>
+  <style>
+    .transport-layout, .transport-layout tbody, .transport-layout tr { display: block; width: 100%; }
+    .transport-layout tr { display: flex; flex-direction: column; }
+    .transport-layout td { display: block; width: 100%; }
+    .transport-layout nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 0; list-style: none; }
+  </style>
 </head>
 <body>
-  <header>
+<table width="100%" cellpadding="16" cellspacing="0">
+  <tr>
+    <td width="230" valign="top" bgcolor="#f4f6f8">
+      <aside aria-label="Project navigation">
+        <h2>Other services</h2>
+        <nav aria-label="Project pages">
+          <ul>
+        <li><a href="indexFIXMYCITY.html">Fix My City</a></li>
+        <li><a href="lost-and-found.html">Lost and Found</a></li>
+        <li><a href="smart-queue.html">Smart Queue</a></li>
+        <li><a href="smart-sport.html">Smart Sport</a></li>
+        <li><a href="Smart_Vet.html">Smart Vet</a></li>
+        <li><a href="transport.html" aria-current="page">Transport</a></li>
+          </ul>
+        </nav>
+      </aside>
+    </td>
+    <td valign="top">
+
+<header>
     <h1>GoTravel</h1>
     <p>Available bus and train trips across Tunisia</p>
   </header>
-  <table>
+  <table class="transport-layout">
     <tr>
       <td>
         <nav aria-label="Main navigation">
           <h2>Destinations</h2>
-          <ul><li><a href="#tunis">From Tunis</a></li><li><a href="#sousse">From Sousse</a></li><li><a href="#sfax">From Sfax</a></li><li><a href="#monastir">From Monastir</a></li></ul>
+          <ul><li><a href="#tunis">From Tunis</a></li><li><a href="#sousse">From Sousse</a></li><li><a href="#sfax">From Sfax</a></li><li><a href="#monastir">From Monastir</a></li>
+
+</ul>
         </nav>
-      </td>
+</td>
       <td>
         <main>
           <h2>Choose an available trip</h2>
@@ -111,5 +138,8 @@
     </tr>
   </table>
   <footer><p>GoTravel — bus and train trips</p></footer>
+    </td>
+  </tr>
+</table>
 </body>
 </html>

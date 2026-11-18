@@ -4,10 +4,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Smart Lost &amp; Found &mdash; Front Office</title>
+  <style>
+    .service-layout { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
+    .service-layout > aside[aria-label="Sidebar"] nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 0; list-style: none; }
+  </style>
 </head>
 <body>
+<table width="100%" cellpadding="16" cellspacing="0">
+  <tr>
+    <td width="230" valign="top" bgcolor="#f4f6f8">
+      <aside aria-label="Project navigation">
+        <h2>Other services</h2>
+        <nav aria-label="Project pages">
+          <ul>
+        <li><a href="indexFIXMYCITY.html">Fix My City</a></li>
+        <li><a href="lost-and-found.html" aria-current="page">Lost and Found</a></li>
+        <li><a href="smart-queue.html">Smart Queue</a></li>
+        <li><a href="smart-sport.html">Smart Sport</a></li>
+        <li><a href="Smart_Vet.html">Smart Vet</a></li>
+        <li><a href="transport.html">Transport</a></li>
+          </ul>
+        </nav>
+      </aside>
+    </td>
+    <td valign="top">
 
-  <div>
+<div class="service-layout">
 
     <aside aria-label="Sidebar">
       <p><strong>SmartLostFound</strong></p>
@@ -23,14 +45,14 @@
               <li><a href="#">Lost Items</a></li>
               <li><a href="#">Found Items</a></li>
               <li><a href="#">Make an Enquiry</a></li>
-            </ul>
+
+</ul>
           </li>
           <li><a href="#">History</a></li>
           <li><a href="#">Settings</a></li>
         </ul>
       </nav>
-
-      <p><button type="button">Log out</button></p>
+<p><button type="button">Log out</button></p>
     </aside>
 
     <main>
@@ -217,5 +239,8 @@
     </aside>
 
   </div>
+    </td>
+  </tr>
+</table>
 </body>
 </html>
