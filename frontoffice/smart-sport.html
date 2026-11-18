@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Sport - Front-office</title>
+</head>
+<body>
+
+
+<table width="100%" cellpadding="12">
+<tr>
+
+
+<td valign="top" width="210">
+  <header id="top">
+    <h1>⚽ Smart Sport</h1>
+    <p>Find sports, book a stadium, play together.</p>
+    <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#sports">Sports</a></li>
+      <li><a href="#stadiums">Stadiums</a></li>
+      <li><a href="#matches">Matches</a></li>
+      <li><a href="#booking">Book a slot</a></li>
+      <li><a href="#my-participations">My participations</a></li>
+      <li><a href="#profile">Player profile</a></li>
+      <li><a href="#login">Log in</a></li>
+      <li><a href="#logout">Log out</a></li>
+    </ul>
+    </nav>
+  </header>
+</td>
+
+
+<td valign="top">
+
+<main>
+
+
+<section id="home">
+  <h2>Home</h2>
+  <h3>Welcome to Smart Sport</h3>
+  <p>No team? No friends to play with? Pick a sport, choose a time slot, and join a match with other people from your city.</p>
+  <p><a href="#matches"><strong>Discover available matches</strong></a></p>
+
+  <h3>Available sports</h3>
+  <ul>
+    <li>⚽ <a href="#sports">Football</a></li>
+    <li>🏀 <a href="#sports">Basketball</a></li>
+    <li>🏐 <a href="#sports">Volleyball</a></li>
+    <li>🤾 <a href="#sports">Handball</a></li>
+    <li>🎾 <a href="#sports">Tennis</a></li>
+  </ul>
+
+  <h3>Featured matches</h3>
+  <article>
+    <h4>Football Match</h4>
+    <p>Thursday, 09:00–10:00<br>Stadium: Municipal Stadium<br>Players: 8/12<br>Remaining places: 4</p>
+    <p><a href="#matches"><button type="button">JOIN MATCH</button></a></p>
+  </article>
+  <article>
+    <h4>Volleyball Match</h4>
+    <p>Friday, 17:00–18:00<br>Stadium: Green Court Arena<br>Players: 3/12<br>Remaining places: 9</p>
+    <p><a href="#matches"><button type="button">JOIN MATCH</button></a></p>
+  </article>
+
+  <h3>Stadiums</h3>
+  <p>Municipal Stadium, Smart City Sports Hall, Green Court Arena, Ace Tennis Club. <a href="#stadiums">See all stadiums</a>.</p>
+  <hr>
+</section>
+
+
+<section id="login">
+  <h2>Log in</h2>
+  <form action="#home" method="post">
+    <p><label>Email<br><input type="email" name="email" required></label></p>
+    <p><label>Password<br><input type="password" name="password" required></label></p>
+    <p><button type="submit">Log in</button></p>
+  </form>
+  <hr>
+</section>
+
+<section id="logout">
+  <h2>Log out</h2>
+  <p>You are about to leave your session.</p>
+  <p><a href="#home"><button type="button">Log out</button></a></p>
+  <hr>
+</section>
+
+<section id="profile">
+  <h2>Player profile</h2>
+  <p>First time here? Tell us about your sport. Your name and email are already saved in your account.</p>
+  <form action="#matches" method="post">
+    <p><label>Preferred sport<br>
+      <select name="sport" required>
+        <option value="">Choose a sport</option>
+        <option>Football</option><option>Basketball</option><option>Volleyball</option><option>Handball</option><option>Tennis</option>
+      </select></label></p>
+    <p><label>Sports level<br>
+      <select name="niveau" required>
+        <option value="">Choose a level</option>
+        <option>Beginner</option><option>Intermediate</option><option>Advanced</option>
+      </select></label></p>
+    <p><button type="submit">Save profile</button></p>
+  </form>
+  <hr>
+</section>
+
+
+<section id="sports">
+  <h2>Sports</h2>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>Sport</th><th>Select</th></tr></thead>
+    <tbody>
+      <tr><td>⚽ Football</td><td><a href="#matches"><button type="button">Select Football</button></a></td></tr>
+      <tr><td>🏀 Basketball</td><td><a href="#matches"><button type="button">Select Basketball</button></a></td></tr>
+      <tr><td>🏐 Volleyball</td><td><a href="#matches"><button type="button">Select Volleyball</button></a></td></tr>
+      <tr><td>🤾 Handball</td><td><a href="#matches"><button type="button">Select Handball</button></a></td></tr>
+      <tr><td>🎾 Tennis</td><td><a href="#matches"><button type="button">Select Tennis</button></a></td></tr>
+    </tbody>
+  </table>
+  <hr>
+</section>
+
+
+<section id="stadiums">
+  <h2>Stadiums</h2>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>Stadium</th><th>Address</th><th>Sport facilities</th><th>Capacity</th><th>Availability</th></tr></thead>
+    <tbody>
+      <tr><td>Municipal Stadium</td><td>Avenue de la Republique, Manouba</td><td>Football</td><td>500</td><td>Available</td></tr>
+      <tr><td>Smart City Sports Hall</td><td>Rue de l'Innovation, Douar Hicher</td><td>Basketball, Handball, Volleyball</td><td>300</td><td>Available</td></tr>
+      <tr><td>Green Court Arena</td><td>Parc Urbain, Manouba</td><td>Volleyball</td><td>150</td><td>Available</td></tr>
+      <tr><td>Ace Tennis Club</td><td>Rue des Jasmins, Tunis</td><td>Tennis</td><td>40</td><td>Available</td></tr>
+    </tbody>
+  </table>
+  <hr>
+</section>
+
+
+<section id="matches">
+  <h2>Matches</h2>
+  <form action="#matches" method="get">
+    <label>Sport
+      <select name="sport"><option value="">All sports</option><option>Football</option><option>Basketball</option><option>Volleyball</option><option>Handball</option><option>Tennis</option></select>
+    </label>
+    <label>Date <input type="date" name="date"></label>
+    <button type="submit">Filter matches</button>
+  </form>
+  <br>
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr><th>Sport</th><th>Stadium</th><th>Date</th><th>Start</th><th>End</th><th>Registered</th><th>Maximum</th><th>Remaining places</th><th>Status</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>⚽ Football</td><td>Municipal Stadium</td><td>Thu 19 Nov 2026</td><td>09:00</td><td>10:00</td><td>8</td><td>12</td><td>4</td><td>OPEN</td><td><button type="button">JOIN MATCH</button></td></tr>
+      <tr><td>🏀 Basketball</td><td>Smart City Sports Hall</td><td>Wed 18 Nov 2026</td><td>18:00</td><td>19:30</td><td>6</td><td>6</td><td>0</td><td>FULL</td><td><button type="button" disabled>JOIN MATCH</button></td></tr>
+      <tr><td>🎾 Tennis</td><td>Ace Tennis Club</td><td>Thu 19 Nov 2026</td><td>10:00</td><td>11:00</td><td>1</td><td>4</td><td>3</td><td>OPEN</td><td><button type="button">JOIN MATCH</button></td></tr>
+      <tr><td>🏐 Volleyball</td><td>Green Court Arena</td><td>Fri 20 Nov 2026</td><td>17:00</td><td>18:00</td><td>3</td><td>12</td><td>9</td><td>OPEN</td><td><button type="button">JOIN MATCH</button></td></tr>
+      <tr><td>🤾 Handball</td><td>Smart City Sports Hall</td><td>Sat 21 Nov 2026</td><td>19:00</td><td>20:30</td><td>2</td><td>14</td><td>12</td><td>OPEN</td><td><button type="button">JOIN MATCH</button></td></tr>
+      <tr><td>⚽ Football</td><td>Municipal Stadium</td><td>Sun 22 Nov 2026</td><td>20:00</td><td>21:00</td><td>0</td><td>12</td><td>12</td><td>OPEN</td><td><button type="button">JOIN MATCH</button></td></tr>
+      <tr><td>🏀 Basketball</td><td>Smart City Sports Hall</td><td>Mon 23 Nov 2026</td><td>18:00</td><td>19:30</td><td>0</td><td>10</td><td>10</td><td>CANCELLED</td><td><button type="button" disabled>JOIN MATCH</button></td></tr>
+    </tbody>
+  </table>
+  <hr>
+</section>
+
+<section id="booking">
+  <h2>Book a slot</h2>
+  <form action="#my-participations" method="post">
+    <p><label>Sport<br>
+      <select name="sport" required><option value="">Choose a sport</option><option>Football</option><option>Basketball</option><option>Volleyball</option><option>Handball</option><option>Tennis</option></select></label></p>
+    <p><label>Stadium<br>
+      <select name="stadium" required>
+        <option value="">Choose a stadium</option>
+        <option>Municipal Stadium</option><option>Smart City Sports Hall</option><option>Green Court Arena</option><option>Ace Tennis Club</option>
+      </select></label></p>
+    <p><label>Date<br><input type="date" name="date" required></label></p>
+    <p><label>Available time slot<br>
+      <select name="slot" required>
+        <option value="">Choose a time slot</option>
+        <option>09:00–10:00 (Football, 8/12 players, 4 places left)</option>
+        <option>10:00–11:00 (Tennis, 1/4 players, 3 places left)</option>
+        <option>17:00–18:00 (Volleyball, 3/12 players, 9 places left)</option>
+        <option>19:00–20:30 (Handball, 2/14 players, 12 places left)</option>
+      </select></label></p>
+    <p><button type="submit">Join this match</button></p>
+  </form>
+  <p><strong>Confirmation message (shown after registration):</strong> Registration confirmed: Football on Thu 19 Nov at 09:00, Municipal Stadium. See you there!</p>
+  <hr>
+</section>
+
+
+<section id="my-participations">
+  <h2>My participations</h2>
+
+  <h3>My upcoming matches</h3>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>Sport</th><th>Stadium</th><th>Address</th><th>Date</th><th>Time</th><th>Players</th><th>Cancellation</th></tr></thead>
+    <tbody>
+      <tr><td>⚽ Football</td><td>Municipal Stadium</td><td>Avenue de la Republique, Manouba</td><td>Thu 19 Nov 2026</td><td>09:00–10:00</td><td>8/12</td><td><button type="button">Cancel participation</button></td></tr>
+      <tr><td>🤾 Handball</td><td>Smart City Sports Hall</td><td>Rue de l'Innovation, Douar Hicher</td><td>Sat 21 Nov 2026</td><td>19:00–20:30</td><td>2/14</td><td><button type="button">Cancel participation</button></td></tr>
+    </tbody>
+  </table>
+
+  <h3>My previous matches</h3>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>Sport</th><th>Stadium</th><th>Date</th><th>Time</th><th>Players</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>⚽ Football</td><td>Municipal Stadium</td><td>Sat 14 Nov 2026</td><td>18:00–19:00</td><td>4/12</td><td>PLAYED</td></tr>
+    </tbody>
+  </table>
+  <p><a href="#top">Back to top</a></p>
+</section>
+
+</main>
+
+<footer>
+  <hr>
+  <p>Smart Sport, a Smart City module.</p>
+</footer>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

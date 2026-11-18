@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Sport - Back-office (Administrator)</title>
+</head>
+<body>
+
+
+<table width="100%" cellpadding="12">
+<tr>
+
+
+<td valign="top" width="210">
+  <header id="top">
+    <h1>⚽ Smart Sport Admin</h1>
+    <p>Logged in as: Smart Admin (admin@smartsport.tn)</p>
+    <nav>
+    <ul>
+      <li><a href="#admin-login">Admin login</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#users">Users</a></li>
+      <li><a href="#players">Players</a></li>
+      <li><a href="#stadiums">Stadiums</a></li>
+      <li><a href="#matches">Matches</a></li>
+      <li><a href="#participations">Participations</a></li>
+      <li><a href="#logout">Log out</a></li>
+    </ul>
+    </nav>
+  </header>
+</td>
+
+
+<td valign="top">
+
+<main>
+
+
+<section id="admin-login">
+  <h2>Administrator login</h2>
+  <p>This area is reserved for administrators.</p>
+  <form action="#dashboard" method="post">
+    <p><label>Email<br><input type="email" name="email" required></label></p>
+    <p><label>Password<br><input type="password" name="password" required></label></p>
+    <p><button type="submit">Log in</button></p>
+  </form>
+  <hr>
+</section>
+
+
+<section id="dashboard">
+  <h2>Dashboard</h2>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>Statistic</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Total users</td><td>11</td></tr>
+      <tr><td>Total players</td><td>9</td></tr>
+      <tr><td>Total stadiums</td><td>4</td></tr>
+      <tr><td>Total matches</td><td>8</td></tr>
+      <tr><td>Total participations</td><td>25</td></tr>
+    </tbody>
+  </table>
+  <hr>
+</section>
+
+
+<section id="users">
+  <h2>User management</h2>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>ID</th><th>Last name</th><th>First name</th><th>Email</th><th>Phone</th><th>Role</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Admin</td><td>Smart</td><td>admin@smartsport.tn</td><td>20000000</td><td>admin</td><td>-</td></tr>
+      <tr><td>2</td><td>Ben Salah</td><td>Youssef</td><td>student@smartsport.tn</td><td>21111111</td><td>user</td><td><button type="button">View</button> <button type="button">Make admin</button> <button type="button">Delete</button></td></tr>
+      <tr><td>3</td><td>Trabelsi</td><td>Amine</td><td>player1@smartsport.tn</td><td>22000001</td><td>user</td><td><button type="button">View</button> <button type="button">Make admin</button> <button type="button">Delete</button></td></tr>
+      <tr><td>4</td><td>Gharbi</td><td>Sara</td><td>player2@smartsport.tn</td><td>22000002</td><td>user</td><td><button type="button">View</button> <button type="button">Make admin</button> <button type="button">Delete</button></td></tr>
+      <tr><td>5</td><td>Mansour</td><td>Omar</td><td>player3@smartsport.tn</td><td>22000003</td><td>user</td><td><button type="button">View</button> <button type="button">Make admin</button> <button type="button">Delete</button></td></tr>
+    </tbody>
+  </table>
+  <hr>
+</section>
+
+
+<section id="players">
+  <h2>Player management</h2>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>ID</th><th>Player</th><th>Email</th><th>Preferred sport</th><th>Level</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Amine Trabelsi</td><td>player1@smartsport.tn</td><td>Football</td><td>Intermediate</td></tr>
+      <tr><td>2</td><td>Sara Gharbi</td><td>player2@smartsport.tn</td><td>Basketball</td><td>Beginner</td></tr>
+      <tr><td>3</td><td>Omar Mansour</td><td>player3@smartsport.tn</td><td>Football</td><td>Advanced</td></tr>
+      <tr><td>4</td><td>Lina Jlassi</td><td>player4@smartsport.tn</td><td>Volleyball</td><td>Intermediate</td></tr>
+      <tr><td>5</td><td>Karim Hamdi</td><td>player5@smartsport.tn</td><td>Handball</td><td>Beginner</td></tr>
+    </tbody>
+  </table>
+  <hr>
+</section>
+
+
+<section id="stadiums">
+  <h2>Stadium management</h2>
+
+  <h3>Add / edit a stadium</h3>
+  <form action="#stadiums" method="post">
+    <p><label>Stadium name<br><input type="text" name="nom_stadium" required maxlength="100"></label></p>
+    <p><label>Address<br><input type="text" name="adresse" required maxlength="200"></label></p>
+    <p><label>Capacity<br><input type="number" name="capacite" min="2" required></label></p>
+    <fieldset>
+      <legend>Sport facilities</legend>
+      <label><input type="checkbox" name="sports" value="Football"> Football</label>
+      <label><input type="checkbox" name="sports" value="Basketball"> Basketball</label>
+      <label><input type="checkbox" name="sports" value="Volleyball"> Volleyball</label>
+      <label><input type="checkbox" name="sports" value="Handball"> Handball</label>
+      <label><input type="checkbox" name="sports" value="Tennis"> Tennis</label>
+    </fieldset>
+    <p><label><input type="checkbox" name="disponible" checked> Available for new matches</label></p>
+    <p><button type="submit">Save stadium</button></p>
+  </form>
+
+  <h3>All stadiums</h3>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>ID</th><th>Name</th><th>Address</th><th>Facilities</th><th>Capacity</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Municipal Stadium</td><td>Avenue de la Republique, Manouba</td><td>Football</td><td>500</td><td>Available</td><td><button type="button">View</button> <button type="button">Edit</button> <button type="button">Delete</button></td></tr>
+      <tr><td>2</td><td>Smart City Sports Hall</td><td>Rue de l'Innovation, Douar Hicher</td><td>Basketball, Handball, Volleyball</td><td>300</td><td>Available</td><td><button type="button">View</button> <button type="button">Edit</button> <button type="button">Delete</button></td></tr>
+      <tr><td>3</td><td>Green Court Arena</td><td>Parc Urbain, Manouba</td><td>Volleyball</td><td>150</td><td>Available</td><td><button type="button">View</button> <button type="button">Edit</button> <button type="button">Delete</button></td></tr>
+      <tr><td>4</td><td>Ace Tennis Club</td><td>Rue des Jasmins, Tunis</td><td>Tennis</td><td>40</td><td>Available</td><td><button type="button">View</button> <button type="button">Edit</button> <button type="button">Delete</button></td></tr>
+    </tbody>
+  </table>
+  <hr>
+</section>
+
+
+<section id="matches">
+  <h2>Match management</h2>
+
+  <h3>Create / edit a match</h3>
+  <form action="#matches" method="post">
+    <p><label>Sport<br>
+      <select name="sport" required><option value="">Choose a sport</option><option>Football</option><option>Basketball</option><option>Volleyball</option><option>Handball</option><option>Tennis</option></select></label></p>
+    <p><label>Stadium<br>
+      <select name="id_stadium" required><option value="">Choose a stadium</option><option>Municipal Stadium</option><option>Smart City Sports Hall</option><option>Green Court Arena</option><option>Ace Tennis Club</option></select></label></p>
+    <p><label>Date<br><input type="date" name="date_match" required></label></p>
+    <p><label>Start time<br><input type="time" name="heure_debut" required></label></p>
+    <p><label>End time<br><input type="time" name="heure_fin" required></label></p>
+    <p><label>Maximum number of players (Football: 12 by default)<br><input type="number" name="nombre_joueurs" min="2" value="12" required></label></p>
+    <p><button type="submit">Save match</button></p>
+  </form>
+
+  <h3>All matches</h3>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>ID</th><th>Sport</th><th>Stadium</th><th>Date</th><th>Time</th><th>Players</th><th>Places left</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Football</td><td>Municipal Stadium</td><td>2026-11-19</td><td>09:00–10:00</td><td>8/12</td><td>4</td><td>OPEN</td><td><a href="#match-players"><button type="button">View players</button></a> <button type="button">Edit</button> <button type="button">Cancel match</button></td></tr>
+      <tr><td>2</td><td>Basketball</td><td>Smart City Sports Hall</td><td>2026-11-18</td><td>18:00–19:30</td><td>6/6</td><td>0</td><td>FULL</td><td><button type="button">View players</button> <button type="button">Edit</button> <button type="button">Cancel match</button></td></tr>
+      <tr><td>3</td><td>Volleyball</td><td>Green Court Arena</td><td>2026-11-20</td><td>17:00–18:00</td><td>3/12</td><td>9</td><td>OPEN</td><td><button type="button">View players</button> <button type="button">Edit</button> <button type="button">Cancel match</button></td></tr>
+      <tr><td>4</td><td>Tennis</td><td>Ace Tennis Club</td><td>2026-11-19</td><td>10:00–11:00</td><td>1/4</td><td>3</td><td>OPEN</td><td><button type="button">View players</button> <button type="button">Edit</button> <button type="button">Cancel match</button></td></tr>
+      <tr><td>5</td><td>Basketball</td><td>Smart City Sports Hall</td><td>2026-11-23</td><td>18:00–19:30</td><td>0/10</td><td>10</td><td>CANCELLED</td><td><button type="button">View players</button> <button type="button">Edit</button></td></tr>
+    </tbody>
+  </table>
+  <hr>
+</section>
+
+<section id="match-players">
+  <h3>Registered players: Football, Thu 19 Nov 2026, Municipal Stadium (8/12, 4 places left)</h3>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>Player</th><th>Level</th><th>Registered on</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>Amine Trabelsi</td><td>Intermediate</td><td>2026-11-15 10:12</td><td>active</td><td><button type="button">Cancel</button></td></tr>
+      <tr><td>Sara Gharbi</td><td>Beginner</td><td>2026-11-15 11:40</td><td>active</td><td><button type="button">Cancel</button></td></tr>
+      <tr><td>Omar Mansour</td><td>Advanced</td><td>2026-11-16 08:05</td><td>active</td><td><button type="button">Cancel</button></td></tr>
+    </tbody>
+  </table>
+  <hr>
+</section>
+
+
+<section id="participations">
+  <h2>Participation management</h2>
+  <form action="#participations" method="get">
+    <label>Filter by match
+      <select name="match">
+        <option value="">All matches</option>
+        <option>Football, 19 Nov, 09:00 (8/12, 4 places left)</option>
+        <option>Basketball, 18 Nov, 18:00 (6/6, 0 places left)</option>
+        <option>Volleyball, 20 Nov, 17:00 (3/12, 9 places left)</option>
+      </select>
+    </label>
+    <button type="submit">Apply filter</button>
+  </form>
+  <br>
+  <table border="1" cellpadding="8">
+    <thead><tr><th>ID</th><th>Player</th><th>Match</th><th>Stadium</th><th>Registered on</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Amine Trabelsi</td><td>Football, 2026-11-19 09:00</td><td>Municipal Stadium</td><td>2026-11-15 10:12</td><td>active</td><td><button type="button">Cancel</button></td></tr>
+      <tr><td>2</td><td>Sara Gharbi</td><td>Football, 2026-11-19 09:00</td><td>Municipal Stadium</td><td>2026-11-15 11:40</td><td>active</td><td><button type="button">Cancel</button></td></tr>
+      <tr><td>9</td><td>Amine Trabelsi</td><td>Basketball, 2026-11-18 18:00</td><td>Smart City Sports Hall</td><td>2026-11-14 09:30</td><td>active</td><td><button type="button">Cancel</button></td></tr>
+      <tr><td>25</td><td>Karim Hamdi</td><td>Handball, 2026-11-21 19:00</td><td>Smart City Sports Hall</td><td>2026-11-16 17:20</td><td>cancelled</td><td>-</td></tr>
+    </tbody>
+  </table>
+  <hr>
+</section>
+
+<section id="logout">
+  <h2>Log out</h2>
+  <p><a href="#admin-login"><button type="button">Log out</button></a></p>
+  <p><a href="#top">Back to top</a></p>
+</section>
+
+</main>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
