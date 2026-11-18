@@ -6,6 +6,7 @@
   <title>Smart Vet &mdash; Front Office</title>
 </head>
 <body>
+<!-- this menu is the same in all the pages of my friends -->
 <table width="100%" cellpadding="16" cellspacing="0">
   <tr>
     <td width="230" valign="top" bgcolor="#f4f6f8">
@@ -23,25 +24,17 @@
         </nav>
       </aside>
     </td>
+    <!-- here starts my own page -->
     <td valign="top">
 
-        <!--
-          HOW THIS FILE WORKS
-          - It is plain HTML: no CSS and no JavaScript.
-          - The page has 4 parts: Home, Pet owner space, Veterinarian space, Support.
-          - Each part is a <section> with an id. A link like <a href="#owner">
-            jumps to the section that has id="owner".
-          - Every form has "action" empty: your team sets it to the backend route.
-          - Every table is empty: the backend fills the rows.
-        -->
+        <!-- title of the page -->
         <h1>Smart Vet</h1>
         <p>Pet care in one place: your animals, veterinarians, adoption and stores.</p>
 
-        <!-- ========== HOME: choose your role ========== -->
+        <!-- home: the user chooses who he is -->
         <section id="home">
           <h2>Home</h2>
           <p>Choose how you want to use Smart Vet:</p>
-          <!-- The two choices are on the same line -->
           <p>
             <a href="#owner">I am a pet owner / adopter</a>
             |
@@ -51,15 +44,15 @@
 
         <hr>
 
-        <!-- ========== PET OWNER SPACE ========== -->
+        <!-- space for the pet owner / adopter -->
         <section id="owner">
           <h2>Pet owner / adopter space</h2>
           <p><a href="#home">Back: change role</a></p>
 
-          <!-- ========== 1. MY PETS ========== -->
+          <!-- my pets: add an animal and see my animals -->
           <section id="my-pets">
             <h3>1. My pets</h3>
-            <!-- Click the title to open the form -->
+            <!-- click here to open the form and add something -->
             <details>
               <summary>Add an animal</summary>
               <form method="post" action="">
@@ -82,6 +75,7 @@
               </form>
             </details>
 
+            <!-- the table is empty, the backend will put the data here -->
             <table border="1" cellpadding="6">
               <tr>
                 <th>Name</th>
@@ -91,17 +85,16 @@
                 <th>Notes</th>
                 <th>Action</th>
               </tr>
-              <!-- One row per animal of the user -->
               <tr>
                 <td colspan="6">Nothing here yet.</td>
               </tr>
             </table>
           </section>
 
-          <!-- ========== 2. ADOPT A PET ========== -->
+          <!-- adopt a pet: search and filter the animals -->
           <section id="adopt">
             <h3>2. Adopt a pet</h3>
-            <!-- Filters: all on one line. The page reloads with the chosen values -->
+            <!-- filters: i choose something and click on Filter -->
             <form method="get" action="">
               Search: <input type="search" name="q">
               Type:
@@ -129,6 +122,7 @@
               <button type="submit">Filter</button>
             </form>
 
+            <!-- the table is empty, the backend will put the data here -->
             <table border="1" cellpadding="6">
               <tr>
                 <th>Name</th>
@@ -139,17 +133,16 @@
                 <th>Description</th>
                 <th>Action</th>
               </tr>
-              <!-- One row per animal waiting for a home -->
               <tr>
                 <td colspan="7">Nothing here yet.</td>
               </tr>
             </table>
           </section>
 
-          <!-- ========== 3. FIND A VETERINARIAN ========== -->
+          <!-- find a veterinarian: filter by city and specialty -->
           <section id="vets">
             <h3>3. Find a veterinarian</h3>
-            <!-- Filters: all on one line. The page reloads with the chosen values -->
+            <!-- filters: i choose something and click on Filter -->
             <form method="get" action="">
               Search: <input type="search" name="q">
               City:
@@ -184,6 +177,7 @@
               <button type="submit">Filter</button>
             </form>
 
+            <!-- the table is empty, the backend will put the data here -->
             <table border="1" cellpadding="6">
               <tr>
                 <th>Name</th>
@@ -192,17 +186,16 @@
                 <th>Phone</th>
                 <th>Action</th>
               </tr>
-              <!-- One row per veterinarian -->
               <tr>
                 <td colspan="5">Nothing here yet.</td>
               </tr>
             </table>
           </section>
 
-          <!-- ========== 4. STORES ========== -->
+          <!-- stores: find a store -->
           <section id="stores">
             <h3>4. Stores</h3>
-            <!-- Filters: all on one line. The page reloads with the chosen values -->
+            <!-- filters: i choose something and click on Filter -->
             <form method="get" action="">
               Search: <input type="search" name="q">
               City:
@@ -221,6 +214,7 @@
               <button type="submit">Filter</button>
             </form>
 
+            <!-- the table is empty, the backend will put the data here -->
             <table border="1" cellpadding="6">
               <tr>
                 <th>Name</th>
@@ -229,17 +223,16 @@
                 <th>Address</th>
                 <th>Phone</th>
               </tr>
-              <!-- One row per store -->
               <tr>
                 <td colspan="5">Nothing here yet.</td>
               </tr>
             </table>
           </section>
 
-          <!-- ========== 5. MY APPOINTMENTS ========== -->
+          <!-- my appointments: book one and see them -->
           <section id="owner-appointments">
             <h3>5. My appointments</h3>
-            <!-- Click the title to open the form -->
+            <!-- click here to open the form and add something -->
             <details>
               <summary>Book an appointment</summary>
               <form method="post" action="">
@@ -260,6 +253,7 @@
               </form>
             </details>
 
+            <!-- the table is empty, the backend will put the data here -->
             <table border="1" cellpadding="6">
               <tr>
                 <th>Date</th>
@@ -270,7 +264,6 @@
                 <th>Status</th>
                 <th>Action</th>
               </tr>
-              <!-- One row per appointment of the user -->
               <tr>
                 <td colspan="7">Nothing here yet.</td>
               </tr>
@@ -280,15 +273,15 @@
 
         <hr>
 
-        <!-- ========== VETERINARIAN SPACE ========== -->
+        <!-- space for the veterinarian -->
         <section id="vet">
           <h2>Veterinarian space</h2>
           <p><a href="#home">Back: change role</a></p>
 
-          <!-- ========== 1. MY PATIENTS ========== -->
+          <!-- patients: own animals and the animals of my clients -->
           <section id="patients">
             <h3>1. My patients</h3>
-            <!-- Filters: all on one line. The page reloads with the chosen values -->
+            <!-- filters: i choose something and click on Filter -->
             <form method="get" action="">
               Search pet or owner: <input type="search" name="q">
               Type:
@@ -319,6 +312,7 @@
               <button type="submit">Filter</button>
             </form>
 
+            <!-- the table is empty, the backend will put the data here -->
             <table border="1" cellpadding="6">
               <tr>
                 <th>Animal</th>
@@ -329,17 +323,16 @@
                 <th>Phone</th>
                 <th>Action</th>
               </tr>
-              <!-- One row per patient (own animals + clients animals) -->
               <tr>
                 <td colspan="7">Nothing here yet.</td>
               </tr>
             </table>
           </section>
 
-          <!-- ========== 2. MY APPOINTMENTS ========== -->
+          <!-- my appointments: add one and see the list -->
           <section id="vet-appointments">
             <h3>2. My appointments</h3>
-            <!-- Filters: all on one line. The page reloads with the chosen values -->
+            <!-- filters: i choose something and click on Filter -->
             <form method="get" action="">
               Period:
               <select name="period">
@@ -358,7 +351,7 @@
               <button type="submit">Filter</button>
             </form>
 
-            <!-- Click the title to open the form -->
+            <!-- click here to open the form and add something -->
             <details>
               <summary>Add an appointment</summary>
               <form method="post" action="">
@@ -374,6 +367,7 @@
               </form>
             </details>
 
+            <!-- the table is empty, the backend will put the data here -->
             <table border="1" cellpadding="6">
               <tr>
                 <th>Date</th>
@@ -384,7 +378,6 @@
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
-              <!-- One row per appointment. Actions: confirm / done / cancel -->
               <tr>
                 <td colspan="7">Nothing here yet.</td>
               </tr>
@@ -394,11 +387,12 @@
 
         <hr>
 
-        <!-- ========== SUPPORT ========== -->
+        <!-- support: email, questions and a contact form -->
         <section id="support">
           <h2>Support</h2>
           <p>Email: <a href="mailto:support@smartvet.tn">support@smartvet.tn</a></p>
           <h3>Questions</h3>
+          <!-- questions and answers, click on a question to see the answer -->
           <details>
             <summary>How do I book a veterinarian?</summary>
             <p>Open "Find a veterinarian", choose a city and a specialty, then book.</p>
@@ -416,6 +410,7 @@
             <p>Open the veterinarian space, part "My patients".</p>
           </details>
           <h3>Write to us</h3>
+          <!-- form to send a message to the support -->
           <form method="post" action="mailto:support@smartvet.tn" enctype="text/plain">
             Name: <input type="text" name="name" required><br>
             Email: <input type="email" name="email" required><br>
