@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Smart Vet - Front Office</title>
-<style>
-  header nav ul { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-left: 0; list-style: none; }
-  header nav li { min-width: max-content; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Vet &mdash; Front Office</title>
 </head>
 <body>
 <table width="100%" cellpadding="16" cellspacing="0">
@@ -29,227 +25,408 @@
     </td>
     <td valign="top">
 
-<header>
-<h1>Smart Vet</h1>
-<p>Pet care in one place: your animals, veterinarians, adoption and stores.</p>
-<nav>
-<ul>
-<li><a href="#home">Home</a></li>
-<li>Access: <a href="#login">Login</a> | <a href="#signup">Sign up</a></li>
-<li>Pet owner: <a href="#my-pets">My pets</a> | <a href="#adopt">Adopt</a> | <a href="#vets">Find a vet</a> | <a href="#stores">Stores</a> | <a href="#owner-appointments">Appointments</a></li>
-<li>Veterinarian: <a href="#patients">Patients</a> | <a href="#vet-appointments">Appointments</a></li>
-<li><a href="#account">My account</a></li>
-<li><a href="#support">Support</a></li>
+        <!--
+          HOW THIS FILE WORKS
+          - It is plain HTML: no CSS and no JavaScript.
+          - The page has 4 parts: Home, Pet owner space, Veterinarian space, Support.
+          - Each part is a <section> with an id. A link like <a href="#owner">
+            jumps to the section that has id="owner".
+          - Every form has "action" empty: your team sets it to the backend route.
+          - Every table is empty: the backend fills the rows.
+        -->
+        <h1>Smart Vet</h1>
+        <p>Pet care in one place: your animals, veterinarians, adoption and stores.</p>
 
-</ul>
-</nav>
-</header>
+        <!-- ========== HOME: choose your role ========== -->
+        <section id="home">
+          <h2>Home</h2>
+          <p>Choose how you want to use Smart Vet:</p>
+          <!-- The two choices are on the same line -->
+          <p>
+            <a href="#owner">I am a pet owner / adopter</a>
+            |
+            <a href="#vet">I am a veterinarian</a>
+          </p>
+        </section>
 
-<hr>
-<section id="home">
-<h2>Home</h2>
-<p>Create an account as a pet owner or as a veterinarian, then use the menu above.</p>
+        <hr>
 
-<p><a href="#signup">Sign up</a> or <a href="#login">Login</a></p>
-</section>
-<hr>
-<section id="login">
-<h2>Login</h2>
-<form method="post" action="">
-<p><label>Email <input type="email" name="email" required></label></p>
-<p><label>Password <input type="password" name="password" required></label></p>
-<p><button>Login</button></p>
-</form>
+        <!-- ========== PET OWNER SPACE ========== -->
+        <section id="owner">
+          <h2>Pet owner / adopter space</h2>
+          <p><a href="#home">Back: change role</a></p>
 
-<p>No account yet? <a href="#signup">Sign up</a></p>
-</section>
-<hr>
-<section id="signup">
-<h2>Sign up</h2>
-<form method="post" action="">
-<p><label>Full name <input type="text" name="name" required></label></p>
-<p><label>Email <input type="email" name="email" required></label></p>
-<p><label>Password <input type="password" name="password" required></label></p>
-<p><label>I am <select name="role"><option value="owner">Pet owner / adopter</option><option value="vet">Veterinarian</option></select></label></p>
-<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
-<p><label>Specialty (veterinarians only) <select name="specialty"><option value="">-</option><option>Small animals</option><option>Surgery</option><option>Exotic pets</option><option>Dermatology</option><option>Cardiology</option><option>Dentistry</option><option>Large animals</option></select></label></p>
-<p><label>Phone (veterinarians only) <input type="text" name="phone"></label></p>
-<p><button>Create my account</button></p>
-</form>
-</section>
-<hr>
-<section id="owner">
-<h2>Pet owner space</h2>
-<p><small>Shown after login. Each user sees only their own information.</small></p>
+          <!-- ========== 1. MY PETS ========== -->
+          <section id="my-pets">
+            <h3>1. My pets</h3>
+            <!-- Click the title to open the form -->
+            <details>
+              <summary>Add an animal</summary>
+              <form method="post" action="">
+                Name: <input type="text" name="name" required><br>
+                Type:
+                <select name="type">
+                  <option value="">Choose a type</option>
+                  <option>Dog</option>
+                  <option>Cat</option>
+                  <option>Bird</option>
+                  <option>Rabbit</option>
+                  <option>Reptile</option>
+                  <option>Other</option>
+                </select><br>
+                Breed: <input type="text" name="breed"><br>
+                Age (years): <input type="number" name="age"><br>
+                Notes:<br>
+                <textarea name="notes" rows="3" cols="40"></textarea><br>
+                <button type="submit">Save</button>
+              </form>
+            </details>
 
-<h3 id="my-pets">1. My pets</h3>
-<details>
-<summary>Add an animal</summary>
-<form method="post" action="">
-<p><label>Name <input type="text" name="name" required></label></p>
-<p><label>Type <select name="type"><option value="">Choose a type</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label></p>
-<p><label>Breed <input type="text" name="breed"></label></p>
-<p><label>Age (years) <input type="number" name="age"></label></p>
-<p><label>Notes<br><textarea name="notes" rows="2" cols="40"></textarea></label></p>
-<p><button>Save</button></p>
-</form>
-</details>
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>Type</th><th>Breed</th><th>Age</th><th>Notes</th><th>Action</th></tr>
-<tr><td colspan="6" align="center"><i>No animals yet.</i></td></tr>
-</table>
+            <table border="1" cellpadding="6">
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Notes</th>
+                <th>Action</th>
+              </tr>
+              <!-- One row per animal of the user -->
+              <tr>
+                <td colspan="6">Nothing here yet.</td>
+              </tr>
+            </table>
+          </section>
 
+          <!-- ========== 2. ADOPT A PET ========== -->
+          <section id="adopt">
+            <h3>2. Adopt a pet</h3>
+            <!-- Filters: all on one line. The page reloads with the chosen values -->
+            <form method="get" action="">
+              Search: <input type="search" name="q">
+              Type:
+              <select name="type">
+                <option value="">All types</option>
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Bird</option>
+                <option>Rabbit</option>
+                <option>Reptile</option>
+                <option>Other</option>
+              </select>
+              City:
+              <select name="city">
+                <option value="">All cities</option>
+                <option>Tunis</option>
+                <option>Ariana</option>
+                <option>Sfax</option>
+                <option>Sousse</option>
+                <option>Nabeul</option>
+                <option>Bizerte</option>
+                <option>Monastir</option>
+                <option>Gabes</option>
+              </select>
+              <button type="submit">Filter</button>
+            </form>
 
-<h3 id="adopt">2. Adopt a pet</h3>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Search <input type="search" name="q"></label>
-<label>Type <select name="type"><option value="">All</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label>
-<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
-<button>Filter</button>
-</fieldset>
-</form>
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>Type</th><th>Breed</th><th>Age</th><th>City</th><th>Description</th><th>Action</th></tr>
-<tr><td colspan="7" align="center"><i>No pets are available for adoption yet.</i></td></tr>
-</table>
+            <table border="1" cellpadding="6">
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>City</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+              <!-- One row per animal waiting for a home -->
+              <tr>
+                <td colspan="7">Nothing here yet.</td>
+              </tr>
+            </table>
+          </section>
 
+          <!-- ========== 3. FIND A VETERINARIAN ========== -->
+          <section id="vets">
+            <h3>3. Find a veterinarian</h3>
+            <!-- Filters: all on one line. The page reloads with the chosen values -->
+            <form method="get" action="">
+              Search: <input type="search" name="q">
+              City:
+              <select name="city">
+                <option value="">All cities</option>
+                <option>Tunis</option>
+                <option>Ariana</option>
+                <option>Sfax</option>
+                <option>Sousse</option>
+                <option>Nabeul</option>
+                <option>Bizerte</option>
+                <option>Monastir</option>
+                <option>Gabes</option>
+              </select>
+              Specialty:
+              <select name="specialty">
+                <option value="">All specialties</option>
+                <option>Small animals</option>
+                <option>Surgery</option>
+                <option>Exotic pets</option>
+                <option>Dermatology</option>
+                <option>Cardiology</option>
+                <option>Dentistry</option>
+                <option>Large animals</option>
+              </select>
+              Sort by:
+              <select name="sort">
+                <option value="">Default</option>
+                <option>Name</option>
+                <option>City</option>
+              </select>
+              <button type="submit">Filter</button>
+            </form>
 
-<h3 id="vets">3. Find a veterinarian</h3>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Search <input type="search" name="q"></label>
-<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
-<label>Specialty <select name="specialty"><option value="">All</option><option>Small animals</option><option>Surgery</option><option>Exotic pets</option><option>Dermatology</option><option>Cardiology</option><option>Dentistry</option><option>Large animals</option></select></label>
-<label>Sort by <select name="sort"><option value="name">Name A-Z</option><option value="city">City</option></select></label>
-<button>Filter</button>
-</fieldset>
-</form>
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>City</th><th>Specialty</th><th>Phone</th><th>Action</th></tr>
-<tr><td colspan="5" align="center"><i>No veterinarians registered yet.</i></td></tr>
-</table>
+            <table border="1" cellpadding="6">
+              <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Specialty</th>
+                <th>Phone</th>
+                <th>Action</th>
+              </tr>
+              <!-- One row per veterinarian -->
+              <tr>
+                <td colspan="5">Nothing here yet.</td>
+              </tr>
+            </table>
+          </section>
 
+          <!-- ========== 4. STORES ========== -->
+          <section id="stores">
+            <h3>4. Stores</h3>
+            <!-- Filters: all on one line. The page reloads with the chosen values -->
+            <form method="get" action="">
+              Search: <input type="search" name="q">
+              City:
+              <select name="city">
+                <option value="">All cities</option>
+                <option>Tunis</option>
+                <option>Ariana</option>
+                <option>Sfax</option>
+                <option>Sousse</option>
+                <option>Nabeul</option>
+                <option>Bizerte</option>
+                <option>Monastir</option>
+                <option>Gabes</option>
+              </select>
+              Category: <input type="text" name="category">
+              <button type="submit">Filter</button>
+            </form>
 
-<h3 id="stores">4. Stores</h3>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Search <input type="search" name="q"></label>
-<label>City <select name="city"><option value="">All</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label>
-<label>Category <input type="text" name="category"></label>
-<button>Filter</button>
-</fieldset>
-</form>
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>Category</th><th>City</th><th>Address</th><th>Phone</th></tr>
-<tr><td colspan="5" align="center"><i>No stores added yet.</i></td></tr>
-</table>
+            <table border="1" cellpadding="6">
+              <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Phone</th>
+              </tr>
+              <!-- One row per store -->
+              <tr>
+                <td colspan="5">Nothing here yet.</td>
+              </tr>
+            </table>
+          </section>
 
+          <!-- ========== 5. MY APPOINTMENTS ========== -->
+          <section id="owner-appointments">
+            <h3>5. My appointments</h3>
+            <!-- Click the title to open the form -->
+            <details>
+              <summary>Book an appointment</summary>
+              <form method="post" action="">
+                Veterinarian:
+                <select name="vet">
+                  <option value="">Choose a veterinarian</option>
 
-<h3 id="owner-appointments">5. Appointments</h3>
-<details>
-<summary>Book an appointment</summary>
-<form method="post" action="">
-<p><label>Veterinarian <select name="vet"><option value="">Choose a veterinarian</option></select></label></p>
-<p><label>Animal <select name="pet"><option value="">Choose an animal</option></select></label></p>
-<p><label>Date <input type="date" name="date" required></label></p>
-<p><label>Time <input type="time" name="time" required></label></p>
-<p><label>Reason <input type="text" name="reason" required></label></p>
-<p><button>Confirm booking</button></p>
-</form>
-</details>
-<table border="1" cellpadding="6">
-<tr><th>Date</th><th>Time</th><th>Animal</th><th>Veterinarian</th><th>Reason</th><th>Status</th><th>Action</th></tr>
-<tr><td colspan="7" align="center"><i>No appointments yet.</i></td></tr>
-</table>
+                </select><br>
+                Animal:
+                <select name="pet">
+                  <option value="">Choose an animal</option>
 
-</section>
-<hr>
-<section id="vet">
-<h2>Veterinarian space</h2>
-<p><small>Shown after login. You see your own animals and the animals of your clients.</small></p>
+                </select><br>
+                Date: <input type="date" name="date" required><br>
+                Time: <input type="time" name="time" required><br>
+                Reason: <input type="text" name="reason" required><br>
+                <button type="submit">Book</button>
+              </form>
+            </details>
 
-<h3 id="patients">1. Patients</h3>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Search pet or owner <input type="search" name="q"></label>
-<label>Type <select name="type"><option value="">All</option><option>Dog</option><option>Cat</option><option>Bird</option><option>Rabbit</option><option>Reptile</option><option>Other</option></select></label>
-<label>Show <select name="scope"><option value="mine">My animals + my clients animals</option><option value="clients">My clients animals</option><option value="own">My own animals</option></select></label>
-<label>Sort by <select name="sort"><option value="name-asc">Name A-Z</option><option value="name-desc">Name Z-A</option><option value="type">Type</option><option value="age-asc">Age (low to high)</option><option value="age-desc">Age (high to low)</option></select></label>
-<button>Filter</button>
-</fieldset>
-</form>
-<table border="1" cellpadding="6">
-<tr><th>Animal</th><th>Type</th><th>Breed</th><th>Age</th><th>Owner</th><th>Phone</th><th>Action</th></tr>
-<tr><td colspan="7" align="center"><i>No patients yet. Clients appear here once they book with you.</i></td></tr>
-</table>
+            <table border="1" cellpadding="6">
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Animal</th>
+                <th>Veterinarian</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+              <!-- One row per appointment of the user -->
+              <tr>
+                <td colspan="7">Nothing here yet.</td>
+              </tr>
+            </table>
+          </section>
+        </section>
 
+        <hr>
 
-<h3 id="vet-appointments">2. Appointment organizer</h3>
-<form method="get" action="">
-<fieldset><legend>Filters</legend>
-<label>Period <select name="period"><option value="upcoming">Upcoming</option><option value="today">Today</option><option value="all">All</option></select></label>
-<label>Status <select name="status"><option value="">All</option><option>pending</option><option>confirmed</option><option>done</option><option>cancelled</option></select></label>
-<button>Filter</button>
-</fieldset>
-</form>
-<details>
-<summary>New appointment</summary>
-<form method="post" action="">
-<p><label>Animal <select name="pet"><option value="">Choose an animal</option></select></label></p>
-<p><label>Date <input type="date" name="date" required></label></p>
-<p><label>Time <input type="time" name="time" required></label></p>
-<p><label>Reason <input type="text" name="reason" required></label></p>
-<p><button>Add appointment</button></p>
-</form>
-</details>
-<table border="1" cellpadding="6">
-<tr><th>Date</th><th>Time</th><th>Animal</th><th>Owner</th><th>Reason</th><th>Status</th><th>Actions</th></tr>
-<tr><td colspan="7" align="center"><i>Nothing scheduled.</i></td></tr>
-</table>
+        <!-- ========== VETERINARIAN SPACE ========== -->
+        <section id="vet">
+          <h2>Veterinarian space</h2>
+          <p><a href="#home">Back: change role</a></p>
 
-</section>
-<hr>
-<section id="account">
-<h2>My account</h2>
-<p><small>Only you can see this page. Specialty is for veterinarians.</small></p>
+          <!-- ========== 1. MY PATIENTS ========== -->
+          <section id="patients">
+            <h3>1. My patients</h3>
+            <!-- Filters: all on one line. The page reloads with the chosen values -->
+            <form method="get" action="">
+              Search pet or owner: <input type="search" name="q">
+              Type:
+              <select name="type">
+                <option value="">All types</option>
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Bird</option>
+                <option>Rabbit</option>
+                <option>Reptile</option>
+                <option>Other</option>
+              </select>
+              Show:
+              <select name="scope">
+                <option value="">Everything</option>
+                <option>My animals</option>
+                <option>My clients animals</option>
+              </select>
+              Sort by:
+              <select name="sort">
+                <option value="">Default</option>
+                <option>Name A-Z</option>
+                <option>Name Z-A</option>
+                <option>Type</option>
+                <option>Age low to high</option>
+                <option>Age high to low</option>
+              </select>
+              <button type="submit">Filter</button>
+            </form>
 
-<form method="post" action="">
-<p><label>Full name <input type="text" name="name"></label></p>
-<p><label>Email <input type="email" name="email"></label></p>
-<p><label>City <select name="city"><option value="">Choose a city</option><option>Tunis</option><option>Ariana</option><option>Sfax</option><option>Sousse</option><option>Nabeul</option><option>Bizerte</option><option>Monastir</option><option>Gabes</option></select></label></p>
-<p><label>Phone <input type="text" name="phone"></label></p>
-<p><label>Specialty <select name="specialty"><option value="">-</option><option>Small animals</option><option>Surgery</option><option>Exotic pets</option><option>Dermatology</option><option>Cardiology</option><option>Dentistry</option><option>Large animals</option></select></label></p>
-<p><label>New password (leave empty to keep the current one) <input type="password" name="password"></label></p>
-<p><button>Save changes</button> <button type="submit" name="delete" value="1">Delete my account</button></p>
-</form>
-</section>
-<hr>
-<section id="support">
-<h2>Support</h2>
-<p>Email: <a href="mailto:support@smartvet.tn">support@smartvet.tn</a></p>
+            <table border="1" cellpadding="6">
+              <tr>
+                <th>Animal</th>
+                <th>Type</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Owner</th>
+                <th>Phone</th>
+                <th>Action</th>
+              </tr>
+              <!-- One row per patient (own animals + clients animals) -->
+              <tr>
+                <td colspan="7">Nothing here yet.</td>
+              </tr>
+            </table>
+          </section>
 
-<h3 id="faq">FAQ</h3>
-<details><summary>How do I create an account?</summary><p>Click "Sign up", choose pet owner or veterinarian and fill in the form.</p></details>
-<details><summary>How do I book a veterinarian?</summary><p>Open "Find a vet", filter by city and specialty, then book.</p></details>
-<details><summary>How do I add my pet?</summary><p>Go to "My pets" and click "Add an animal".</p></details>
-<details><summary>How does adoption work?</summary><p>Open "Adopt", pick an animal and send a request.</p></details>
-<details><summary>I forgot my password</summary><p>Send us an email at support@smartvet.tn.</p></details>
+          <!-- ========== 2. MY APPOINTMENTS ========== -->
+          <section id="vet-appointments">
+            <h3>2. My appointments</h3>
+            <!-- Filters: all on one line. The page reloads with the chosen values -->
+            <form method="get" action="">
+              Period:
+              <select name="period">
+                <option value="">All</option>
+                <option>Upcoming</option>
+                <option>Today</option>
+              </select>
+              Status:
+              <select name="status">
+                <option value="">All status</option>
+                <option>pending</option>
+                <option>confirmed</option>
+                <option>done</option>
+                <option>cancelled</option>
+              </select>
+              <button type="submit">Filter</button>
+            </form>
 
+            <!-- Click the title to open the form -->
+            <details>
+              <summary>Add an appointment</summary>
+              <form method="post" action="">
+                Animal:
+                <select name="pet">
+                  <option value="">Choose an animal</option>
 
-<h3 id="contact">Contact us</h3>
-<form method="post" action="mailto:support@smartvet.tn" enctype="text/plain">
-<p><label>Name <input type="text" name="name" required></label></p>
-<p><label>Email <input type="email" name="email" required></label></p>
-<p><label>Message<br><textarea name="message" rows="4" cols="40"></textarea></label></p>
-<p><button>Send message</button></p>
-</form>
+                </select><br>
+                Date: <input type="date" name="date" required><br>
+                Time: <input type="time" name="time" required><br>
+                Reason: <input type="text" name="reason" required><br>
+                <button type="submit">Add</button>
+              </form>
+            </details>
 
-</section>
+            <table border="1" cellpadding="6">
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Animal</th>
+                <th>Owner</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+              <!-- One row per appointment. Actions: confirm / done / cancel -->
+              <tr>
+                <td colspan="7">Nothing here yet.</td>
+              </tr>
+            </table>
+          </section>
+        </section>
 
-<hr>
-<footer><p>&copy; 2026 Smart Vet</p></footer>
+        <hr>
 
+        <!-- ========== SUPPORT ========== -->
+        <section id="support">
+          <h2>Support</h2>
+          <p>Email: <a href="mailto:support@smartvet.tn">support@smartvet.tn</a></p>
+          <h3>Questions</h3>
+          <details>
+            <summary>How do I book a veterinarian?</summary>
+            <p>Open "Find a veterinarian", choose a city and a specialty, then book.</p>
+          </details>
+          <details>
+            <summary>How do I add my pet?</summary>
+            <p>Go to "My pets" and open "Add an animal".</p>
+          </details>
+          <details>
+            <summary>How does adoption work?</summary>
+            <p>Open "Adopt a pet", choose an animal and send a request.</p>
+          </details>
+          <details>
+            <summary>I am a veterinarian, where are my patients?</summary>
+            <p>Open the veterinarian space, part "My patients".</p>
+          </details>
+          <h3>Write to us</h3>
+          <form method="post" action="mailto:support@smartvet.tn" enctype="text/plain">
+            Name: <input type="text" name="name" required><br>
+            Email: <input type="email" name="email" required><br>
+            Message:<br>
+            <textarea name="message" rows="3" cols="40"></textarea><br>
+            <button type="submit">Send</button>
+          </form>
+        </section>
+
+        <hr>
+        <p>&copy; 2026 Smart Vet</p>
     </td>
   </tr>
 </table>
