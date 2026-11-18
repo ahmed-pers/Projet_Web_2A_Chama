@@ -4,6 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Smart Queue &mdash; Front Office</title>
+  <style>
+    .queue-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .queue-layout > aside[aria-label="Sidebar"] nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 0; list-style: none; }
+  </style>
 </head>
 <body>
 <table width="100%" cellpadding="16" cellspacing="0">
@@ -25,7 +34,7 @@
     </td>
     <td valign="top">
 
-<div>
+<div class="queue-layout">
 
     <aside aria-label="Sidebar">
       <p><strong>SmartQueue</strong></p>

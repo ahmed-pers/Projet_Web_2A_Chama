@@ -4,6 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GoTravel | Available trips</title>
+  <style>
+    .transport-layout, .transport-layout tbody, .transport-layout tr { display: block; width: 100%; }
+    .transport-layout tr { display: flex; flex-direction: column; }
+    .transport-layout td { display: block; width: 100%; }
+    .transport-layout nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 0; list-style: none; }
+  </style>
 </head>
 <body>
 <table width="100%" cellpadding="16" cellspacing="0">
@@ -29,7 +35,7 @@
     <h1>GoTravel</h1>
     <p>Available bus and train trips across Tunisia</p>
   </header>
-  <table>
+  <table class="transport-layout">
     <tr>
       <td>
         <nav aria-label="Main navigation">
