@@ -34,7 +34,23 @@ public/js/validation.js    Validation JavaScript
 
 1. Créer la base `smart_queue` et importer `sql/schema.sql`.
 2. Adapter `config/config.php` (ou `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`).
-3. Ouvrir `index.php`.
+3. Ouvrir `index.php` via un serveur PHP (voir XAMPP ci-dessous).
+
+## Lancer avec XAMPP (Windows)
+
+1. Copier le projet dans `C:\xampp\htdocs\smart-queue`.
+2. Ouvrir `C:\xampp\xampp-control.exe`, puis cliquer **Start** sur **Apache** et **MySQL**.
+3. Dans `http://localhost/phpmyadmin`, créer la base `smart_queue`,
+   la sélectionner, onglet **Import** → `sql/schema.sql` → **Go**.
+4. Ouvrir :
+
+```
+http://localhost/smart-queue/index.php?page=front
+```
+
+Ne pas double-cliquer sur `index.php` : Apache doit exécuter le PHP.
+Les listes sont vides au départ : ajouter une catégorie, puis un service,
+puis réserver un ticket.
 
 ## Pages
 
