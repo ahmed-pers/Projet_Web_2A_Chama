@@ -1,4 +1,4 @@
-<h2><?= isset($category['id_categorie']) && $category['id_categorie'] !== '' ? 'Edit category' : 'Add a category' ?></h2>
+<h2><?= $action === 'back.categorie.create' ? 'Add a category' : 'Edit category' ?></h2>
 
 <?php foreach ($errors as $error): ?>
   <p><strong><?= e($error) ?></strong></p>
@@ -6,11 +6,7 @@
 
 <form method="post" action="index.php?page=<?= e($action) ?>" data-validate>
   <p>
-    <label for="id_categorie">Category number</label>
-    <input type="number" id="id_categorie" name="id_categorie" value="<?= e($category['id_categorie'] ?? '') ?>" <?= isset($category['id_categorie']) && $category['id_categorie'] !== '' ? 'readonly' : '' ?> data-required>
-  </p>
-  <p>
-    <label for="nomCategorie">Name</label>
+    <label for="nomCategorie">Category name</label>
     <input type="text" id="nomCategorie" name="nomCategorie" value="<?= e($category['nomCategorie'] ?? '') ?>" data-required>
   </p>
   <p>

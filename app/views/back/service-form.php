@@ -1,4 +1,4 @@
-<h2><?= isset($service['id_service']) && $service['id_service'] !== '' ? 'Edit service' : 'Add a service' ?></h2>
+<h2><?= $action === 'back.service.create' ? 'Add a service' : 'Edit service' ?></h2>
 
 <?php foreach ($errors as $error): ?>
   <p><strong><?= e($error) ?></strong></p>
@@ -6,11 +6,7 @@
 
 <form method="post" action="index.php?page=<?= e($action) ?>" data-validate>
   <p>
-    <label for="id_service">Service number</label>
-    <input type="number" id="id_service" name="id_service" value="<?= e($service['id_service'] ?? '') ?>" <?= isset($service['id_service']) && $service['id_service'] !== '' ? 'readonly' : '' ?> data-required>
-  </p>
-  <p>
-    <label for="nomService">Name</label>
+    <label for="nomService">Service name</label>
     <input type="text" id="nomService" name="nomService" value="<?= e($service['nomService'] ?? '') ?>" data-required>
   </p>
   <p>

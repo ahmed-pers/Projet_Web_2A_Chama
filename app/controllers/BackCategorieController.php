@@ -24,7 +24,6 @@ class BackCategorieController extends Controller
     private function readForm(): array
     {
         return [
-            'id_categorie' => $this->post('id_categorie'),
             'nomCategorie' => trim((string) $this->post('nomCategorie')),
             'description'  => trim((string) $this->post('description')),
         ];
@@ -34,9 +33,7 @@ class BackCategorieController extends Controller
     {
         $validator = new Validator();
 
-        $validator->required('id_categorie', $data['id_categorie'])
-            ->intRange('id_categorie', $data['id_categorie'], 1, PHP_INT_MAX)
-            ->required('nomCategorie', $data['nomCategorie'])
+        $validator->required('nomCategorie', $data['nomCategorie'])
             ->length('nomCategorie', $data['nomCategorie'], 3, 100)
             ->unique('nomCategorie', $data['nomCategorie'], function ($name) use ($id) {
                 return $this->categories->nameExists($name, $id);
@@ -55,15 +52,10 @@ class BackCategorieController extends Controller
             $validator = $this->validate($data, null);
 
             if ($validator->isValid()) {
-                $id = (int) $data['id_categorie'];
-
-                if ($this->categories->exists($id)) {
-                    $validator->fail('id_categorie', 'This id already exists.');
-                } else {
-                    $this->categories->create($data);
-                    $this->flash('Category created.');
-                    $this->redirect('back.categories');
-                }
+                $data['id_categorie'] = $this->categories->nextId();
+                $this->categories->create($data);
+                $this->flash('Category added.');
+                $this->redirect('back.categories');
             }
 
             $errors = $validator->errors();
@@ -73,7 +65,7 @@ class BackCategorieController extends Controller
             'category' => $data,
             'errors'   => $errors,
             'action'   => 'back.categorie.create',
-        ], 'New category');
+        ], 'Add a category');
     }
 
     public function edit(): void

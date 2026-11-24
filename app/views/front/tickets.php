@@ -1,16 +1,12 @@
-<h2>My Tickets</h2>
+<h2>Reserve a ticket</h2>
 
-<h3>Get a ticket</h3>
+<p>Choose a service. The ticket number and time are added automatically.</p>
 
 <?php foreach ($errors as $error): ?>
   <p><strong><?= e($error) ?></strong></p>
 <?php endforeach; ?>
 
 <form method="post" action="index.php?page=front.tickets" data-validate>
-  <p>
-    <label for="id_Ticket">Ticket number</label>
-    <input type="number" id="id_Ticket" name="id_Ticket" value="<?= e($ticket['id_Ticket'] ?? '') ?>" data-required>
-  </p>
   <p>
     <label for="id_client">Client number</label>
     <input type="number" id="id_client" name="id_client" value="<?= e($ticket['id_client'] ?? '') ?>" data-required>
@@ -26,15 +22,7 @@
     </select>
   </p>
   <p>
-    <label for="date">Date</label>
-    <input type="date" id="date" name="date" value="<?= e($ticket['date'] ?? '') ?>" data-required>
-  </p>
-  <p>
-    <label for="time">Time</label>
-    <input type="time" id="time" name="time" value="<?= e($ticket['time'] ?? '') ?>" data-required>
-  </p>
-  <p>
-    <button type="submit">Get my ticket</button>
+    <button type="submit">Reserve</button>
   </p>
 </form>
 

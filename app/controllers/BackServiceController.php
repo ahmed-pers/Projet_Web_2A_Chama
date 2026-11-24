@@ -27,7 +27,6 @@ class BackServiceController extends Controller
     private function readForm(): array
     {
         return [
-            'id_service'   => $this->post('id_service'),
             'nomService'   => trim((string) $this->post('nomService')),
             'status'       => $this->post('status'),
             'id_categorie' => $this->post('id_categorie'),
@@ -38,9 +37,7 @@ class BackServiceController extends Controller
     {
         $validator = new Validator();
 
-        $validator->required('id_service', $data['id_service'])
-            ->intRange('id_service', $data['id_service'], 1, PHP_INT_MAX)
-            ->required('nomService', $data['nomService'])
+        $validator->required('nomService', $data['nomService'])
             ->length('nomService', $data['nomService'], 3, 100)
             ->unique('nomService', $data['nomService'], function ($name) use ($id) {
                 return $this->services->nameExists($name, $id);
@@ -65,15 +62,10 @@ class BackServiceController extends Controller
             $validator = $this->validate($data, null);
 
             if ($validator->isValid()) {
-                $id = (int) $data['id_service'];
-
-                if ($this->services->exists($id)) {
-                    $validator->fail('id_service', 'This id already exists.');
-                } else {
-                    $this->services->create($data);
-                    $this->flash('Service created.');
-                    $this->redirect('back.services');
-                }
+                $data['id_service'] = $this->services->nextId();
+                $this->services->create($data);
+                $this->flash('Service added.');
+                $this->redirect('back.services');
             }
 
             $errors = $validator->errors();
@@ -84,7 +76,7 @@ class BackServiceController extends Controller
             'categories' => $this->categories->all(),
             'errors'     => $errors,
             'action'     => 'back.service.create',
-        ], 'New service');
+        ], 'Add a service');
     }
 
     public function edit(): void

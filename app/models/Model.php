@@ -32,6 +32,15 @@ abstract class Model
         return $this->find($id) !== null;
     }
 
+    public function nextId(): int
+    {
+        $statement = $this->db->query(
+            'SELECT COALESCE(MAX(' . $this->primaryKey . '), 0) + 1 FROM ' . $this->table
+        );
+
+        return (int) $statement->fetchColumn();
+    }
+
     public function delete(int $id): bool
     {
         $statement = $this->db->prepare(
