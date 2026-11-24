@@ -1,17 +1,17 @@
 <h2>Reserve a ticket</h2>
 
 <?php foreach ($errors as $error): ?>
-  <p><strong><?= $error ?></strong></p>
+  <p class="error"><?= $error ?></p>
 <?php endforeach; ?>
 
-<form method="post" action="index.php?page=front.tickets">
+<form method="post" action="index.php?page=front.tickets" data-validate>
   <p>
     <label for="id_client">Client number</label>
-    <input type="number" id="id_client" name="id_client" value="<?= $client ?>">
+    <input type="number" id="id_client" name="id_client" value="<?= $client ?>" data-required>
   </p>
   <p>
     <label for="id_service">Service</label>
-    <select id="id_service" name="id_service">
+    <select id="id_service" name="id_service" data-required>
       <?php foreach ($services as $service): ?>
         <option value="<?= $service['id_service'] ?>" <?= (string) $serviceId === (string) $service['id_service'] ? 'selected' : '' ?>>
           <?= $service['nomService'] ?>

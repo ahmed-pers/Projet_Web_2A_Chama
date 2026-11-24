@@ -1,13 +1,13 @@
 <h2><?= $action === 'back.categorie.create' ? 'Add a category' : 'Edit category' ?></h2>
 
 <?php foreach ($errors as $error): ?>
-  <p><strong><?= $error ?></strong></p>
+  <p class="error"><?= $error ?></p>
 <?php endforeach; ?>
 
-<form method="post" action="index.php?page=<?= $action ?>">
+<form method="post" action="index.php?page=<?= $action ?>" data-validate>
   <p>
     <label for="nomCategorie">Name</label>
-    <input type="text" id="nomCategorie" name="nomCategorie" value="<?= $category['nomCategorie'] ?? '' ?>">
+    <input type="text" id="nomCategorie" name="nomCategorie" value="<?= $category['nomCategorie'] ?? '' ?>" data-required>
   </p>
   <p>
     <label for="description">Description</label>

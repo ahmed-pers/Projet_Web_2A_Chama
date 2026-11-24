@@ -1,10 +1,10 @@
 <h2>Services</h2>
 
 <?php if ($error !== ''): ?>
-  <p><strong><?= $error ?></strong></p>
+  <p class="error"><?= $error ?></p>
 <?php endif; ?>
 
-<p><a href="index.php?page=back.service.create">Add a service</a></p>
+<p><a class="btn" href="index.php?page=back.service.create">Add a service</a></p>
 
 <table>
   <tr>

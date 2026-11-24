@@ -1,10 +1,10 @@
 <h2>Categories</h2>
 
 <?php if ($error !== ''): ?>
-  <p><strong><?= $error ?></strong></p>
+  <p class="error"><?= $error ?></p>
 <?php endif; ?>
 
-<p><a href="index.php?page=back.categorie.create">Add a category</a></p>
+<p><a class="btn" href="index.php?page=back.categorie.create">Add a category</a></p>
 
 <table>
   <tr>

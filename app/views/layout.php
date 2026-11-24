@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <title><?= $title ?></title>
+  <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
 
   <h1>Smart Queue</h1>
 
-  <ul>
+  <ul class="nav">
     <li><a href="index.php?page=front">Front Office</a></li>
     <li><a href="index.php?page=front.services">Services</a></li>
     <li><a href="index.php?page=front.tickets">Reserve</a></li>
@@ -19,5 +20,6 @@
 
   <?= $content ?>
 
+  <script src="public/js/validation.js"></script>
 </body>
 </html>

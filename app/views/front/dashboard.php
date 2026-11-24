@@ -1,6 +1,6 @@
 <h2>Today's Queue</h2>
 
-<p><a href="index.php?page=front.tickets">Reserve a ticket</a></p>
+<p><a class="btn" href="index.php?page=front.tickets">Reserve a ticket</a></p>
 
 <ul>
   <li>Services: <?= count($services) ?></li>

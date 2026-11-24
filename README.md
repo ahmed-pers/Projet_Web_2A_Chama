@@ -26,6 +26,8 @@ app/models/                Model, Categorie, Service, Ticket
 app/controllers/           FrontController, BackCategorieController,
                            BackServiceController, BackTicketController
 app/views/                 layout + 8 vues
+public/css/style.css       Style simple
+public/js/validation.js    Validation JavaScript
 ```
 
 ## Installation
@@ -45,7 +47,12 @@ app/views/                 layout + 8 vues
 | `back.services` | CRUD services |
 | `back.tickets` | Liste des tickets |
 
-## Validation PHP
+## Style et validation
+
+- `public/css/style.css` : mise en page simple (navigation, tableaux, formulaires, boutons).
+- `public/js/validation.js` : vérifie les champs `data-required` des formulaires
+  `data-validate` avant l'envoi, puis affiche une alerte.
+- Le contrôle PHP (`Validator`) refait les mêmes vérifications côté serveur.
 
 - Client et service obligatoires et numériques.
 - Nom de catégorie / service : obligatoire, unique, 3 à 100 caractères.
