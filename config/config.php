@@ -5,5 +5,3 @@ define('DB_NAME', getenv('DB_NAME') ?: 'smart_queue');
 define('DB_USER', getenv('DB_USER') ?: 'root');
 define('DB_PASS', getenv('DB_PASS') ?: '');
 define('DB_CHARSET', 'utf8mb4');
-
-define('STATUSES', ['open', 'closed']);

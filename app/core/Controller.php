@@ -10,7 +10,6 @@ abstract class Controller
         require __DIR__ . '/../views/' . $view . '.php';
         $content = ob_get_clean();
 
-        $flash = $this->takeFlash();
         require __DIR__ . '/../views/layout.php';
     }
 
@@ -33,17 +32,5 @@ abstract class Controller
     protected function get(string $key, $default = '')
     {
         return $_GET[$key] ?? $default;
-    }
-
-    protected function flash(string $message): void
-    {
-        $_SESSION['flash'] = $message;
-    }
-
-    protected function takeFlash(): string
-    {
-        $message = $_SESSION['flash'] ?? '';
-        unset($_SESSION['flash']);
-        return $message;
     }
 }

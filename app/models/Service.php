@@ -51,32 +51,13 @@ class Service extends Model
         return (int) $statement->fetchColumn() > 0;
     }
 
-    // Jointure SERVICE <-> CATEGORIE
-    public function allWithCategories(): array
-    {
-        $statement = $this->db->query(
-            'SELECT s.id_service, s.nomService, s.status, s.id_categorie,
-                    c.nomCategorie
-             FROM SERVICE s
-             INNER JOIN CATEGORIE c ON c.id_categorie = s.id_categorie
-             ORDER BY s.id_service'
-        );
-
-        return $statement->fetchAll();
-    }
-
-    public function ticketCount(int $id): int
+    public function hasTickets(int $id): bool
     {
         $statement = $this->db->prepare(
             'SELECT COUNT(*) FROM TICKET WHERE id_service = :id'
         );
         $statement->execute(['id' => $id]);
 
-        return (int) $statement->fetchColumn();
-    }
-
-    public function hasTickets(int $id): bool
-    {
-        return $this->ticketCount($id) > 0;
+        return (int) $statement->fetchColumn() > 0;
     }
 }

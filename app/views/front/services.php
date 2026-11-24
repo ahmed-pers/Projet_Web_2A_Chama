@@ -1,22 +1,18 @@
-<h2>Our Services</h2>
-
-<p>Services with their category (SQL join between SERVICE and CATEGORIE).</p>
+<h2>Services</h2>
 
 <table>
   <tr>
     <th>Id</th>
     <th>Service</th>
-    <th>Category</th>
     <th>Status</th>
+    <th>Category id</th>
   </tr>
   <?php foreach ($services as $service): ?>
     <tr>
-      <td><?= e($service['id_service']) ?></td>
-      <td><?= e($service['nomService']) ?></td>
-      <td><?= e($service['nomCategorie']) ?></td>
-      <td><?= e($service['status']) ?></td>
+      <td><?= $service['id_service'] ?></td>
+      <td><?= $service['nomService'] ?></td>
+      <td><?= $service['status'] ?></td>
+      <td><?= $service['id_categorie'] ?></td>
     </tr>
   <?php endforeach; ?>
 </table>
-
-<p><a href="index.php?page=front.tickets">Get a ticket</a></p>

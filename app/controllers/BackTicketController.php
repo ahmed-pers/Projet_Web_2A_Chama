@@ -12,7 +12,7 @@ class BackTicketController extends Controller
     public function index(): void
     {
         $this->render('back/tickets', [
-            'tickets' => $this->tickets->allWithDetails(),
-        ], 'Back office - Tickets');
+            'tickets' => $this->tickets->all(),
+        ], 'Tickets');
     }
 }

@@ -1,24 +1,20 @@
-<h2>Tickets - Back Office</h2>
-
-<p>Tickets are created in the Front Office. This page shows all tickets.</p>
+<h2>Tickets</h2>
 
 <table>
   <tr>
     <th>Ticket</th>
     <th>Client</th>
-    <th>Service</th>
-    <th>Category</th>
+    <th>Service id</th>
     <th>Date</th>
     <th>Time</th>
   </tr>
   <?php foreach ($tickets as $ticket): ?>
     <tr>
-      <td><?= e($ticket['id_Ticket']) ?></td>
-      <td><?= e($ticket['id_client']) ?></td>
-      <td><?= e($ticket['nomService']) ?></td>
-      <td><?= e($ticket['nomCategorie']) ?></td>
-      <td><?= e($ticket['date']) ?></td>
-      <td><?= e($ticket['time']) ?></td>
+      <td><?= $ticket['id_Ticket'] ?></td>
+      <td><?= $ticket['id_client'] ?></td>
+      <td><?= $ticket['id_service'] ?></td>
+      <td><?= $ticket['date'] ?></td>
+      <td><?= $ticket['time'] ?></td>
     </tr>
   <?php endforeach; ?>
 </table>

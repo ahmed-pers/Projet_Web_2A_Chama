@@ -19,34 +19,4 @@ class Ticket extends Model
             'time'    => $data['time'],
         ]);
     }
-
-    // Jointure TICKET <-> SERVICE <-> CATEGORIE
-    public function allWithDetails(): array
-    {
-        $statement = $this->db->query(
-            'SELECT t.id_Ticket, t.id_client, t.`date`, t.`time`,
-                    s.nomService, s.status, c.nomCategorie
-             FROM TICKET t
-             INNER JOIN SERVICE s ON s.id_service = t.id_service
-             INNER JOIN CATEGORIE c ON c.id_categorie = s.id_categorie
-             ORDER BY t.`date`, t.`time`'
-        );
-
-        return $statement->fetchAll();
-    }
-
-    public function existsOnDate(int $client, int $service, string $date): bool
-    {
-        $statement = $this->db->prepare(
-            'SELECT COUNT(*) FROM TICKET
-             WHERE id_client = :client AND id_service = :service AND `date` = :date'
-        );
-        $statement->execute([
-            'client'  => $client,
-            'service' => $service,
-            'date'    => $date,
-        ]);
-
-        return (int) $statement->fetchColumn() > 0;
-    }
 }

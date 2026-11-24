@@ -1,13 +1,13 @@
 <h2><?= $action === 'back.service.create' ? 'Add a service' : 'Edit service' ?></h2>
 
 <?php foreach ($errors as $error): ?>
-  <p><strong><?= e($error) ?></strong></p>
+  <p><strong><?= $error ?></strong></p>
 <?php endforeach; ?>
 
-<form method="post" action="index.php?page=<?= e($action) ?>" data-validate>
+<form method="post" action="index.php?page=<?= $action ?>">
   <p>
-    <label for="nomService">Service name</label>
-    <input type="text" id="nomService" name="nomService" value="<?= e($service['nomService'] ?? '') ?>" data-required>
+    <label for="nomService">Name</label>
+    <input type="text" id="nomService" name="nomService" value="<?= $service['nomService'] ?? '' ?>">
   </p>
   <p>
     <label for="status">Status</label>
@@ -18,10 +18,10 @@
   </p>
   <p>
     <label for="id_categorie">Category</label>
-    <select id="id_categorie" name="id_categorie" data-required>
+    <select id="id_categorie" name="id_categorie">
       <?php foreach ($categories as $category): ?>
-        <option value="<?= e($category['id_categorie']) ?>" <?= (string) ($service['id_categorie'] ?? '') === (string) $category['id_categorie'] ? 'selected' : '' ?>>
-          <?= e($category['nomCategorie']) ?>
+        <option value="<?= $category['id_categorie'] ?>" <?= (string) ($service['id_categorie'] ?? '') === (string) $category['id_categorie'] ? 'selected' : '' ?>>
+          <?= $category['nomCategorie'] ?>
         </option>
       <?php endforeach; ?>
     </select>
@@ -31,4 +31,4 @@
   </p>
 </form>
 
-<p><a href="index.php?page=back.services">Back to services</a></p>
+<p><a href="index.php?page=back.services">Back</a></p>

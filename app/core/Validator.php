@@ -14,8 +14,7 @@ class Validator
 
     public function length(string $field, $value, int $min, int $max): self
     {
-        $value = trim((string) $value);
-        $length = strlen($value);
+        $length = strlen(trim((string) $value));
 
         if ($length < $min || $length > $max) {
             $this->errors[$field] = ucfirst($field) . ' must be between ' . $min . ' and ' . $max . ' characters.';
@@ -26,7 +25,7 @@ class Validator
     public function intRange(string $field, $value, int $min, int $max): self
     {
         if (!filter_var($value, FILTER_VALIDATE_INT) || (int) $value < $min || (int) $value > $max) {
-            $this->errors[$field] = ucfirst($field) . ' must be a number between ' . $min . ' and ' . $max . '.';
+            $this->errors[$field] = ucfirst($field) . ' must be a number.';
         }
         return $this;
     }
@@ -44,20 +43,6 @@ class Validator
         if ($exists($value)) {
             $this->errors[$field] = ucfirst($field) . ' already exists.';
         }
-        return $this;
-    }
-
-    public function matches(string $field, $value, string $pattern, string $message): self
-    {
-        if (!preg_match($pattern, (string) $value)) {
-            $this->errors[$field] = $message;
-        }
-        return $this;
-    }
-
-    public function fail(string $field, string $message): self
-    {
-        $this->errors[$field] = $message;
         return $this;
     }
 

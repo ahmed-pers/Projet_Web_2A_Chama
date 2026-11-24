@@ -11,14 +11,12 @@ class BackCategorieController extends Controller
 
     public function index(): void
     {
-        $categories = [];
+        $error = $this->get('error') === '1' ? 'This category still has services.' : '';
 
-        foreach ($this->categories->all() as $category) {
-            $category['service_count'] = $this->categories->serviceCount((int) $category['id_categorie']);
-            $categories[] = $category;
-        }
-
-        $this->render('back/categories', ['categories' => $categories], 'Back office - Categories');
+        $this->render('back/categories', [
+            'categories' => $this->categories->all(),
+            'error'      => $error,
+        ], 'Categories');
     }
 
     private function readForm(): array
@@ -37,8 +35,7 @@ class BackCategorieController extends Controller
             ->length('nomCategorie', $data['nomCategorie'], 3, 100)
             ->unique('nomCategorie', $data['nomCategorie'], function ($name) use ($id) {
                 return $this->categories->nameExists($name, $id);
-            })
-            ->length('description', $data['description'], 0, 255);
+            });
 
         return $validator;
     }
@@ -54,7 +51,6 @@ class BackCategorieController extends Controller
             if ($validator->isValid()) {
                 $data['id_categorie'] = $this->categories->nextId();
                 $this->categories->create($data);
-                $this->flash('Category added.');
                 $this->redirect('back.categories');
             }
 
@@ -74,7 +70,6 @@ class BackCategorieController extends Controller
         $category = $this->categories->find($id);
 
         if ($category === null) {
-            $this->flash('Category not found.');
             $this->redirect('back.categories');
         }
 
@@ -87,7 +82,6 @@ class BackCategorieController extends Controller
 
             if ($validator->isValid()) {
                 $this->categories->update($id, $data);
-                $this->flash('Category updated.');
                 $this->redirect('back.categories');
             }
 
@@ -107,11 +101,10 @@ class BackCategorieController extends Controller
             $id = (int) $this->post('id');
 
             if ($this->categories->hasServices($id)) {
-                $this->flash('This category still has services. Delete or move them first.');
-            } else {
-                $this->categories->delete($id);
-                $this->flash('Category deleted.');
+                $this->redirect('back.categories&error=1');
             }
+
+            $this->categories->delete($id);
         }
 
         $this->redirect('back.categories');
