@@ -1,414 +1,187 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Smart Vet</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Vet - Front Office</title>
+<style>
+body{font-family:Arial;background:#f4f6f8;margin:0;color:#263238}
+header{background:#246b61;color:white;padding:25px;text-align:center}
+.container{max-width:850px;margin:30px auto;padding:20px}
+section{background:white;padding:25px;margin-bottom:20px;border-radius:8px}
+input,select,textarea{display:block;width:95%;padding:12px;margin:12px 0;border:1px solid #ccc;border-radius:5px}
+button{background:#246b61;color:white;border:0;padding:12px 20px;border-radius:5px;cursor:pointer}
+.card{background:#e8f3f0;padding:15px;margin:10px 0;border-radius:6px}
+</style>
 </head>
-
 <body>
-  <!--
-    HOW THIS FILE WORKS
-    - It is plain HTML: no CSS and no JavaScript.
-    - The page has 4 parts: Home, Pet owner space, Veterinarian space, Support.
-    - Each part is a <section> with an id. A link like <a href="#owner">
-      jumps to the section that has id="owner".
-    - Every form has "action" empty: your team sets it to the backend route.
-    - Every table is empty: the backend fills the rows.
-  -->
-  <h1>Smart Vet</h1>
-  <p>Pet care in one place: your animals, veterinarians, adoption and stores.</p>
 
-  <!-- ========== HOME: choose your role ========== -->
-  <section id="home">
-    <h2>Home</h2>
-    <p>Choose how you want to use Smart Vet:</p>
-    <!-- The two choices are on the same line -->
-    <p>
-      <a href="#owner">I am a pet owner / adopter</a>
-      |
-      <a href="#vet">I am a veterinarian</a>
-    </p>
-  </section>
+<header>
+<h1>Smart Vet</h1>
+<p>Taking care of your best friend</p>
+</header>
 
-  <hr>
+<div class="container">
 
-  <!-- ========== PET OWNER SPACE ========== -->
-  <section id="owner">
-    <h2>Pet owner / adopter space</h2>
-    <p><a href="#home">Back: change role</a></p>
+<section>
+<h2>Register Your Animal</h2>
 
-    <!-- ========== 1. MY PETS ========== -->
-    <section id="my-pets">
-      <h3>1. My pets</h3>
-      <!-- Click the title to open the form -->
-      <details>
-        <summary>Add an animal</summary>
-        <form method="post" action="">
-          Name: <input type="text" name="name" required><br>
-          Type:
-          <select name="type">
-            <option value="">Choose a type</option>
-            <option>Dog</option>
-            <option>Cat</option>
-            <option>Bird</option>
-            <option>Rabbit</option>
-            <option>Reptile</option>
-            <option>Other</option>
-          </select><br>
-          Breed: <input type="text" name="breed"><br>
-          Age (years): <input type="number" name="age"><br>
-          Notes:<br>
-          <textarea name="notes" rows="3" cols="40"></textarea><br>
-          <button type="submit">Save</button>
-        </form>
-      </details>
+<form id="animalForm">
+<input id="name" placeholder="Animal name" required>
 
-      <table border="1" cellpadding="6">
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Breed</th>
-          <th>Age</th>
-          <th>Notes</th>
-          <th>Action</th>
-        </tr>
-        <!-- One row per animal of the user -->
-        <tr>
-          <td colspan="6">Nothing here yet.</td>
-        </tr>
-      </table>
-    </section>
+<select id="type" required>
+<option value="">Select animal type</option>
+<option>Dog</option><option>Cat</option>
+<option>Bird</option><option>Rabbit</option>
+<option>Other</option>
+</select>
 
-    <!-- ========== 2. ADOPT A PET ========== -->
-    <section id="adopt">
-      <h3>2. Adopt a pet</h3>
-      <!-- Filters: all on one line. The page reloads with the chosen values -->
-      <form method="get" action="">
-        Search: <input type="search" name="q">
-        Type:
-        <select name="type">
-          <option value="">All types</option>
-          <option>Dog</option>
-          <option>Cat</option>
-          <option>Bird</option>
-          <option>Rabbit</option>
-          <option>Reptile</option>
-          <option>Other</option>
-        </select>
-        City:
-        <select name="city">
-          <option value="">All cities</option>
-          <option>Tunis</option>
-          <option>Ariana</option>
-          <option>Sfax</option>
-          <option>Sousse</option>
-          <option>Nabeul</option>
-          <option>Bizerte</option>
-          <option>Monastir</option>
-          <option>Gabes</option>
-        </select>
-        <button type="submit">Filter</button>
-      </form>
+<input id="breed" placeholder="Breed">
+<input id="age" type="number" min="0" placeholder="Age">
 
-      <table border="1" cellpadding="6">
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Breed</th>
-          <th>Age</th>
-          <th>City</th>
-          <th>Description</th>
-          <th>Action</th>
-        </tr>
-        <!-- One row per animal waiting for a home -->
-        <tr>
-          <td colspan="7">Nothing here yet.</td>
-        </tr>
-      </table>
-    </section>
+<input id="owner" placeholder="Your name" required>
+<input id="email" type="email" placeholder="Your email">
 
-    <!-- ========== 3. FIND A VETERINARIAN ========== -->
-    <section id="vets">
-      <h3>3. Find a veterinarian</h3>
-      <!-- Filters: all on one line. The page reloads with the chosen values -->
-      <form method="get" action="">
-        Search: <input type="search" name="q">
-        City:
-        <select name="city">
-          <option value="">All cities</option>
-          <option>Tunis</option>
-          <option>Ariana</option>
-          <option>Sfax</option>
-          <option>Sousse</option>
-          <option>Nabeul</option>
-          <option>Bizerte</option>
-          <option>Monastir</option>
-          <option>Gabes</option>
-        </select>
-        Specialty:
-        <select name="specialty">
-          <option value="">All specialties</option>
-          <option>Small animals</option>
-          <option>Surgery</option>
-          <option>Exotic pets</option>
-          <option>Dermatology</option>
-          <option>Cardiology</option>
-          <option>Dentistry</option>
-          <option>Large animals</option>
-        </select>
-        Sort by:
-        <select name="sort">
-          <option value="">Default</option>
-          <option>Name</option>
-          <option>City</option>
-        </select>
-        <button type="submit">Filter</button>
-      </form>
+<button type="submit">Register Animal</button>
+</form>
+</section>
 
-      <table border="1" cellpadding="6">
-        <tr>
-          <th>Name</th>
-          <th>City</th>
-          <th>Specialty</th>
-          <th>Phone</th>
-          <th>Action</th>
-        </tr>
-        <!-- One row per veterinarian -->
-        <tr>
-          <td colspan="5">Nothing here yet.</td>
-        </tr>
-      </table>
-    </section>
+<section>
+<h2>Book an Appointment</h2>
 
-    <!-- ========== 4. STORES ========== -->
-    <section id="stores">
-      <h3>4. Stores</h3>
-      <!-- Filters: all on one line. The page reloads with the chosen values -->
-      <form method="get" action="">
-        Search: <input type="search" name="q">
-        City:
-        <select name="city">
-          <option value="">All cities</option>
-          <option>Tunis</option>
-          <option>Ariana</option>
-          <option>Sfax</option>
-          <option>Sousse</option>
-          <option>Nabeul</option>
-          <option>Bizerte</option>
-          <option>Monastir</option>
-          <option>Gabes</option>
-        </select>
-        Category: <input type="text" name="category">
-        <button type="submit">Filter</button>
-      </form>
+<form id="appointmentForm">
+<select id="animal" required>
+<option value="">Choose your animal</option>
+</select>
 
-      <table border="1" cellpadding="6">
-        <tr>
-          <th>Name</th>
-          <th>Category</th>
-          <th>City</th>
-          <th>Address</th>
-          <th>Phone</th>
-        </tr>
-        <!-- One row per store -->
-        <tr>
-          <td colspan="5">Nothing here yet.</td>
-        </tr>
-      </table>
-    </section>
+<select id="vet" required>
+<option value="">Choose veterinarian</option>
+<option value="Dr. Ahmed">Dr. Ahmed</option>
+<option value="Dr. Sami">Dr. Sami</option>
+</select>
 
-    <!-- ========== 5. MY APPOINTMENTS ========== -->
-    <section id="owner-appointments">
-      <h3>5. My appointments</h3>
-      <!-- Click the title to open the form -->
-      <details>
-        <summary>Book an appointment</summary>
-        <form method="post" action="">
-          Veterinarian:
-          <select name="vet">
-            <option value="">Choose a veterinarian</option>
+<input type="date" id="date" required>
+<input type="time" id="time" required>
+<textarea id="reason" placeholder="Reason for appointment"></textarea>
 
-          </select><br>
-          Animal:
-          <select name="pet">
-            <option value="">Choose an animal</option>
+<button type="submit">Book Appointment</button>
+</form>
 
-          </select><br>
-          Date: <input type="date" name="date" required><br>
-          Time: <input type="time" name="time" required><br>
-          Reason: <input type="text" name="reason" required><br>
-          <button type="submit">Book</button>
-        </form>
-      </details>
+<p id="message"></p>
+</section>
 
-      <table border="1" cellpadding="6">
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Animal</th>
-          <th>Veterinarian</th>
-          <th>Reason</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-        <!-- One row per appointment of the user -->
-        <tr>
-          <td colspan="7">Nothing here yet.</td>
-        </tr>
-      </table>
-    </section>
-  </section>
+<section>
+<h2>My Appointments</h2>
+<div id="myAppointments"></div>
+</section>
 
-  <hr>
+</div>
 
-  <!-- ========== VETERINARIAN SPACE ========== -->
-  <section id="vet">
-    <h2>Veterinarian space</h2>
-    <p><a href="#home">Back: change role</a></p>
+<script>
+let animals=JSON.parse(localStorage.getItem("animals")||"[]");
+let appointments=JSON.parse(localStorage.getItem("appointments")||"[]");
 
-    <!-- ========== 1. MY PATIENTS ========== -->
-    <section id="patients">
-      <h3>1. My patients</h3>
-      <!-- Filters: all on one line. The page reloads with the chosen values -->
-      <form method="get" action="">
-        Search pet or owner: <input type="search" name="q">
-        Type:
-        <select name="type">
-          <option value="">All types</option>
-          <option>Dog</option>
-          <option>Cat</option>
-          <option>Bird</option>
-          <option>Rabbit</option>
-          <option>Reptile</option>
-          <option>Other</option>
-        </select>
-        Show:
-        <select name="scope">
-          <option value="">Everything</option>
-          <option>My animals</option>
-          <option>My clients animals</option>
-        </select>
-        Sort by:
-        <select name="sort">
-          <option value="">Default</option>
-          <option>Name A-Z</option>
-          <option>Name Z-A</option>
-          <option>Type</option>
-          <option>Age low to high</option>
-          <option>Age high to low</option>
-        </select>
-        <button type="submit">Filter</button>
-      </form>
+function updateAnimalOptions(){
+let select=document.getElementById("animal");
+select.innerHTML='<option value="">Choose your animal</option>';
 
-      <table border="1" cellpadding="6">
-        <tr>
-          <th>Animal</th>
-          <th>Type</th>
-          <th>Breed</th>
-          <th>Age</th>
-          <th>Owner</th>
-          <th>Phone</th>
-          <th>Action</th>
-        </tr>
-        <!-- One row per patient (own animals + clients animals) -->
-        <tr>
-          <td colspan="7">Nothing here yet.</td>
-        </tr>
-      </table>
-    </section>
+animals.forEach(a=>{
+select.innerHTML+=`<option value="${a.id}">${a.name}</option>`;
+});
+}
 
-    <!-- ========== 2. MY APPOINTMENTS ========== -->
-    <section id="vet-appointments">
-      <h3>2. My appointments</h3>
-      <!-- Filters: all on one line. The page reloads with the chosen values -->
-      <form method="get" action="">
-        Period:
-        <select name="period">
-          <option value="">All</option>
-          <option>Upcoming</option>
-          <option>Today</option>
-        </select>
-        Status:
-        <select name="status">
-          <option value="">All status</option>
-          <option>pending</option>
-          <option>confirmed</option>
-          <option>done</option>
-          <option>cancelled</option>
-        </select>
-        <button type="submit">Filter</button>
-      </form>
+document.getElementById("animalForm").onsubmit=function(e){
+e.preventDefault();
 
-      <!-- Click the title to open the form -->
-      <details>
-        <summary>Add an appointment</summary>
-        <form method="post" action="">
-          Animal:
-          <select name="pet">
-            <option value="">Choose an animal</option>
+let animal={
+id:Date.now(),
+name:name.value.trim(),
+type:type.value,
+breed:breed.value.trim(),
+age:age.value,
+owner:owner.value.trim(),
+email:email.value.trim()
+};
 
-          </select><br>
-          Date: <input type="date" name="date" required><br>
-          Time: <input type="time" name="time" required><br>
-          Reason: <input type="text" name="reason" required><br>
-          <button type="submit">Add</button>
-        </form>
-      </details>
+if(!animal.name || !animal.owner || Number(animal.age)<0){
+alert("Please check the information.");
+return;
+}
 
-      <table border="1" cellpadding="6">
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Animal</th>
-          <th>Owner</th>
-          <th>Reason</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-        <!-- One row per appointment. Actions: confirm / done / cancel -->
-        <tr>
-          <td colspan="7">Nothing here yet.</td>
-        </tr>
-      </table>
-    </section>
-  </section>
+animals.push(animal);
+localStorage.setItem("animals",JSON.stringify(animals));
 
-  <hr>
+alert("Your animal has been registered!");
+this.reset();
+updateAnimalOptions();
+};
 
-  <!-- ========== SUPPORT ========== -->
-  <section id="support">
-    <h2>Support</h2>
-    <p>Email: <a href="mailto:support@smartvet.tn">support@smartvet.tn</a></p>
-    <h3>Questions</h3>
-    <details>
-      <summary>How do I book a veterinarian?</summary>
-      <p>Open "Find a veterinarian", choose a city and a specialty, then book.</p>
-    </details>
-    <details>
-      <summary>How do I add my pet?</summary>
-      <p>Go to "My pets" and open "Add an animal".</p>
-    </details>
-    <details>
-      <summary>How does adoption work?</summary>
-      <p>Open "Adopt a pet", choose an animal and send a request.</p>
-    </details>
-    <details>
-      <summary>I am a veterinarian, where are my patients?</summary>
-      <p>Open the veterinarian space, part "My patients".</p>
-    </details>
-    <h3>Write to us</h3>
-    <form method="post" action="mailto:support@smartvet.tn" enctype="text/plain">
-      Name: <input type="text" name="name" required><br>
-      Email: <input type="email" name="email" required><br>
-      Message:<br>
-      <textarea name="message" rows="3" cols="40"></textarea><br>
-      <button type="submit">Send</button>
-    </form>
-  </section>
+document.getElementById("appointmentForm").onsubmit=function(e){
+e.preventDefault();
 
-  <hr>
-  <p>&copy; 2026 Smart Vet</p>
+let appointment={
+id:Date.now(),
+animalId:Number(animal.value),
+vet:vet.value,
+date:date.value,
+time:time.value,
+reason:reason.value,
+status:"pending"
+};
+
+let today=new Date().toLocaleDateString("en-CA");
+
+if(appointment.date<today){
+alert("Please select a future date.");
+return;
+}
+
+let conflict=appointments.some(a=>
+a.vet===appointment.vet &&
+a.date===appointment.date &&
+a.time===appointment.time &&
+a.status!=="cancelled"
+);
+
+if(conflict){
+alert("This veterinarian is already booked at this time.");
+return;
+}
+
+appointments.push(appointment);
+localStorage.setItem("appointments",JSON.stringify(appointments));
+
+document.getElementById("message").innerText=
+"Your appointment request has been sent successfully!";
+
+this.reset();
+showAppointments();
+};
+
+function showAppointments(){
+let list=document.getElementById("myAppointments");
+list.innerHTML="";
+
+appointments.forEach(a=>{
+let pet=animals.find(x=>x.id===a.animalId);
+
+if(pet){
+list.innerHTML+=`
+<div class="card">
+<strong>${pet.name}</strong><br>
+Veterinarian: ${a.vet}<br>
+Date: ${a.date}<br>
+Time: ${a.time}<br>
+Status: ${a.status}
+</div>`;
+}
+});
+}
+
+updateAnimalOptions();
+showAppointments();
+</script>
+
 </body>
-
 </html>
