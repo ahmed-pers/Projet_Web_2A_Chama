@@ -1,118 +1,99 @@
 # Smart Queue - PHP MVC CRUD
 
-A small PHP application that manages **services** and **counters (guichets)** linked by a
-join table. It uses PDO, an MVC structure, object-oriented PHP, and simple beginner-friendly
-HTML views.
+Application PHP simple (MVC + POO + PDO) avec **CRUD complet sur SERVICE et CATEGORIE**,
+deux entités liées par `id_categorie` et affichées ensemble avec une **jointure SQL**
+(`INNER JOIN`). Les TICKET sont créés dans le Front Office et affichés dans le Back Office.
 
-## Entities and join table
+## Schéma SQL utilisé
 
-```
-services  <--->  service_counter  <--->  counters
-```
-
-- One service can be served by several counters.
-- One counter can serve several services (maximum 3).
-- `service_counter` has a composite primary key `(service_id, counter_id)` and two foreign
-  keys with `ON DELETE CASCADE`.
-
-## Project structure
+Le fichier `sql/schema.sql` contient uniquement les 3 tables fournies :
 
 ```
-index.php                  Front controller (all requests go through here)
-config/
-  config.php               Database settings + business rule constants
-  bootstrap.php            Session, autoloader, e() helper
-sql/
-  schema.sql               Tables and sample data
-app/
-  core/
-    Database.php           PDO connection (singleton)
-    Controller.php         render(), redirect(), flash(), request helpers
-    Validator.php          PHP form validation
-  models/
-    Model.php              Base model (all(), find(), delete())
-    Service.php            Service CRUD
-    Counter.php            Counter CRUD
-    ServiceCounter.php     Join table operations
-  controllers/
-    FrontController.php    Front Office (read only)
-    BackServiceController.php   Back Office services + assignments
-    BackCounterController.php   Back Office counters
-    HomeController.php     Default redirect
-  views/
-    layout.php             Shared page layout + navigation
-    front/                 Front Office views
-    back/                  Back Office views
-public/js/
-  validation.js            JavaScript form validation
+CATEGORIE (id_categorie, nomCategorie, description)
+     ^
+     | id_categorie
+SERVICE (id_service, nomService, status, id_categorie)
+     ^
+     | id_service
+TICKET (id_Ticket, id_client, id_service, date, time)
+```
+
+Les identifiants ne sont pas `AUTO_INCREMENT` : ils sont saisis dans les formulaires
+`Ajouter`. Les colonnes `date` et `time` sont entourées de backticks dans les requêtes.
+
+## Structure
+
+```
+index.php                       Contrôleur frontal (toutes les routes)
+config/config.php               Paramètres BD + statuts autorisés
+config/bootstrap.php            Session, autoload, helper e()
+sql/schema.sql                  Vos 3 CREATE TABLE (exactement)
+app/core/                       Database (PDO), Controller, Validator
+app/models/                     Model, Categorie, Service, Ticket
+app/controllers/                Front, BackCategorie, BackService, BackTicket, Home
+app/views/                      layout + vues front/ et back/
+public/js/validation.js         Validation JavaScript
 ```
 
 ## Installation
 
-1. Install PHP 7.4+ with the PDO MySQL driver and a MySQL/MariaDB server.
-   (For example with XAMPP, WAMP, MAMP, or Docker.)
-2. Create the database and tables:
-   ```bash
-   mysql -u root -p < sql/schema.sql
-   ```
-   Or import `sql/schema.sql` in phpMyAdmin.
-3. Copy the project into your web server root (for example `htdocs/smart-queue`).
-4. Adjust the database settings in `config/config.php`, or use environment variables:
-   ```
-   DB_HOST, DB_NAME, DB_USER, DB_PASS
-   ```
-5. Open `index.php` in your browser.
+1. Installer PHP avec PDO MySQL et un serveur MySQL/MariaDB (XAMPP, WAMP, MAMP...).
+2. Créer une base `smart_queue`, puis importer `sql/schema.sql` (phpMyAdmin ou ligne de commande).
+3. Copier le projet dans le dossier du serveur web (par exemple `htdocs/smart-queue`).
+4. Ajuster `config/config.php` ou utiliser les variables d'environnement
+   `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`.
+5. Ouvrir `index.php` dans le navigateur.
 
 ## Routes
 
-All actions use `index.php?page=...`.
+Tout passe par `index.php?page=...`.
 
-### Front Office (read only)
-
-| Page | Description |
-|---|---|
-| `front` | Dashboard: services and open counters |
-| `front.services` | Services with their assigned counters |
-
-### Back Office (full CRUD)
+### Front Office (création de ticket + lecture)
 
 | Page | Description |
 |---|---|
-| `back.services` | List, add, edit, delete services |
-| `back.service.create` | Create a service |
-| `back.service.edit&id=1` | Edit a service |
-| `back.service.delete` | Delete a service (POST with `id`) |
-| `back.assign&id=1` | Assign counters to a service |
-| `back.counters` | List, add, edit, delete counters |
-| `back.counter.create` | Create a counter |
-| `back.counter.edit&id=1` | Edit a counter |
-| `back.counter.delete` | Delete a counter (POST with `id`) |
+| `front` | Tableau de bord : compteurs, services ouverts |
+| `front.services` | Services avec le nom de leur catégorie (jointure) |
+| `front.tickets` | Formulaire de ticket + liste des tickets (jointure TICKET → SERVICE → CATEGORIE) |
+
+### Back Office (CRUD complet)
+
+| Entité | Afficher | Ajouter | Modifier | Supprimer |
+|---|---|---|---|---|
+| CATEGORIE | `back.categories` | `back.categorie.create` | `back.categorie.edit&id=1` | `back.categorie.delete` (POST `id`) |
+| SERVICE | `back.services` | `back.service.create` | `back.service.edit&id=1` | `back.service.delete` (POST `id`) |
+
+Tickets (lecture seule) : `back.tickets`.
 
 ## Validation
 
-- **JavaScript** (`public/js/validation.js`): checks required fields marked with
-  `data-required` inside forms marked with `data-validate`.
-- **PHP** (`Validator`): checks the same data again on the server (never trust the browser).
+- **JavaScript** : `public/js/validation.js` vérifie les champs `data-required`
+  dans les formulaires `data-validate`.
+- **PHP** : `Validator` revérifie tout côté serveur (required, longueur, entier,
+  valeur autorisée, unicité, format date/heure).
 
-## Business rules
+## Règles métiers
 
-### Simple rules (implemented)
+### Simples (implémentées)
 
-1. A service name is required, unique, and 3 to 50 characters long.
-2. A service average time must be a number between 1 and 120 minutes.
-3. A service status must be `open` or `closed`.
-4. A counter number is required, unique, and 2 to 20 characters long.
-5. A counter status must be `open` or `closed`.
+1. `id_categorie` et `id_service` : entiers positifs, uniques.
+2. `nomCategorie` et `nomService` : obligatoires, uniques, 3 à 100 caractères.
+3. `description` : 255 caractères maximum.
+4. `status` : `open` ou `closed` uniquement.
+5. `id_Ticket` et `id_client` : entiers positifs ; `date` au format `YYYY-MM-DD`,
+   `time` au format `HH:MM`.
 
-### Advanced rules (implemented)
+### Avancées (implémentées)
 
-1. A **closed counter** cannot be assigned to a service.
-2. A counter can serve **at most 3 services** (`MAX_SERVICES_PER_COUNTER` in `config/config.php`).
-3. A counter that is the **only counter of an open service** cannot be deleted.
+1. Un ticket ne peut être créé que pour un service **ouvert**.
+2. Un service doit appartenir à une catégorie **existante** (contrôle PHP + clé étrangère).
+3. On ne peut pas supprimer une catégorie qui a encore des services.
+4. On ne peut pas supprimer un service qui a encore des tickets.
+5. Un même client ne peut pas prendre deux tickets pour le même service le même jour.
 
-### Advanced rules (ideas for later)
+### Avancées (idées pour plus tard)
 
-4. Prevent deleting a service that still has waiting tickets.
-5. A ticket can only be called if its service is open and has at least one open counter.
-6. Only one active ticket per phone number at a time.
-7. VIP / elderly tickets are served first inside the same service.
+6. Priorité ( elderly / handicap / VIP ) dans l'ordre d'appel des tickets.
+7. Temps d'attente estimé à partir de l'heure du ticket et du service.
+8. Statut du ticket (`waiting`, `called`, `served`, `skipped`) avec historique.
+9. Statistiques par catégorie : nombre de tickets, temps moyen d'attente.

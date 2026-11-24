@@ -5,6 +5,7 @@ require_once __DIR__ . '/config/bootstrap.php';
 $page = $_GET['page'] ?? 'front';
 
 switch ($page) {
+    // Front Office
     case 'front':
         (new FrontController())->dashboard();
         break;
@@ -13,6 +14,28 @@ switch ($page) {
         (new FrontController())->services();
         break;
 
+    case 'front.tickets':
+        (new FrontController())->tickets();
+        break;
+
+    // Back Office - Categories
+    case 'back.categories':
+        (new BackCategorieController())->index();
+        break;
+
+    case 'back.categorie.create':
+        (new BackCategorieController())->create();
+        break;
+
+    case 'back.categorie.edit':
+        (new BackCategorieController())->edit();
+        break;
+
+    case 'back.categorie.delete':
+        (new BackCategorieController())->delete();
+        break;
+
+    // Back Office - Services
     case 'back.services':
         (new BackServiceController())->index();
         break;
@@ -29,24 +52,9 @@ switch ($page) {
         (new BackServiceController())->delete();
         break;
 
-    case 'back.assign':
-        (new BackServiceController())->assign();
-        break;
-
-    case 'back.counters':
-        (new BackCounterController())->index();
-        break;
-
-    case 'back.counter.create':
-        (new BackCounterController())->create();
-        break;
-
-    case 'back.counter.edit':
-        (new BackCounterController())->edit();
-        break;
-
-    case 'back.counter.delete':
-        (new BackCounterController())->delete();
+    // Back Office - Tickets (read only)
+    case 'back.tickets':
+        (new BackTicketController())->index();
         break;
 
     default:

@@ -12,8 +12,10 @@
   <ul>
     <li><a href="index.php?page=front">Front Office - Dashboard</a></li>
     <li><a href="index.php?page=front.services">Front Office - Services</a></li>
+    <li><a href="index.php?page=front.tickets">Front Office - My tickets</a></li>
+    <li><a href="index.php?page=back.categories">Back Office - Categories</a></li>
     <li><a href="index.php?page=back.services">Back Office - Services</a></li>
-    <li><a href="index.php?page=back.counters">Back Office - Counters</a></li>
+    <li><a href="index.php?page=back.tickets">Back Office - Tickets</a></li>
   </ul>
 
   <?php if ($flash !== ''): ?>

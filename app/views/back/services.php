@@ -4,25 +4,24 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Average time</th>
+    <th>Id</th>
+    <th>Service</th>
+    <th>Category</th>
     <th>Status</th>
-    <th>Counters</th>
+    <th>Tickets</th>
     <th>Actions</th>
   </tr>
   <?php foreach ($services as $service): ?>
     <tr>
-      <td><?= e($service['name']) ?></td>
-      <td><?= e($service['description']) ?></td>
-      <td><?= e($service['average_time']) ?> min</td>
+      <td><?= e($service['id_service']) ?></td>
+      <td><?= e($service['nomService']) ?></td>
+      <td><?= e($service['nomCategorie']) ?></td>
       <td><?= e($service['status']) ?></td>
-      <td><?= e($service['counter_count']) ?></td>
+      <td><?= e($service['ticket_count']) ?></td>
       <td>
-        <a href="index.php?page=back.service.edit&amp;id=<?= e($service['id']) ?>">Edit</a>
-        <a href="index.php?page=back.assign&amp;id=<?= e($service['id']) ?>">Assign counters</a>
+        <a href="index.php?page=back.service.edit&amp;id=<?= e($service['id_service']) ?>">Edit</a>
         <form method="post" action="index.php?page=back.service.delete">
-          <input type="hidden" name="id" value="<?= e($service['id']) ?>">
+          <input type="hidden" name="id" value="<?= e($service['id_service']) ?>">
           <button type="submit">Delete</button>
         </form>
       </td>
@@ -30,4 +29,4 @@
   <?php endforeach; ?>
 </table>
 
-<p><a href="index.php?page=back.counters">Manage counters</a></p>
+<p><a href="index.php?page=back.categories">Manage categories</a></p>

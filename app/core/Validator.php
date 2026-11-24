@@ -47,6 +47,20 @@ class Validator
         return $this;
     }
 
+    public function matches(string $field, $value, string $pattern, string $message): self
+    {
+        if (!preg_match($pattern, (string) $value)) {
+            $this->errors[$field] = $message;
+        }
+        return $this;
+    }
+
+    public function fail(string $field, string $message): self
+    {
+        $this->errors[$field] = $message;
+        return $this;
+    }
+
     public function isValid(): bool
     {
         return empty($this->errors);

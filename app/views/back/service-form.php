@@ -1,4 +1,4 @@
-<h2><?= isset($service['id']) ? 'Edit service' : 'Add a service' ?></h2>
+<h2><?= isset($service['id_service']) && $service['id_service'] !== '' ? 'Edit service' : 'Add a service' ?></h2>
 
 <?php foreach ($errors as $error): ?>
   <p><strong><?= e($error) ?></strong></p>
@@ -6,22 +6,28 @@
 
 <form method="post" action="index.php?page=<?= e($action) ?>" data-validate>
   <p>
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" value="<?= e($service['name'] ?? '') ?>" data-required>
+    <label for="id_service">Service number</label>
+    <input type="number" id="id_service" name="id_service" value="<?= e($service['id_service'] ?? '') ?>" <?= isset($service['id_service']) && $service['id_service'] !== '' ? 'readonly' : '' ?> data-required>
   </p>
   <p>
-    <label for="description">Description</label>
-    <input type="text" id="description" name="description" value="<?= e($service['description'] ?? '') ?>">
-  </p>
-  <p>
-    <label for="average_time">Average time (minutes)</label>
-    <input type="number" id="average_time" name="average_time" value="<?= e($service['average_time'] ?? '') ?>" data-required>
+    <label for="nomService">Name</label>
+    <input type="text" id="nomService" name="nomService" value="<?= e($service['nomService'] ?? '') ?>" data-required>
   </p>
   <p>
     <label for="status">Status</label>
     <select id="status" name="status">
       <option value="open" <?= ($service['status'] ?? 'open') === 'open' ? 'selected' : '' ?>>Open</option>
       <option value="closed" <?= ($service['status'] ?? '') === 'closed' ? 'selected' : '' ?>>Closed</option>
+    </select>
+  </p>
+  <p>
+    <label for="id_categorie">Category</label>
+    <select id="id_categorie" name="id_categorie" data-required>
+      <?php foreach ($categories as $category): ?>
+        <option value="<?= e($category['id_categorie']) ?>" <?= (string) ($service['id_categorie'] ?? '') === (string) $category['id_categorie'] ? 'selected' : '' ?>>
+          <?= e($category['nomCategorie']) ?>
+        </option>
+      <?php endforeach; ?>
     </select>
   </p>
   <p>

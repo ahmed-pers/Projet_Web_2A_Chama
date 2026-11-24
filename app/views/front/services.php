@@ -1,24 +1,22 @@
 <h2>Our Services</h2>
 
-<p>Services and the counters that serve them.</p>
+<p>Services with their category (SQL join between SERVICE and CATEGORIE).</p>
 
-<ul>
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Service</th>
+    <th>Category</th>
+    <th>Status</th>
+  </tr>
   <?php foreach ($services as $service): ?>
-    <li>
-      <strong><?= e($service['name']) ?></strong>
-      - <?= e($service['average_time']) ?> min
-      - <?= e($service['status']) ?>
-      <?php if (empty($service['counters'])): ?>
-        <p>No counter assigned yet.</p>
-      <?php else: ?>
-        <ul>
-          <?php foreach ($service['counters'] as $counter): ?>
-            <li><?= e($counter['number']) ?> (<?= e($counter['status']) ?>)</li>
-          <?php endforeach; ?>
-        </ul>
-      <?php endif; ?>
-    </li>
+    <tr>
+      <td><?= e($service['id_service']) ?></td>
+      <td><?= e($service['nomService']) ?></td>
+      <td><?= e($service['nomCategorie']) ?></td>
+      <td><?= e($service['status']) ?></td>
+    </tr>
   <?php endforeach; ?>
-</ul>
+</table>
 
-<p><a href="index.php?page=front">Back to dashboard</a></p>
+<p><a href="index.php?page=front.tickets">Get a ticket</a></p>
