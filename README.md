@@ -65,7 +65,8 @@ puis réserver un ticket.
 
 ## Style et validation
 
-- `public/css/style.css` : mise en page simple (navigation, tableaux, formulaires, boutons).
+- `public/css/style.css` : interface moderne en un seul fichier (barre sombre, cartes,
+  statistiques, badges de statut, tableaux et boutons), responsive sur mobile.
 - `public/js/validation.js` : vérifie les champs `data-required` des formulaires
   `data-validate` avant l'envoi, puis affiche une alerte.
 - Le contrôle PHP (`Validator`) refait les mêmes vérifications côté serveur.
