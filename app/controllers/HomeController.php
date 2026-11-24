@@ -2,7 +2,7 @@
 
 class HomeController extends Controller
 {
-    public function index(): void
+    public function index()
     {
         $this->redirect('front');
     }

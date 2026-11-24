@@ -2,65 +2,56 @@
 
 class Categorie extends Model
 {
-    protected string $table = 'CATEGORIE';
-    protected string $primaryKey = 'id_categorie';
+    protected $table = 'CATEGORIE';
+    protected $primaryKey = 'id_categorie';
 
-    public function create(array $data): void
+    public function create($data)
     {
-        $statement = $this->db->prepare(
-            'INSERT INTO CATEGORIE (id_categorie, nomCategorie, description)
-             VALUES (:id, :name, :description)'
-        );
+        $sql = 'INSERT INTO CATEGORIE (id_categorie, nomCategorie, description)
+                VALUES (:id, :name, :description)';
+        $statement = $this->db->prepare($sql);
         $statement->execute([
             'id'          => $data['id_categorie'],
             'name'        => $data['nomCategorie'],
-            'description' => $data['description'],
+            'description' => $data['description']
         ]);
     }
 
-    public function update(int $id, array $data): bool
+    public function update($id, $data)
     {
-        $statement = $this->db->prepare(
-            'UPDATE CATEGORIE
-             SET nomCategorie = :name, description = :description
-             WHERE id_categorie = :id'
-        );
-
-        return $statement->execute([
+        $sql = 'UPDATE CATEGORIE
+                SET nomCategorie = :name, description = :description
+                WHERE id_categorie = :id';
+        $statement = $this->db->prepare($sql);
+        $statement->execute([
             'id'          => $id,
             'name'        => $data['nomCategorie'],
-            'description' => $data['description'],
+            'description' => $data['description']
         ]);
     }
 
-    public function nameExists(string $name, ?int $exceptId = null): bool
+    // $exceptId = 0 when we add a new category.
+    // When we edit, we ignore the category we are editing.
+    public function nameExists($name, $exceptId)
     {
-        $sql = 'SELECT COUNT(*) FROM CATEGORIE WHERE nomCategorie = :name';
-        $parameters = ['name' => $name];
-
-        if ($exceptId !== null) {
-            $sql .= ' AND id_categorie <> :id';
-            $parameters['id'] = $exceptId;
-        }
-
+        $sql = 'SELECT COUNT(*) FROM CATEGORIE
+                WHERE nomCategorie = :name AND id_categorie <> :id';
         $statement = $this->db->prepare($sql);
-        $statement->execute($parameters);
+        $statement->execute([
+            'name' => $name,
+            'id'   => $exceptId
+        ]);
 
-        return (int) $statement->fetchColumn() > 0;
+        return $statement->fetchColumn() > 0;
     }
 
-    public function serviceCount(int $id): int
+    public function hasServices($id)
     {
         $statement = $this->db->prepare(
             'SELECT COUNT(*) FROM SERVICE WHERE id_categorie = :id'
         );
         $statement->execute(['id' => $id]);
 
-        return (int) $statement->fetchColumn();
-    }
-
-    public function hasServices(int $id): bool
-    {
-        return $this->serviceCount($id) > 0;
+        return $statement->fetchColumn() > 0;
     }
 }

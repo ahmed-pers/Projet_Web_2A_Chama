@@ -2,103 +2,118 @@
 
 class BackCategorieController extends Controller
 {
-    private Categorie $categories;
+    private $categories;
 
     public function __construct()
     {
         $this->categories = new Categorie(Database::getConnection());
     }
 
-    public function index(): void
+    public function index()
     {
-        $error = $this->get('error') === '1' ? 'This category still has services.' : '';
+        $error = '';
+        if (isset($_GET['error']) && $_GET['error'] === '1') {
+            $error = 'This category still has services.';
+        }
 
         $this->render('back/categories', [
             'categories' => $this->categories->all(),
-            'error'      => $error,
+            'error'      => $error
         ], 'Categories');
     }
 
-    private function readForm(): array
-    {
-        return [
-            'nomCategorie' => trim((string) $this->post('nomCategorie')),
-            'description'  => trim((string) $this->post('description')),
-        ];
-    }
-
-    private function validate(array $data, ?int $id): Validator
-    {
-        $validator = new Validator();
-
-        $validator->required('nomCategorie', $data['nomCategorie'])
-            ->length('nomCategorie', $data['nomCategorie'], 3, 100)
-            ->unique('nomCategorie', $data['nomCategorie'], function ($name) use ($id) {
-                return $this->categories->nameExists($name, $id);
-            });
-
-        return $validator;
-    }
-
-    public function create(): void
+    public function create()
     {
         $errors = [];
-        $data = $this->readForm();
+        $name = '';
+        $description = '';
 
-        if ($this->isPost()) {
-            $validator = $this->validate($data, null);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = isset($_POST['nomCategorie']) ? trim($_POST['nomCategorie']) : '';
+            $description = isset($_POST['description']) ? trim($_POST['description']) : '';
 
-            if ($validator->isValid()) {
-                $data['id_categorie'] = $this->categories->nextId();
-                $this->categories->create($data);
-                $this->redirect('back.categories');
+            if ($name === '') {
+                $errors[] = 'Name is required.';
+            } elseif (strlen($name) < 3 || strlen($name) > 100) {
+                $errors[] = 'Name must be between 3 and 100 characters.';
+            } elseif ($this->categories->nameExists($name, 0)) {
+                $errors[] = 'Name already exists.';
             }
 
-            $errors = $validator->errors();
+            if (count($errors) === 0) {
+                $this->categories->create([
+                    'id_categorie' => $this->categories->nextId(),
+                    'nomCategorie' => $name,
+                    'description'  => $description
+                ]);
+
+                $this->redirect('back.categories');
+            }
         }
 
+        $category = [
+            'nomCategorie' => $name,
+            'description'  => $description
+        ];
+
         $this->render('back/categorie-form', [
-            'category' => $data,
+            'category' => $category,
             'errors'   => $errors,
-            'action'   => 'back.categorie.create',
+            'action'   => 'back.categorie.create'
         ], 'Add a category');
     }
 
-    public function edit(): void
+    public function edit()
     {
-        $id = (int) $this->get('id');
-        $category = $this->categories->find($id);
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+        $categoryFromDb = $this->categories->find($id);
 
-        if ($category === null) {
+        if (!$categoryFromDb) {
             $this->redirect('back.categories');
         }
 
         $errors = [];
-        $data = $category;
+        $name = $categoryFromDb['nomCategorie'];
+        $description = $categoryFromDb['description'];
 
-        if ($this->isPost()) {
-            $data = $this->readForm();
-            $validator = $this->validate($data, $id);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = isset($_POST['nomCategorie']) ? trim($_POST['nomCategorie']) : '';
+            $description = isset($_POST['description']) ? trim($_POST['description']) : '';
 
-            if ($validator->isValid()) {
-                $this->categories->update($id, $data);
-                $this->redirect('back.categories');
+            if ($name === '') {
+                $errors[] = 'Name is required.';
+            } elseif (strlen($name) < 3 || strlen($name) > 100) {
+                $errors[] = 'Name must be between 3 and 100 characters.';
+            } elseif ($this->categories->nameExists($name, $id)) {
+                $errors[] = 'Name already exists.';
             }
 
-            $errors = $validator->errors();
+            if (count($errors) === 0) {
+                $this->categories->update($id, [
+                    'nomCategorie' => $name,
+                    'description'  => $description
+                ]);
+
+                $this->redirect('back.categories');
+            }
         }
 
+        $category = [
+            'nomCategorie' => $name,
+            'description'  => $description
+        ];
+
         $this->render('back/categorie-form', [
-            'category' => $data,
+            'category' => $category,
             'errors'   => $errors,
-            'action'   => 'back.categorie.edit&id=' . $id,
+            'action'   => 'back.categorie.edit&id=' . $id
         ], 'Edit category');
     }
 
-    public function delete(): void
+    public function delete()
     {
-        if ($this->isPost()) {
-            $id = (int) $this->post('id');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
 
             if ($this->categories->hasServices($id)) {
                 $this->redirect('back.categories&error=1');

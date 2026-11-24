@@ -2,8 +2,8 @@
 
 class BackServiceController extends Controller
 {
-    private Categorie $categories;
-    private Service $services;
+    private $categories;
+    private $services;
 
     public function __construct()
     {
@@ -12,102 +12,141 @@ class BackServiceController extends Controller
         $this->services = new Service($db);
     }
 
-    public function index(): void
+    public function index()
     {
-        $error = $this->get('error') === '1' ? 'This service still has tickets.' : '';
+        $error = '';
+        if (isset($_GET['error']) && $_GET['error'] === '1') {
+            $error = 'This service still has tickets.';
+        }
 
         $this->render('back/services', [
             'services' => $this->services->all(),
-            'error'    => $error,
+            'error'    => $error
         ], 'Services');
     }
 
-    private function readForm(): array
-    {
-        return [
-            'nomService'   => trim((string) $this->post('nomService')),
-            'status'       => $this->post('status'),
-            'id_categorie' => $this->post('id_categorie'),
-        ];
-    }
-
-    private function validate(array $data, ?int $id): Validator
-    {
-        $validator = new Validator();
-
-        $validator->required('nomService', $data['nomService'])
-            ->length('nomService', $data['nomService'], 3, 100)
-            ->unique('nomService', $data['nomService'], function ($name) use ($id) {
-                return $this->services->nameExists($name, $id);
-            })
-            ->in('status', $data['status'], ['open', 'closed'])
-            ->required('id_categorie', $data['id_categorie'])
-            ->intRange('id_categorie', $data['id_categorie'], 1, PHP_INT_MAX);
-
-        return $validator;
-    }
-
-    public function create(): void
+    public function create()
     {
         $errors = [];
-        $data = $this->readForm();
+        $name = '';
+        $status = 'open';
+        $categoryId = '';
 
-        if ($this->isPost()) {
-            $validator = $this->validate($data, null);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = isset($_POST['nomService']) ? trim($_POST['nomService']) : '';
+            $status = isset($_POST['status']) ? $_POST['status'] : 'open';
+            $categoryId = isset($_POST['id_categorie']) ? trim($_POST['id_categorie']) : '';
 
-            if ($validator->isValid()) {
-                $data['id_service'] = $this->services->nextId();
-                $this->services->create($data);
-                $this->redirect('back.services');
+            if ($name === '') {
+                $errors[] = 'Name is required.';
+            } elseif (strlen($name) < 3 || strlen($name) > 100) {
+                $errors[] = 'Name must be between 3 and 100 characters.';
+            } elseif ($this->services->nameExists($name, 0)) {
+                $errors[] = 'Name already exists.';
             }
 
-            $errors = $validator->errors();
+            if ($status !== 'open' && $status !== 'closed') {
+                $errors[] = 'Status is not valid.';
+            }
+
+            if ($categoryId === '') {
+                $errors[] = 'Category is required.';
+            } elseif (!filter_var($categoryId, FILTER_VALIDATE_INT) || (int) $categoryId < 1) {
+                $errors[] = 'Category must be a number.';
+            }
+
+            if (count($errors) === 0) {
+                $this->services->create([
+                    'id_service'   => $this->services->nextId(),
+                    'nomService'   => $name,
+                    'status'       => $status,
+                    'id_categorie' => (int) $categoryId
+                ]);
+
+                $this->redirect('back.services');
+            }
         }
 
+        $service = [
+            'nomService'   => $name,
+            'status'       => $status,
+            'id_categorie' => $categoryId
+        ];
+
         $this->render('back/service-form', [
-            'service'    => $data,
+            'service'    => $service,
             'categories' => $this->categories->all(),
             'errors'     => $errors,
-            'action'     => 'back.service.create',
+            'action'     => 'back.service.create'
         ], 'Add a service');
     }
 
-    public function edit(): void
+    public function edit()
     {
-        $id = (int) $this->get('id');
-        $service = $this->services->find($id);
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+        $serviceFromDb = $this->services->find($id);
 
-        if ($service === null) {
+        if (!$serviceFromDb) {
             $this->redirect('back.services');
         }
 
         $errors = [];
-        $data = $service;
+        $name = $serviceFromDb['nomService'];
+        $status = $serviceFromDb['status'];
+        $categoryId = $serviceFromDb['id_categorie'];
 
-        if ($this->isPost()) {
-            $data = $this->readForm();
-            $validator = $this->validate($data, $id);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = isset($_POST['nomService']) ? trim($_POST['nomService']) : '';
+            $status = isset($_POST['status']) ? $_POST['status'] : 'open';
+            $categoryId = isset($_POST['id_categorie']) ? trim($_POST['id_categorie']) : '';
 
-            if ($validator->isValid()) {
-                $this->services->update($id, $data);
-                $this->redirect('back.services');
+            if ($name === '') {
+                $errors[] = 'Name is required.';
+            } elseif (strlen($name) < 3 || strlen($name) > 100) {
+                $errors[] = 'Name must be between 3 and 100 characters.';
+            } elseif ($this->services->nameExists($name, $id)) {
+                $errors[] = 'Name already exists.';
             }
 
-            $errors = $validator->errors();
+            if ($status !== 'open' && $status !== 'closed') {
+                $errors[] = 'Status is not valid.';
+            }
+
+            if ($categoryId === '') {
+                $errors[] = 'Category is required.';
+            } elseif (!filter_var($categoryId, FILTER_VALIDATE_INT) || (int) $categoryId < 1) {
+                $errors[] = 'Category must be a number.';
+            }
+
+            if (count($errors) === 0) {
+                $this->services->update($id, [
+                    'nomService'   => $name,
+                    'status'       => $status,
+                    'id_categorie' => (int) $categoryId
+                ]);
+
+                $this->redirect('back.services');
+            }
         }
 
+        $service = [
+            'nomService'   => $name,
+            'status'       => $status,
+            'id_categorie' => $categoryId
+        ];
+
         $this->render('back/service-form', [
-            'service'    => $data,
+            'service'    => $service,
             'categories' => $this->categories->all(),
             'errors'     => $errors,
-            'action'     => 'back.service.edit&id=' . $id,
+            'action'     => 'back.service.edit&id=' . $id
         ], 'Edit service');
     }
 
-    public function delete(): void
+    public function delete()
     {
-        if ($this->isPost()) {
-            $id = (int) $this->post('id');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
 
             if ($this->services->hasTickets($id)) {
                 $this->redirect('back.services&error=1');

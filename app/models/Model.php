@@ -1,51 +1,42 @@
 <?php
 
-abstract class Model
+class Model
 {
-    protected PDO $db;
-    protected string $table;
-    protected string $primaryKey;
+    protected $db;
+    protected $table;
+    protected $primaryKey;
 
-    public function __construct(PDO $db)
+    public function __construct($db)
     {
         $this->db = $db;
     }
 
-    public function all(): array
+    public function all()
     {
-        $statement = $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY ' . $this->primaryKey);
-        return $statement->fetchAll();
+        $sql = 'SELECT * FROM ' . $this->table . ' ORDER BY ' . $this->primaryKey;
+        return $this->db->query($sql)->fetchAll();
     }
 
-    public function find(int $id): ?array
+    public function find($id)
     {
-        $statement = $this->db->prepare(
-            'SELECT * FROM ' . $this->table . ' WHERE ' . $this->primaryKey . ' = :id'
-        );
+        $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->primaryKey . ' = :id';
+        $statement = $this->db->prepare($sql);
         $statement->execute(['id' => $id]);
-        $row = $statement->fetch();
-        return $row ?: null;
+
+        return $statement->fetch();
     }
 
-    public function exists(int $id): bool
+    // Next id = biggest id + 1 (the tables do not use AUTO_INCREMENT).
+    public function nextId()
     {
-        return $this->find($id) !== null;
+        $sql = 'SELECT COALESCE(MAX(' . $this->primaryKey . '), 0) + 1 FROM ' . $this->table;
+        return $this->db->query($sql)->fetchColumn();
     }
 
-    public function nextId(): int
+    public function delete($id)
     {
-        $statement = $this->db->query(
-            'SELECT COALESCE(MAX(' . $this->primaryKey . '), 0) + 1 FROM ' . $this->table
-        );
-
-        return (int) $statement->fetchColumn();
-    }
-
-    public function delete(int $id): bool
-    {
-        $statement = $this->db->prepare(
-            'DELETE FROM ' . $this->table . ' WHERE ' . $this->primaryKey . ' = :id'
-        );
-        return $statement->execute(['id' => $id]);
+        $sql = 'DELETE FROM ' . $this->table . ' WHERE ' . $this->primaryKey . ' = :id';
+        $statement = $this->db->prepare($sql);
+        $statement->execute(['id' => $id]);
     }
 }

@@ -2,17 +2,17 @@
 
 class BackTicketController extends Controller
 {
-    private Ticket $tickets;
+    private $tickets;
 
     public function __construct()
     {
         $this->tickets = new Ticket(Database::getConnection());
     }
 
-    public function index(): void
+    public function index()
     {
         $this->render('back/tickets', [
-            'tickets' => $this->tickets->all(),
+            'tickets' => $this->tickets->all()
         ], 'Tickets');
     }
 }

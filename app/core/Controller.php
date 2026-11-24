@@ -1,9 +1,11 @@
 <?php
 
-abstract class Controller
+class Controller
 {
-    protected function render(string $view, array $data = [], string $title = ''): void
+    // Show a view inside the main layout.
+    protected function render($view, $data, $title)
     {
+        // $data contains things like $services, $errors, $title...
         extract($data);
 
         ob_start();
@@ -13,24 +15,9 @@ abstract class Controller
         require __DIR__ . '/../views/layout.php';
     }
 
-    protected function redirect(string $page): void
+    protected function redirect($page)
     {
         header('Location: index.php?page=' . $page);
         exit;
-    }
-
-    protected function isPost(): bool
-    {
-        return ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
-    }
-
-    protected function post(string $key, $default = '')
-    {
-        return $_POST[$key] ?? $default;
-    }
-
-    protected function get(string $key, $default = '')
-    {
-        return $_GET[$key] ?? $default;
     }
 }

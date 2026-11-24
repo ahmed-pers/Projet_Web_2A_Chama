@@ -9,10 +9,10 @@ $links = [
 ];
 $current = $_GET['page'] ?? 'front';
 $active = $current;
-if (str_starts_with($active, 'back.categorie')) {
+if ($current === 'back.categorie.create' || $current === 'back.categorie.edit' || $current === 'back.categorie.delete') {
     $active = 'back.categories';
 }
-if (str_starts_with($active, 'back.service')) {
+if ($current === 'back.service.create' || $current === 'back.service.edit' || $current === 'back.service.delete') {
     $active = 'back.services';
 }
 ?>

@@ -1,7 +1,11 @@
 # Smart Queue - version simple (MVC + PDO)
 
-Projet minimal : vos 3 tables SQL, un bouton **Reserve** qui ajoute un ticket,
+Projet simple avec vos 3 tables SQL, un bouton **Reserve** pour ajouter un ticket,
 et le CRUD de CATEGORIE et SERVICE dans le Back Office.
+
+Le code PHP est volontairement écrit de façon simple et lisible, comme un projet
+d'étudiant : chargement des classes avec `require_once` dans `index.php`,
+validations avec des `if`, pas d'autoload et pas de classe Validator.
 
 ## Tables (votre SQL, inchangé)
 
@@ -11,35 +15,37 @@ SERVICE   (id_service, nomService, status, id_categorie)
 TICKET    (id_Ticket, id_client, id_service, date, time)
 ```
 
-`sql/schema.sql` = exactement vos 3 `CREATE TABLE`.
-Les IDs et la date/heure des tickets sont générés automatiquement par l'application.
+`sql/schema.sql` contient exactement vos 3 `CREATE TABLE`, sans données de test.
+Les IDs et la date/heure des tickets sont générés par l'application.
 
 ## Fichiers
 
 ```
-index.php                  Routes
-config/config.php          Connexion BD
-config/bootstrap.php       Autoload des classes
-sql/schema.sql             Vos tables
-app/core/                  Database, Controller, Validator
-app/models/                Model, Categorie, Service, Ticket
-app/controllers/           FrontController, BackCategorieController,
-                           BackServiceController, BackTicketController
+index.php                  Chargement des classes + routes (if / elseif)
+config/config.php          Paramètres de la base de données
+sql/schema.sql             Vos 3 tables
+app/core/Database.php      Connexion PDO
+app/core/Controller.php    render() et redirect()
+app/models/Model.php       all(), find(), nextId(), delete()
+app/models/Categorie.php   Requêtes CATEGORIE
+app/models/Service.php     Requêtes SERVICE
+app/models/Ticket.php      Requête TICKET
+app/controllers/           Front + Back (validations simples)
 app/views/                 layout + 8 vues
-public/css/style.css       Style simple
-public/js/validation.js    Validation JavaScript
+public/css/style.css       Interface moderne en un seul fichier
+public/js/validation.js    Validation JavaScript des formulaires
 ```
 
 ## Installation
 
 1. Créer la base `smart_queue` et importer `sql/schema.sql`.
-2. Adapter `config/config.php` (ou `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`).
-3. Ouvrir `index.php` via un serveur PHP (voir XAMPP ci-dessous).
+2. Adapter `config/config.php` si besoin (mot de passe MySQL, nom de la base...).
+3. Ouvrir le projet avec un serveur PHP (XAMPP ci-dessous).
 
 ## Lancer avec XAMPP (Windows)
 
 1. Copier le projet dans `C:\xampp\htdocs\smart-queue`.
-2. Ouvrir `C:\xampp\xampp-control.exe`, puis cliquer **Start** sur **Apache** et **MySQL**.
+2. Ouvrir `C:\xampp\xampp-control.exe` et démarrer **Apache** et **MySQL**.
 3. Dans `http://localhost/phpmyadmin`, créer la base `smart_queue`,
    la sélectionner, onglet **Import** → `sql/schema.sql` → **Go**.
 4. Ouvrir :
@@ -48,29 +54,28 @@ public/js/validation.js    Validation JavaScript
 http://localhost/smart-queue/index.php?page=front
 ```
 
-Ne pas double-cliquer sur `index.php` : Apache doit exécuter le PHP.
-Les listes sont vides au départ : ajouter une catégorie, puis un service,
-puis réserver un ticket.
+Ne pas double-cliquer sur `index.php` : c'est Apache qui doit exécuter le PHP.
+Ajouter une catégorie, puis un service, puis réserver un ticket depuis le Front Office.
 
 ## Pages
 
 | Page | Rôle |
 |---|---|
-| `front` | Accueil + lien Reserve |
+| `front` | Accueil + statistiques |
 | `front.services` | Liste des services |
 | `front.tickets` | **Reserve** (client + service) + liste des tickets |
 | `back.categories` | CRUD catégories |
 | `back.services` | CRUD services |
-| `back.tickets` | Liste des tickets |
+| `back.tickets` | Liste des tickets (lecture seule) |
 
-## Style et validation
+## Interface et validation
 
-- `public/css/style.css` : interface moderne en un seul fichier (barre sombre, cartes,
-  statistiques, badges de statut, tableaux et boutons), responsive sur mobile.
-- `public/js/validation.js` : vérifie les champs `data-required` des formulaires
-  `data-validate` avant l'envoi, puis affiche une alerte.
-- Le contrôle PHP (`Validator`) refait les mêmes vérifications côté serveur.
+- `public/css/style.css` : barre sombre, cartes, statistiques, badges de statut,
+  tableaux et boutons ; l'interface s'adapte au mobile.
+- `public/js/validation.js` : vérifie les champs `data-required` avant l'envoi.
+- Le PHP refait les mêmes vérifications avec de simples `if`.
 
+Règles gardées :
 - Client et service obligatoires et numériques.
 - Nom de catégorie / service : obligatoire, unique, 3 à 100 caractères.
 - Statut : `open` ou `closed`.
