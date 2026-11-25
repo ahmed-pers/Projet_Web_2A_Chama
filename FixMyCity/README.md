@@ -17,7 +17,8 @@ to a department. Stack: PHP (OOP, MVC, PDO), MySQL, HTML and CSS. Single entry p
 - `index.php` session config, security headers, router
 - `config/database.php` shared (Database::getConnexion()); `config/fixmycity.sql`
 - `models/` ReportModel, CategoryModel (attributes + getters/setters + fromArray, no SQL)
-- `controllers/ReportController.php` report/category logic; `controllers/AuthController.php` registration, login, logout and password reset
+- `controllers/ReportController.php` report/category logic
+- `user/` registration, login, logout, password reset and the account view
 - `views/frontoffice`, `views/backoffice` display only, every value through htmlspecialchars()
 - `assets/` css, imgs, backgrounds; `uploads/` report photos
 

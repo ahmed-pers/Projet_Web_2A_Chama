@@ -25,7 +25,7 @@ header('Referrer-Policy: strict-origin-when-cross-origin');
 header("Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:");
 
 // 4. Controllers
-require_once __DIR__ . '/controllers/AuthController.php';   // teammate's file (stub until the merge)
+require_once __DIR__ . '/user/AuthController.php';
 require_once __DIR__ . '/controllers/ReportController.php';
 
 $authController   = new AuthController();
@@ -41,7 +41,7 @@ switch ($action) {
         $message = (string) ($_GET['message'] ?? '');
         $resetToken = (string) ($_GET['token'] ?? '');
         $csrfToken = $authController->getCsrfToken();
-        require __DIR__ . '/views/frontoffice/auth.php';
+        require __DIR__ . '/user/auth.php';
         break;
     case 'register':
         $authController->register();
