@@ -11,6 +11,7 @@
       <ul>
         <li><a href="index.php?action=report_form"<?= ($currentPage ?? '') === 'report_form' ? ' aria-current="page"' : '' ?>>Report a problem</a></li>
         <li><a href="index.php?action=info">How to use</a></li>
+        <li><a href="index.php?action=logout">Log out</a></li>
       </ul>
     </nav>
   </aside>

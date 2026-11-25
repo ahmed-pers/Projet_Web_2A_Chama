@@ -7,15 +7,17 @@ to a department. Stack: PHP (OOP, MVC, PDO), MySQL, HTML/CSS/JS. Single entry po
 1. Put the folder in `xampp/htdocs/fixmycity`, start Apache + MySQL.
 2. Import `config/fixmycity.sql` in phpMyAdmin (creates the DB, the tables, seed departments/categories and 2 dev users).
 3. Put `logo.png` and `avatar.png` in `assets/imgs/`, your background images in `assets/backgrounds/`.
-4. Open http://localhost/fixmycity/index.php  (front office)
-   Back office: set `DEV_ROLE` to `'admin'` in `controllers/AuthController.php` (stub), then
-   http://localhost/fixmycity/index.php?action=admin_reports
+4. Open the project root's `index.html` in your browser to sign in or create an account.
+   The seeded accounts are `user1` / `admin1` with password `User@1234`.
+   Admin reports: sign in as `admin1`, then open `fixmycity/index.php?action=admin_reports`.
+5. Password reset sends a one-hour link with PHP `mail()`. Configure a local mail transport for delivery;
+   when developing on `localhost` without mail configured, the reset form opens directly after submission.
 
 ## Structure
 - `index.php` session config, security headers, router
 - `config/database.php` shared (Database::getConnexion()); `config/fixmycity.sql`
 - `models/` ReportModel, CategoryModel (attributes + getters/setters + fromArray, no SQL)
-- `controllers/ReportController.php` all logic; `controllers/AuthController.php` = STUB of the teammate's class
+- `controllers/ReportController.php` report/category logic; `controllers/AuthController.php` registration, login, logout and password reset
 - `views/frontoffice`, `views/backoffice` display only, every value through htmlspecialchars()
 - `assets/` css, js, imgs, backgrounds; `uploads/` report photos
 
@@ -34,10 +36,5 @@ Advanced: (1) status workflow pending -> in_progress -> resolved, no going back;
 (2) automatic routing category -> department -> contact_email (shown on forms and in the back office);
 (3) points and rank computed in PHP: 10 points per report in_progress/resolved, ranks by thresholds, no extra column.
 
-## Merging with the auth teammate
-- Replace `controllers/AuthController.php` (stub) with theirs. Same method names: `isAuthenticated`, `requireAuth`,
-  `requireRole`, `getCsrfToken`. Add their cases (home, register, login, logout, dashboard, admin) in `index.php`.
-- `index.php` already has their session config, 30 min inactivity expiry and security headers.
-- The CSP only allows scripts from `'self'`: no inline `<script>` or `onclick` in the views.
-- The sidebar "Log out" link points to their `logout` action (404 until merged).
-- DB: `report.user_id` references their `users(id)`.
+`index.php` configures secure sessions, 30-minute inactivity expiry and security headers. The database schema
+includes `password_reset` tokens. Re-import `config/fixmycity.sql` on an existing database to create that table.

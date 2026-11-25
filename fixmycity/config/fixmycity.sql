@@ -12,6 +12,13 @@ CREATE TABLE IF NOT EXISTS users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS password_reset (
+  user_id INT PRIMARY KEY,
+  token_hash CHAR(64) NOT NULL UNIQUE,
+  expires_at DATETIME NOT NULL,
+  CONSTRAINT fk_password_reset_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
 -- ---------------- my 3 entities ----------------
 CREATE TABLE IF NOT EXISTS department (
   id            INT AUTO_INCREMENT PRIMARY KEY,

@@ -35,7 +35,25 @@ $reportController = new ReportController($authController);
 $action = $_GET['action'] ?? 'report_form';
 
 switch ($action) {
-    // TODO at merge: add the teammate's cases here (home, register, login, logout, dashboard, admin)
+    case 'csrf':
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['token' => $authController->getCsrfToken()]);
+        break;
+    case 'register':
+        $authController->register();
+        break;
+    case 'login':
+        $authController->login();
+        break;
+    case 'forgot_password':
+        $authController->forgotPassword();
+        break;
+    case 'reset_password':
+        $authController->resetPassword();
+        break;
+    case 'logout':
+        $authController->logout();
+        break;
 
     // ---------------- FRONT OFFICE (any authenticated user) ----------------
     case 'report_form':
