@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Lost &amp; Found &mdash; Back Office</title>
+  <style>
+    .service-layout { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start; }
+    .service-layout > aside[aria-label="Sidebar"] nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 0; list-style: none; }
+  </style>
+</head>
+<body>
+<table width="100%" cellpadding="16" cellspacing="0">
+  <tr>
+    <td width="230" valign="top" bgcolor="#f4f6f8">
+      <aside aria-label="Project navigation">
+        <h2>Other services</h2>
+        <nav aria-label="Project pages">
+          <ul>
+        <li><a href="indexFIXMYCITY.html">Fix My City</a></li>
+        <li><a href="lost-and-found.html" aria-current="page">Lost and Found</a></li>
+        <li><a href="smart-queue.html">Smart Queue</a></li>
+        <li><a href="smart-sport.html">Smart Sport</a></li>
+        <li><a href="Smart_Vet.html">Smart Vet</a></li>
+        <li><a href="transport.html">Transport</a></li>
+          </ul>
+        </nav>
+      </aside>
+    </td>
+    <td valign="top">
+
+<div class="service-layout">
+
+    <aside aria-label="Sidebar">
+
+      <p>
+        <strong>Report list</strong>
+        <a href="#">Back</a>
+      </p>
+
+      <h2>Settings</h2>
+      <nav aria-label="Settings menu">
+        <ul>
+          <li><a href="#">My details</a></li>
+          <li><a href="#">Counters</a></li>
+          <li><a href="#" aria-current="page">Categories</a></li>
+          <li><a href="#">Items</a></li>
+          <li><a href="#">Statistics <span>20</span></a></li>
+          <li><a href="#">Announcements</a></li>
+          <li><a href="#">Team</a></li>
+
+</ul>
+      </nav>
+<section aria-label="Staff profile">
+        <p>ER</p>
+        <p><strong>Emma Rose</strong></p>
+        <p>@counter2</p>
+      </section>
+    </aside>
+
+    <div>
+
+      <header>
+        <p><strong>Main Branch ▾</strong></p>
+
+        <div>
+          <ul>
+            <li>SB</li>
+            <li>KT</li>
+            <li>+2</li>
+          </ul>
+
+          <button type="button">Apps ▾</button>
+          <button type="button">+ Add category</button>
+        </div>
+      </header>
+
+      <nav aria-label="Quick actions">
+        <ul>
+          <li><a href="#">Claim item</a></li>
+          <li><a href="#">Create announcement</a></li>
+          <li><a href="#">Export CSV</a></li>
+        </ul>
+      </nav>
+
+      <section aria-label="Search and filter">
+        <form action="#" method="get">
+          <p>
+            <label for="search">Search for an item or report number</label>
+            <input type="search" id="search" name="q" placeholder="Search for an item or report number">
+          </p>
+
+          <p>
+            <button type="submit">Filter</button>
+            <button type="button">View all ▾</button>
+          </p>
+        </form>
+      </section>
+
+      <section aria-labelledby="items-title">
+        <h2 id="items-title">Items</h2>
+        <p>Manage every lost &amp; found report at this branch.</p>
+
+        <div>
+
+          <article aria-labelledby="item-1">
+            <p>Status: <strong>Pending</strong></p>
+            <h3 id="item-1">Black Wallet</h3>
+
+            <dl>
+              <dt>Report</dt><dd>LF-011</dd>
+              <dt>Type</dt><dd>Lost</dd>
+              <dt>Category</dt><dd>Other</dd>
+              <dt>Location</dt><dd>Main Hall</dd>
+              <dt>Reported</dt><dd><time datetime="2026-11-15">15 November 2026</time></dd>
+              <dt>Contact</dt><dd>john@example.com</dd>
+              <dt>Assigned counter</dt><dd>Counter 2</dd>
+            </dl>
+
+            <details open>
+              <summary>More options</summary>
+              <ul>
+                <li><a href="#">Mark as matched</a></li>
+                <li><a href="#">Mark as returned</a></li>
+                <li><a href="#">Edit</a></li>
+                <li><a href="#">Delete</a></li>
+              </ul>
+            </details>
+          </article>
+
+          <article aria-labelledby="item-2">
+            <p>Status: <strong>Pending</strong></p>
+            <h3 id="item-2">Silver Keys</h3>
+
+            <dl>
+              <dt>Report</dt><dd>LF-012</dd>
+              <dt>Type</dt><dd>Found</dd>
+              <dt>Category</dt><dd>Keys</dd>
+              <dt>Location</dt><dd>Parking Lot</dd>
+              <dt>Reported</dt><dd><time datetime="2026-11-16">16 November 2026</time></dd>
+              <dt>Contact</dt><dd>mary@example.com</dd>
+              <dt>Assigned counter</dt><dd>Counter 2</dd>
+            </dl>
+
+            <p><button type="button" aria-label="More options for Silver Keys">...</button></p>
+          </article>
+
+          <article aria-labelledby="item-3">
+            <p>Status: <strong>Matched</strong></p>
+            <h3 id="item-3">Blue Notebook</h3>
+
+            <dl>
+              <dt>Report</dt><dd>LF-014</dd>
+              <dt>Type</dt><dd>Lost</dd>
+              <dt>Category</dt><dd>Books</dd>
+              <dt>Location</dt><dd>Library</dd>
+              <dt>Reported</dt><dd><time datetime="2026-11-14">14 November 2026</time></dd>
+              <dt>Contact</dt><dd>sarah@example.com</dd>
+              <dt>Assigned counter</dt><dd>Counter 2</dd>
+            </dl>
+
+            <p><button type="button" aria-label="More options for Blue Notebook">...</button></p>
+          </article>
+
+          <article aria-labelledby="item-4">
+            <p>Status: <strong>Returned</strong></p>
+            <h3 id="item-4">Red Umbrella</h3>
+
+            <dl>
+              <dt>Report</dt><dd>LF-009</dd>
+              <dt>Type</dt><dd>Found</dd>
+              <dt>Category</dt><dd>Other</dd>
+              <dt>Location</dt><dd>Cafeteria</dd>
+              <dt>Reported</dt><dd><time datetime="2026-11-10">10 November 2026</time></dd>
+              <dt>Contact</dt><dd>karim@example.com</dd>
+              <dt>Assigned counter</dt><dd>Counter 3</dd>
+            </dl>
+
+            <p><button type="button" aria-label="More options for Red Umbrella">...</button></p>
+          </article>
+
+          <article aria-labelledby="item-5">
+            <p>Status: <strong>Pending</strong></p>
+            <h3 id="item-5">Student ID Card</h3>
+
+            <dl>
+              <dt>Report</dt><dd>LF-013</dd>
+              <dt>Type</dt><dd>Found</dd>
+              <dt>Category</dt><dd>Documents</dd>
+              <dt>Location</dt><dd>Main Hall</dd>
+              <dt>Reported</dt><dd><time datetime="2026-11-17">17 November 2026</time></dd>
+              <dt>Contact</dt><dd>layla@example.com</dd>
+              <dt>Assigned counter</dt><dd>Counter 1</dd>
+            </dl>
+
+            <p><button type="button" aria-label="More options for Student ID Card">...</button></p>
+          </article>
+
+        </div>
+      </section>
+
+      <section aria-label="Branch summary">
+        <h2>Branch summary</h2>
+        <dl>
+          <dt>Total reports</dt><dd>11</dd>
+          <dt>Pending</dt><dd>5</dd>
+          <dt>Matched</dt><dd>4</dd>
+          <dt>Returned</dt><dd>2</dd>
+        </dl>
+      </section>
+
+    </div>
+  </div>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
