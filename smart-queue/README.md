@@ -7,18 +7,17 @@ Le code PHP est volontairement écrit de façon simple et lisible, comme un proj
 d'étudiant : chargement des classes avec `require_once` dans `index.php`,
 validations avec des `if`, pas d'autoload et pas de classe Validator.
 
-## Structure du dépôt (comme les autres services)
+## Structure du dépôt
 
 ```
-index.html                     Page d'accueil du projet
+index.html                     Page d'accueil Smart Queue
 frontoffice/smart-queue.html   Entrée Front Office
 backoffice/smart-queue.html    Entrée Back Office
 smart-queue/                   Application PHP (ce dossier)
-fixmycity/ , transport/ ...    Projets des autres étudiants
 ```
 
-Les deux fichiers HTML sont des pages autonomes avec la navigation
-« Other services ». Ils renvoient vers l'application PHP dans `smart-queue/`.
+Le dépôt ne contient que le projet Smart Queue. Les deux fichiers HTML sont des
+pages autonomes qui renvoient vers l'application PHP dans `smart-queue/`.
 
 ## Tables (votre SQL, inchangé)
 
