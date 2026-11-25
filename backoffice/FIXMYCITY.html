@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CityFix – Admin</title>
+  <style>
+    .service-page-layout { display: block; }
+    #sidebar nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 0; list-style: none; }
+  </style>
+</head>
+<body>
+<table width="100%" cellpadding="16" cellspacing="0">
+  <tr>
+    <td width="230" valign="top" bgcolor="#f4f6f8">
+      <aside aria-label="Project navigation">
+        <h2>Other services</h2>
+        <nav aria-label="Project pages">
+          <ul>
+        <li><a href="indexFIXMYCITY.html">Fix My City</a></li>
+        <li><a href="lost-and-found.html">Lost and Found</a></li>
+        <li><a href="smart-queue.html">Smart Queue</a></li>
+        <li><a href="smart-sport.html">Smart Sport</a></li>
+        <li><a href="Smart_Vet.html">Smart Vet</a></li>
+        <li><a href="transport.html">Transport</a></li>
+          </ul>
+        </nav>
+      </aside>
+    </td>
+    <td class="service-page-layout" valign="top">
+
+<!-- ========== LEFT: SIDEBAR ========== -->
+  <aside id="sidebar">
+
+    <header>
+      <a href="admin.html">
+        <img src="../imgs/logo.png" alt="CityFix logo" width="32" height="32">
+        <span>CityFix admin</span>
+      </a>
+    </header>
+
+    <!-- link back to the main application -->
+    <p><a href="../index.html">&larr; Back</a></p>
+
+    <h2>Moderation</h2>
+
+    <nav>
+      <ul>
+        <li><a href="admin.html" aria-current="page">Pending reports <span id="pending-count">0</span></a></li>
+        <li><a href="admin-accepted.html">Accepted</a></li>
+        <li><a href="admin-rejected.html">Rejected</a></li>
+        <li><a href="admin-archived.html">Archived</a></li>
+        <li><a href="admin-map.html">Map</a></li>
+        <li><a href="admin-users.html">Users</a></li>
+        <li><a href="admin-points.html">Points &amp; ranks</a></li>
+
+</ul>
+    </nav>
+<!-- logged-in admin -->
+    <footer id="admin-profile">
+      <img id="admin-photo" src="avatar.png" alt="Admin picture" width="40" height="40">
+      <p>
+        <strong id="admin-name">Admin name</strong><br>
+        <small id="admin-handle">@admin</small>
+      </p>
+    </footer>
+
+  </aside>
+
+  <!-- ========== MAIN ========== -->
+  <main id="content">
+
+    <!-- Top bar -->
+    <header id="topbar">
+      <h1>Reports moderation</h1>
+
+      <div id="topbar-actions">
+        <a href="admin-stats.html">Statistics</a>
+        <a href="admin-export.html">Export reports</a>
+      </div>
+    </header>
+
+    <!-- Secondary links -->
+    <nav id="shortcuts">
+      <a href="admin-map.html">Open map view</a>
+      <a href="admin-points.html">Configure points</a>
+      <a href="admin-users.html">Manage users</a>
+    </nav>
+
+    <hr>
+
+    <!-- Search + filters -->
+    <form id="search-form" action="#" method="get">
+      <label for="search">Search</label>
+      <input type="search" id="search" name="q" placeholder="Search a report, an address, a user…">
+
+      <label for="filter-type">Type</label>
+      <select id="filter-type" name="type">
+        <option value="">All types</option>
+        <option value="road">Hole in the road</option>
+        <option value="trash">Trash / illegal dumping</option>
+        <option value="dogs">Wild dogs</option>
+        <option value="lighting">Broken street light</option>
+        <option value="water">Water leak</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="filter-status">Status</label>
+      <select id="filter-status" name="status">
+        <option value="">All statuses</option>
+        <option value="pending">Pending</option>
+        <option value="accepted">Accepted</option>
+        <option value="rejected">Rejected</option>
+        <option value="archived">Archived</option>
+      </select>
+
+      <label for="view">View</label>
+      <select id="view" name="view">
+        <option value="all">View all</option>
+        <option value="today">Today</option>
+        <option value="week">This week</option>
+        <option value="month">This month</option>
+      </select>
+
+      <button type="submit">Filter</button>
+    </form>
+
+    <!-- Reports list -->
+    <section id="reports">
+      <header>
+        <h2>Reports</h2>
+        <p>Review the reports sent by citizens. Accepting a report gives points to its author.</p>
+      </header>
+
+      <!-- The cards below are templates: they will be generated from the backend (one <article> per report) -->
+
+      <!-- Card: pending -->
+      <article class="report-card" data-report-id="1">
+        <header>
+          <h3>Road – Hole in the road</h3>
+          <span class="status">Pending</span>
+        </header>
+
+        <img src="report-photo.jpg" alt="Photo of the reported problem" width="240" height="160">
+
+        <dl>
+          <dt>Address</dt>
+          <dd>Street name, neighbourhood</dd>
+          <dt>Sent on</dt>
+          <dd><time datetime="2026-11-17">17 Nov 2026</time></dd>
+          <dt>Description</dt>
+          <dd>Optional text written by the citizen.</dd>
+        </dl>
+
+        <footer>
+          <p>
+            <img src="avatar.png" alt="" width="24" height="24">
+            by <a href="admin-users.html">Citizen name</a>
+          </p>
+
+          <!-- Accept / reject -->
+          <form action="#" method="post">
+            <input type="hidden" name="report_id" value="1">
+
+            <label for="points-1">Points</label>
+            <input type="number" id="points-1" name="points" min="0" value="0">
+
+            <button type="submit" name="decision" value="accept">Accept</button>
+            <button type="submit" name="decision" value="reject">Reject</button>
+          </form>
+
+          <!-- "..." menu (works without JS) -->
+          <details>
+            <summary>More</summary>
+            <ul>
+              <li><a href="admin-map.html">Show on map</a></li>
+              <li><button type="button">Archive</button></li>
+              <li><button type="button">Delete</button></li>
+              <li><button type="button">Block user</button></li>
+            </ul>
+          </details>
+        </footer>
+      </article>
+
+      <!-- Card: accepted -->
+      <article class="report-card" data-report-id="2">
+        <header>
+          <h3>Trash – Illegal dumping</h3>
+          <span class="status">Accepted</span>
+        </header>
+
+        <img src="report-photo.jpg" alt="Photo of the reported problem" width="240" height="160">
+
+        <dl>
+          <dt>Address</dt>
+          <dd>Street name, neighbourhood</dd>
+          <dt>Sent on</dt>
+          <dd><time datetime="2026-11-15">15 Nov 2026</time></dd>
+          <dt>Points given</dt>
+          <dd>0</dd>
+        </dl>
+
+        <footer>
+          <p>
+            <img src="avatar.png" alt="" width="24" height="24">
+            by <a href="admin-users.html">Citizen name</a>
+          </p>
+
+          <details>
+            <summary>More</summary>
+            <ul>
+              <li><a href="admin-map.html">Show on map</a></li>
+              <li><button type="button">Archive</button></li>
+              <li><button type="button">Delete</button></li>
+            </ul>
+          </details>
+        </footer>
+      </article>
+
+      <!-- Card: rejected -->
+      <article class="report-card" data-report-id="3">
+        <header>
+          <h3>Other – Problem</h3>
+          <span class="status">Rejected</span>
+        </header>
+
+        <img src="report-photo.jpg" alt="Photo of the reported problem" width="240" height="160">
+
+        <dl>
+          <dt>Address</dt>
+          <dd>Street name, neighbourhood</dd>
+          <dt>Sent on</dt>
+          <dd><time datetime="2026-11-14">14 Nov 2026</time></dd>
+          <dt>Reason</dt>
+          <dd>Reason written by the admin.</dd>
+        </dl>
+
+        <footer>
+          <p>
+            <img src="avatar.png" alt="" width="24" height="24">
+            by <a href="admin-users.html">Citizen name</a>
+          </p>
+
+          <details>
+            <summary>More</summary>
+            <ul>
+              <li><button type="button">Reopen</button></li>
+              <li><button type="button">Archive</button></li>
+              <li><button type="button">Delete</button></li>
+            </ul>
+          </details>
+        </footer>
+      </article>
+
+    </section>
+
+  </main>
+
+    </td>
+  </tr>
+</table>
+</body>
+</html>

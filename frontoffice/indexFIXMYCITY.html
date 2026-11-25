@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CityFix – Report a problem</title>
+  <style>
+    .service-page-layout { display: block; }
+    #sidebar nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 0; list-style: none; }
+  </style>
+</head>
+<body>
+<table width="100%" cellpadding="16" cellspacing="0">
+  <tr>
+    <td width="230" valign="top" bgcolor="#f4f6f8">
+      <aside aria-label="Project navigation">
+        <h2>Other services</h2>
+        <nav aria-label="Project pages">
+          <ul>
+        <li><a href="indexFIXMYCITY.html" aria-current="page">Fix My City</a></li>
+        <li><a href="lost-and-found.html">Lost and Found</a></li>
+        <li><a href="smart-queue.html">Smart Queue</a></li>
+        <li><a href="smart-sport.html">Smart Sport</a></li>
+        <li><a href="Smart_Vet.html">Smart Vet</a></li>
+        <li><a href="transport.html">Transport</a></li>
+          </ul>
+        </nav>
+      </aside>
+    </td>
+    <td class="service-page-layout" valign="top">
+
+<!-- ========== LEFT: SIDEBAR ========== -->
+  <aside id="sidebar">
+    <header>
+      <a href="index.html">
+        <img src="../imgs/logo.png" alt="CityFix logo" width="40" height="40">
+        <span>CITYFIX</span>
+      </a>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="report.html" aria-current="page">Report a problem</a></li>
+        <li><a href="my-reports.html">My reports</a></li>
+        <li><a href="map.html">City map</a></li>
+        <li><a href="settings.html">Settings</a></li>
+
+</ul>
+    </nav>
+</aside>
+
+  <!-- ========== MIDDLE: MAIN (the form) ========== -->
+  <main id="content">
+    <header>
+      <h1>Report a problem</h1>
+      <p>Take a picture, tell us where it is, and send it to the city.</p>
+    </header>
+
+    <form id="report-form" action="#" method="post" enctype="multipart/form-data">
+
+      <!-- 1. Photo -->
+      <fieldset>
+        <legend>1. Photo</legend>
+        <label for="photo">Take or choose a picture</label>
+        <input type="file" id="photo" name="photo" accept="image/*" capture="environment" required>
+        <!-- preview of the picture will go here later (JS) -->
+        <img id="photo-preview" src="" alt="Preview of the selected photo" hidden>
+      </fieldset>
+
+      <!-- 2. Location -->
+      <fieldset>
+        <legend>2. Location</legend>
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="Street, neighbourhood, landmark…" required>
+
+        <!-- filled automatically later (JS geolocation) -->
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
+
+        <button type="button" id="locate-btn">Use my current location</button>
+      </fieldset>
+
+      <!-- 3. Type -->
+      <fieldset>
+        <legend>3. Type of problem</legend>
+
+        <label for="report-type">Report type</label>
+        <select id="report-type" name="report_type" required>
+          <option value="" disabled selected>Choose a type…</option>
+          <option value="road">Hole in the road</option>
+          <option value="trash">Trash / illegal dumping</option>
+          <option value="dogs">Wild dogs</option>
+          <option value="lighting">Broken street light</option>
+          <option value="water">Water leak</option>
+          <option value="other">Other</option>
+        </select>
+      </fieldset>
+
+      <!-- 4. Optional description -->
+      <fieldset>
+        <legend>4. Details (optional)</legend>
+
+        <input type="checkbox" id="add-description" name="add_description">
+        <label for="add-description">I want to add a description</label>
+
+        <br>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4" maxlength="500"
+                  placeholder="Describe the problem…" disabled></textarea>
+        <!-- the checkbox will enable/disable this textarea later (JS) -->
+      </fieldset>
+
+      <button type="submit">Send report</button>
+      <button type="reset">Clear</button>
+    </form>
+  </main>
+
+  <!-- ========== RIGHT: PANEL ========== -->
+  <aside id="right-panel">
+
+    <!-- Profile: photo from the account creation -->
+    <section id="profile">
+      <img id="user-photo" src="avatar.png" alt="Profile picture" width="64" height="64">
+      <h2 id="user-name">Citizen name</h2>
+
+      <!-- Rank name (empty for now, to be decided) -->
+      <p>Rank: <span id="user-rank"></span></p>
+    </section>
+
+    <!-- Points system -->
+    <section id="points-box">
+      <h2>My points</h2>
+      <p><strong id="user-points">0</strong> points</p>
+
+      <!-- progress towards the next rank (value will come from the backend) -->
+      <label for="rank-progress">Progress to next rank</label>
+      <progress id="rank-progress" value="0" max="100"></progress>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works">
+      <h2>How points work</h2>
+      <ol>
+        <li>You send a report.</li>
+        <li>An admin reviews it.</li>
+        <li>If it is accepted, you earn points.</li>
+      </ol>
+    </section>
+
+  </aside>
+
+    </td>
+  </tr>
+</table>
+</body>
+</html>
