@@ -2,77 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=transport.php">
   <title>Vehicle Rental</title>
-  <style>
-    .vehicle-table { width:100%; }
-    .vehicle-table th, .vehicle-table td { padding:6px; }
-  </style>
 </head>
 <body>
-<table width="100%" cellpadding="16" cellspacing="0">
-  <tr>
-    <td width="230" valign="top" bgcolor="#f4f6f8">
-      <aside aria-label="Project navigation">
-        <h2>Other services</h2>
-        <nav aria-label="Project pages">
-          <ul>
-            <li><a href="indexFIXMYCITY.html">Fix My City</a></li>
-            <li><a href="lost-and-found.html">Lost and Found</a></li>
-            <li><a href="smart-queue.html">Smart Queue</a></li>
-            <li><a href="smart-sport.html">Smart Sport</a></li>
-            <li><a href="Smart_Vet.html">Smart Vet</a></li>
-            <li><a href="transport.html" aria-current="page">Vehicle Rental</a></li>
-          </ul>
-        </nav>
-      </aside>
-    </td>
-    <td valign="top">
-      <header>
-        <h1>Vehicle Rental</h1>
-        <p>Find a car, motorcycle, scooter or bicycle for your next journey.</p>
-      </header>
-
-      <main>
-        <section id="search">
-          <h2>Search for a vehicle</h2>
-          <form action="#vehicles" method="get">
-            Location: <input type="text" name="location" placeholder="City" required>
-            Pick-up: <input type="date" name="start" required>
-            Return: <input type="date" name="end" required>
-            Type:
-            <select name="type">
-              <option value="">Any vehicle</option>
-              <option>Car</option>
-              <option>Motorcycle</option>
-              <option>Scooter</option>
-              <option>Bicycle</option>
-              <option>Van</option>
-            </select>
-            <button type="submit">Search</button>
-          </form>
-        </section>
-
-        <section id="vehicles">
-          <h2>Available vehicles</h2>
-          <table class="vehicle-table" border="1" cellpadding="6" cellspacing="0">
-            <thead>
-              <tr><th>Vehicle</th><th>Type</th><th>Location</th><th>Details</th><th>Price per day</th><th>Action</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Renault Clio</td><td>Car</td><td>Tunis</td><td>5 seats, manual, air conditioning</td><td>85 TND</td><td><button type="button">Rent</button></td></tr>
-              <tr><td>Hyundai Tucson</td><td>SUV</td><td>Sousse</td><td>5 seats, automatic, air conditioning</td><td>160 TND</td><td><button type="button">Rent</button></td></tr>
-              <tr><td>Yamaha MT-07</td><td>Motorcycle</td><td>Tunis</td><td>689 cc, 2 seats</td><td>120 TND</td><td><button type="button">Rent</button></td></tr>
-              <tr><td>Vespa Primavera</td><td>Scooter</td><td>Sousse</td><td>125 cc, 2 seats</td><td>55 TND</td><td><button type="button">Rent</button></td></tr>
-              <tr><td>City Cruiser</td><td>Bicycle</td><td>Hammamet</td><td>7-speed, helmet included</td><td>18 TND</td><td><button type="button">Rent</button></td></tr>
-              <tr><td>Volkswagen Transporter</td><td>Van</td><td>Tunis</td><td>8 seats, extra luggage space</td><td>190 TND</td><td><button type="button">Rent</button></td></tr>
-            </tbody>
-          </table>
-        </section>
-      </main>
-      <footer><p>Vehicle Rental</p></footer>
-    </td>
-  </tr>
-</table>
+  <p><a href="transport.php">Open Vehicle Rental</a></p>
 </body>
 </html>

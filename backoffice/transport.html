@@ -2,92 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=transport.php">
   <title>Vehicle Rental - Back Office</title>
-  <style>
-    .vehicle-table { width:100%; }
-    .vehicle-table th, .vehicle-table td { padding:6px; }
-  </style>
 </head>
 <body>
-<table width="100%" cellpadding="16" cellspacing="0">
-  <tr>
-    <td width="230" valign="top" bgcolor="#f4f6f8">
-      <aside aria-label="Project navigation">
-        <h2>Other services</h2>
-        <nav aria-label="Project pages">
-          <ul>
-            <li><a href="FIXMYCITY.html">Fix My City</a></li>
-            <li><a href="lost-and-found.html">Lost and Found</a></li>
-            <li><a href="smart-queue.html">Smart Queue</a></li>
-            <li><a href="smart-sport.html">Smart Sport</a></li>
-            <li><a href="Smart_Vet.html">Smart Vet</a></li>
-            <li><a href="transport.html" aria-current="page">Vehicle Rental</a></li>
-          </ul>
-        </nav>
-      </aside>
-    </td>
-    <td valign="top">
-      <header>
-        <h1>Vehicle Rental - Back Office</h1>
-        <p>Manage vehicle listings, rental prices and availability.</p>
-      </header>
-
-      <main>
-        <nav aria-label="Staff navigation">
-          <p><a href="#vehicles">Vehicle listings</a> | <a href="#add-vehicle">Add a vehicle</a></p>
-        </nav>
-
-        <section id="overview">
-          <h2>Fleet overview</h2>
-          <p>Vehicles listed: <strong>48</strong></p>
-          <p>Available today: <strong>32</strong></p>
-          <p>Active rentals: <strong>16</strong></p>
-        </section>
-
-        <section id="vehicles">
-          <h2>Vehicle listings</h2>
-          <table class="vehicle-table" border="1" cellpadding="6" cellspacing="0">
-            <thead>
-              <tr><th>Vehicle</th><th>Type</th><th>Location</th><th>Price per day</th><th>Availability</th><th>Status</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Renault Clio</td><td>Car</td><td>Tunis</td><td>85 TND</td><td>Available now</td><td>Available</td></tr>
-              <tr><td>Hyundai Tucson</td><td>SUV</td><td>Sousse</td><td>160 TND</td><td>Returns 28 Nov</td><td>Rented</td></tr>
-              <tr><td>Yamaha MT-07</td><td>Motorcycle</td><td>Tunis</td><td>120 TND</td><td>Available now</td><td>Available</td></tr>
-              <tr><td>Vespa Primavera</td><td>Scooter</td><td>Sousse</td><td>55 TND</td><td>Available now</td><td>Available</td></tr>
-              <tr><td>City Cruiser</td><td>Bicycle</td><td>Hammamet</td><td>18 TND</td><td>Returns 26 Nov</td><td>Rented</td></tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section id="add-vehicle">
-          <h2>Add a vehicle</h2>
-          <form action="#vehicles" method="post">
-            <fieldset>
-              <legend>Vehicle information</legend>
-              Make and model: <input type="text" name="vehicle" required><br>
-              Type:
-              <select name="type" required>
-                <option value="">Choose a type</option>
-                <option>Car</option>
-                <option>SUV</option>
-                <option>Van</option>
-                <option>Motorcycle</option>
-                <option>Scooter</option>
-                <option>Bicycle</option>
-              </select><br>
-              Location: <input type="text" name="location" required><br>
-              Price per day (TND): <input type="number" name="price" min="1" required><br>
-              Available from: <input type="date" name="available_from" required><br>
-              <button type="submit">Add vehicle</button>
-            </fieldset>
-          </form>
-        </section>
-      </main>
-      <footer><p>Vehicle Rental staff portal</p></footer>
-    </td>
-  </tr>
-</table>
+  <p><a href="transport.php">Open Vehicle Rental Back Office</a></p>
 </body>
 </html>
