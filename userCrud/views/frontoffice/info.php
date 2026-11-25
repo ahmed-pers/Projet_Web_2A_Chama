@@ -1,5 +1,5 @@
 <?php
-// View: display only. Static page; the translations live in assets/js/info.js.
+// View: display only. Static information page.
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -258,6 +258,5 @@
     <a class="cta" href="index.php?action=report_form" data-i18n="cta">Start a report</a>
   </main>
 
-  <script src="assets/js/info.js" defer></script>
 </body>
 </html>

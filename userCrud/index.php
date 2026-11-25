@@ -21,7 +21,7 @@ $_SESSION['last_activity'] = time();
 header('X-Frame-Options: DENY');
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: strict-origin-when-cross-origin');
-// 'self' for scripts (so no inline <script> / onclick in the views); blob: = photo preview before upload
+// Keep page resources local and block embedding; this app uses server-rendered forms.
 header("Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:");
 
 // 4. Controllers
@@ -32,12 +32,16 @@ $authController   = new AuthController();
 $reportController = new ReportController($authController);
 
 // 5. Routing
-$action = $_GET['action'] ?? 'report_form';
+$action = $_GET['action'] ?? 'auth';
 
 switch ($action) {
-    case 'csrf':
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(['token' => $authController->getCsrfToken()]);
+    case 'auth':
+        $mode = (string) ($_GET['mode'] ?? 'login');
+        if (!in_array($mode, ['login', 'register', 'forgot', 'reset'], true)) $mode = 'login';
+        $message = (string) ($_GET['message'] ?? '');
+        $resetToken = (string) ($_GET['token'] ?? '');
+        $csrfToken = $authController->getCsrfToken();
+        require __DIR__ . '/views/frontoffice/auth.php';
         break;
     case 'register':
         $authController->register();

@@ -1,15 +1,15 @@
 # FIXMYCITY – reports module
 
 Citizens report a city problem (photo + location + category). The category routes the report
-to a department. Stack: PHP (OOP, MVC, PDO), MySQL, HTML/CSS/JS. Single entry point: `index.php?action=...`
+to a department. Stack: PHP (OOP, MVC, PDO), MySQL, HTML and CSS. Single entry point: `index.php?action=...`
 
 ## Run
-1. Put the folder in `xampp/htdocs/fixmycity`, start Apache + MySQL.
+1. Put this folder in `xampp/htdocs/userCrud`, start Apache + MySQL.
 2. Import `config/fixmycity.sql` in phpMyAdmin (creates the DB, the tables, seed departments/categories and 2 dev users).
 3. Put `logo.png` and `avatar.png` in `assets/imgs/`, your background images in `assets/backgrounds/`.
-4. Open the project root's `index.html` in your browser to sign in or create an account.
+4. Open `http://localhost/userCrud/` (or `http://localhost/userCrud/index.php`) to sign in or create an account. The complete app, including its PHP entry point, controllers, models, views, configuration, and assets, is contained in this top-level `userCrud/` folder. Forms and CRUD actions are handled by PHP without JavaScript.
    The seeded accounts are `user1` / `admin1` with password `User@1234`.
-   Admin reports: sign in as `admin1`, then open `fixmycity/index.php?action=admin_reports`.
+   Admin reports: sign in as `admin1`, then open `http://localhost/userCrud/index.php?action=admin_reports`.
 5. Password reset sends a one-hour link with PHP `mail()`. Configure a local mail transport for delivery;
    when developing on `localhost` without mail configured, the reset form opens directly after submission.
 
@@ -19,7 +19,7 @@ to a department. Stack: PHP (OOP, MVC, PDO), MySQL, HTML/CSS/JS. Single entry po
 - `models/` ReportModel, CategoryModel (attributes + getters/setters + fromArray, no SQL)
 - `controllers/ReportController.php` report/category logic; `controllers/AuthController.php` registration, login, logout and password reset
 - `views/frontoffice`, `views/backoffice` display only, every value through htmlspecialchars()
-- `assets/` css, js, imgs, backgrounds; `uploads/` report photos
+- `assets/` css, imgs, backgrounds; `uploads/` report photos
 
 ## CRUD
 | | Front office | Back office |

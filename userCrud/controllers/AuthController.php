@@ -62,10 +62,10 @@ class AuthController
                 $hash = hash('sha256', $token);
                 $stmt = $this->db->prepare('INSERT INTO password_reset (user_id, token_hash, expires_at) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 1 HOUR)) ON DUPLICATE KEY UPDATE token_hash = VALUES(token_hash), expires_at = VALUES(expires_at)');
                 $stmt->execute([$userId, $hash]);
-                $link = $this->baseUrl() . '/index.html?reset=' . urlencode($token);
+                $link = $this->baseUrl() . '/index.php?action=auth&mode=reset&token=' . urlencode($token);
                 $sent = @mail($email, 'FIXMYCITY password reset', "Use this link within one hour to reset your password:\n\n$link");
                 if (!$sent && (($_SERVER['HTTP_HOST'] ?? '') === 'localhost' || str_starts_with($_SERVER['HTTP_HOST'] ?? '', 'localhost:'))) {
-                    header('Location: ../index.html?message=sent&reset=' . urlencode($token));
+                    header('Location: index.php?action=auth&message=sent&mode=reset&token=' . urlencode($token));
                     exit;
                 }
             }
@@ -106,13 +106,13 @@ class AuthController
             setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
         }
         session_destroy();
-        header('Location: ../index.html');
+        header('Location: index.php?action=auth');
         exit;
     }
 
     public static function isAuthenticated(): bool { return !empty($_SESSION['user_id']); }
     public static function hasRole(string $role): bool { return self::isAuthenticated() && ($_SESSION['role'] ?? null) === $role; }
-    public static function requireAuth(): void { if (!self::isAuthenticated()) { header('Location: ../index.html'); exit; } }
+    public static function requireAuth(): void { if (!self::isAuthenticated()) { header('Location: index.php?action=auth'); exit; } }
     public static function requireRole(string $role): void { self::requireAuth(); if (($_SESSION['role'] ?? null) !== $role) { http_response_code(403); die('Access denied.'); } }
 
     public function getCsrfToken(): string
@@ -130,9 +130,9 @@ class AuthController
     private function baseUrl(): string
     {
         $https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
-        return ($https ? 'https://' : 'http://') . ($_SERVER['HTTP_HOST'] ?? 'localhost') . rtrim(dirname(dirname($_SERVER['SCRIPT_NAME'] ?? '/fixmycity/index.php')), '/');
+        return ($https ? 'https://' : 'http://') . ($_SERVER['HTTP_HOST'] ?? 'localhost') . rtrim(dirname($_SERVER['SCRIPT_NAME'] ?? '/userCrud/index.php'), '/');
     }
 
     private static function requirePost(): void { if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') { http_response_code(405); exit('Method not allowed'); } }
-    private static function redirect(string $message): void { header('Location: ../index.html?message=' . urlencode($message)); exit; }
+    private static function redirect(string $message): void { header('Location: index.php?action=auth&message=' . urlencode($message)); exit; }
 }

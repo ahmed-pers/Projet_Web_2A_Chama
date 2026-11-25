@@ -11,7 +11,6 @@ $statusLabels = ['pending' => 'Pending', 'in_progress' => 'In progress', 'resolv
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CityFix – <?= $mine ? 'My reports' : 'All reports' ?></title>
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/script.js" defer></script>
 </head>
 <body>
 

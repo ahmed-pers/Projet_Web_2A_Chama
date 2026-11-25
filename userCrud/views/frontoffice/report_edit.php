@@ -12,7 +12,6 @@ $descValue   = $old['description'] ?? ($report->getDescription() ?? '');
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CityFix – Edit my report</title>
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/script.js" defer></script>
 </head>
 <body>
 
@@ -24,7 +23,7 @@ $descValue   = $old['description'] ?? ($report->getDescription() ?? '');
       <p>You can change the category and the description while the report is pending.</p>
     </header>
 
-    <form id="edit-form" class="simple-form" action="index.php?action=report_update" method="post" novalidate>
+    <form id="edit-form" class="simple-form" action="index.php?action=report_update" method="post">
       <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
       <input type="hidden" name="report_id" value="<?= $report->getId() ?>">
 

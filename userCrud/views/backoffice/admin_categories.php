@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CityFix – Admin categories</title>
   <link rel="stylesheet" href="assets/css/admin.css">
-  <script src="assets/js/script.js" defer></script>
 </head>
 <body>
 

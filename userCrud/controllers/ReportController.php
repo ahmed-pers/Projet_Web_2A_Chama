@@ -486,14 +486,12 @@ class ReportController
             $clean['category_id'] = (int) $categoryId;
         }
 
-        // 4. optional description, 500 characters max (only when the checkbox is ticked)
-        if (!empty($post['add_description'])) {
-            $description = trim((string) ($post['description'] ?? ''));
-            if (mb_strlen($description) > 500) {
-                $errors['description'] = 'The description is limited to 500 characters.';
-            } elseif ($description !== '') {
-                $clean['description'] = $description;
-            }
+        // 4. optional description, 500 characters max
+        $description = trim((string) ($post['description'] ?? ''));
+        if (mb_strlen($description) > 500) {
+            $errors['description'] = 'The description is limited to 500 characters.';
+        } elseif ($description !== '') {
+            $clean['description'] = $description;
         }
 
         return [$errors, $clean];

@@ -12,7 +12,6 @@ $nextStep = ['pending' => ['in_progress', 'Mark in progress'], 'in_progress' => 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CityFix – Admin reports</title>
   <link rel="stylesheet" href="assets/css/admin.css">
-  <script src="assets/js/script.js" defer></script>
 </head>
 <body>
 
